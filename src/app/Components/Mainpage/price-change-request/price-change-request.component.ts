@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MainPageService} from "../../../Service/main-page.service";
 
 @Component({
   selector: 'app-price-change-request',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PriceChangeRequestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private MainPageService:MainPageService) { }
 
   ngOnInit(): void {
+  }
+
+  onPriceChangeEditScreen () {
+    this.MainPageService.setPriceChangeEditScreen(true)
+    this.MainPageService.setProductScreen(false)
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MainPageService} from "../../../Service/main-page.service";
 
 @Component({
   selector: 'app-product-edit',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private MainPageService: MainPageService) { }
 
   ngOnInit(): void {
+  }
+
+  oncancel () {
+    this.MainPageService.setProductEditScreen(false)
+    this.MainPageService.setProductScreen(true)
   }
 
 }

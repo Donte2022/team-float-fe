@@ -24,9 +24,5 @@ export class ProductComponent implements OnInit {
     this.MainPageService.setPriceChangeCreateScreen(true)
     this.MainPageService.setProductScreen(false)
   }
-  onPriceChangeEditScreen () {
-    this.MainPageService.setPriceChangeEditScreen(true)
-    this.MainPageService.setProductScreen(false)
-  }
 
 }
