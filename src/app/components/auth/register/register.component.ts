@@ -18,10 +18,9 @@ export class RegisterComponent implements OnInit {
     lname: string,
     email: string,
     username: string,
-    password: string
+    password: string,
     rank: number
   }) {
-    console.log(accountInfo)
     this.accountService.attemptRegister(accountInfo.fname, accountInfo.lname, accountInfo.email, accountInfo.username, accountInfo.password, accountInfo.rank)
   }
 
