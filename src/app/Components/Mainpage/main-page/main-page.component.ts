@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MainPageService} from "../../../Service/main-page.service";
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  ShopingpageScreen : boolean = false
+
+  constructor(private MainPageService: MainPageService) {
+    this.MainPageService.$MainShoppingPageScreen.subscribe(value => {this.ShopingpageScreen = value})
+  }
 
   ngOnInit(): void {
+  }
+
+  onshopping () {
+    this.MainPageService.setMainShoppingPageScreen(true)
   }
 
 }

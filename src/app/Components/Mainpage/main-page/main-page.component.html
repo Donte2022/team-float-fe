@@ -1,2 +1,7 @@
+<div *ngIf="ShopingpageScreen === false">
 <p>main-page works!</p>
+<button (click)="onshopping()">Shopping</button>
+</div>
+<div *ngIf="ShopingpageScreen">
 <app-main-shopping-page></app-main-shopping-page>
+</div>

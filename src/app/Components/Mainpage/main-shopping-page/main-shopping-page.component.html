@@ -1,6 +1,16 @@
+<div *ngIf="ProductScreen">
 <p>main-shopping-page works!</p>
-<app-category></app-category>
-<app-category-create></app-category-create>
-<app-category-edit></app-category-edit>
-<app-product-create></app-product-create>
-<app-product></app-product>
+  <div><button (click)="oncanel()">Cancel</button></div>
+  <div><button (click)="oncatcreate()">Create cat</button></div>
+  <div><button (click)="oncatedit()">Edit Cat</button></div>
+  <div><button (click)="onproductcreate()">Create Product</button></div>
+  <app-category></app-category>
+  <app-product></app-product>
+</div>
+<app-category-create *ngIf="CatCreateScreen "></app-category-create>
+<app-category-edit *ngIf="CateditScreen"></app-category-edit>
+<app-product-create *ngIf="ProductCreateScreen"></app-product-create>
+<app-product-edit *ngIf="PriceEditScreen"></app-product-edit>
+<app-price-change-create *ngIf="PriceChangeCreateScreen"></app-price-change-create>
+<app-price-change-edit *ngIf="PriceEditScreen"></app-price-change-edit>
+
