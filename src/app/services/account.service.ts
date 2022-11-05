@@ -27,9 +27,10 @@ export class AccountService {
       params: {username: username, password: password}})
   }
 
-  public createAccount(name: string, email: string, username: string, password: string, rank: number) {
+  public createAccount(fname: string, lname: string, email: string, username: string, password: string, rank: number) {
     return this.http.post<IAccount>("http://localhost:8080/api/account", {
-      name: name,
+      firstname: fname,
+      lastname: lname,
       email: email,
       username: username,
       password: password,
@@ -58,7 +59,7 @@ export class AccountService {
     })
   }
 
-  public attemptRegister(name: string, email: string, username: string, password: string, rank: number) {
+  public attemptRegister(fname: string, lname: string, email: string, username: string, password: string, rank: number) {
     if (username.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_USERNAME_MESSAGE)
       return
@@ -71,7 +72,8 @@ export class AccountService {
       this.$loginErrorMessage.next(this.REGISTER_INVALID_ROLE_MESSAGE)
       return
     }
-    this.createAccount(name, email, username, password, rank).pipe(first()).subscribe({
+    //Todo validation for lname, fname, email
+    this.createAccount(fname, lname, email, username, password, rank).pipe(first()).subscribe({
       next: () => this.attemptLogin(username, password),
       error: (err) => {
         if (err.status === 409) {
