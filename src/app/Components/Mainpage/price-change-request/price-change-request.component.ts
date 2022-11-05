@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MainPageService} from "../../../Service/main-page.service";
+import {IPriceChange} from "../../../Interface/IPriceChange";
 
 @Component({
   selector: 'app-price-change-request',
@@ -7,6 +8,8 @@ import {MainPageService} from "../../../Service/main-page.service";
   styleUrls: ['./price-change-request.component.css']
 })
 export class PriceChangeRequestComponent implements OnInit {
+
+  @Input() Pri: IPriceChange | undefined
 
   constructor(private MainPageService:MainPageService) { }
 

@@ -1,6 +1,7 @@
-<div style="border-style: solid">
+<div *ngIf="Pro !== undefined" style="border-style: solid">
 <p>product works!</p>
+  <div>{{Pro.DisplayName}}</div>
   <div><button (click)="onProductEdit()">Edit Product</button></div>
   <div><button (click)="onPriceChangeCreateScreen()">Price Change Create</button></div>
-  <app-price-change-request></app-price-change-request>
+  <app-price-change-request *ngFor="let pri of Pro.PriceChangeRequest"[Pri]="pri"></app-price-change-request>
 </div>

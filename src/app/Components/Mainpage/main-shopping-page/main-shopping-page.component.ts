@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../Service/main-page.service";
+import {ICategory} from "../../../Interface/ICategory";
+import {IProduct} from "../../../Interface/IProduct";
 
 @Component({
   selector: 'app-main-shopping-page',
@@ -15,8 +17,12 @@ export class MainShoppingPageComponent implements OnInit {
   PriceChangeCreateScreen: boolean = false
   PriceEditScreen  : boolean = false
   ProductScreen: boolean = true
+  CatFulllist: ICategory []
+  ProductFulllist: IProduct []
 
   constructor(private MainPageService: MainPageService) {
+    this.CatFulllist= []
+    this.ProductFulllist= []
     this.MainPageService.$CategoryEditScreen.subscribe(value => {this.CateditScreen = value})
     this.MainPageService.$CategoryCreateScreen.subscribe(value => {this.CatCreateScreen = value})
     this.MainPageService.$ProductCreateScreen.subscribe(value => {this.ProductCreateScreen = value})
@@ -24,9 +30,13 @@ export class MainShoppingPageComponent implements OnInit {
     this.MainPageService.$PriceChangeCreateScreen.subscribe(value => {this.PriceChangeCreateScreen = value})
     this.MainPageService.$PriceChangeEditScreen.subscribe(value => {this.PriceEditScreen = value})
     this.MainPageService.$ProductScreen.subscribe(value => {this.ProductScreen = value})
+    this.MainPageService.$FullCategoryList.subscribe(value => {this.CatFulllist = value})
+    this.MainPageService.$FullProductList.subscribe(value => {this.ProductFulllist = value})
   }
 
   ngOnInit(): void {
+    this.MainPageService.getFullProductList()
+    this.MainPageService.getFullCategoryList()
   }
 
   oncanel () {

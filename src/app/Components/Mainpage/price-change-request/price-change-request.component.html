@@ -1,2 +1,5 @@
+<div *ngIf="Pri !== undefined" style="border-style: solid">
 <p>price-change-request works!</p>
-<div><button (click)="onPriceChangeEditScreen()">Price Change</button></div>
+  <div>{{Pri.NewPrice}}</div>
+<div><button (click)="onPriceChangeEditScreen()">Price Change Edit</button></div>
+</div>

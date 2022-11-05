@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MainPageService} from "../../../Service/main-page.service";
+import {IProduct} from "../../../Interface/IProduct";
+import {IPriceChange} from "../../../Interface/IPriceChange";
 
 @Component({
   selector: 'app-product',
@@ -8,7 +10,7 @@ import {MainPageService} from "../../../Service/main-page.service";
 })
 export class ProductComponent implements OnInit {
 
-
+  @Input() Pro :IProduct | undefined
 
   constructor(private MainPageService:MainPageService) {
   }

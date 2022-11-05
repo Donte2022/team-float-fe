@@ -4,8 +4,8 @@
   <div><button (click)="oncatcreate()">Create cat</button></div>
   <div><button (click)="oncatedit()">Edit Cat</button></div>
   <div><button (click)="onproductcreate()">Create Product</button></div>
-  <app-category></app-category>
-  <app-product></app-product>
+  <app-category *ngFor="let cat of CatFulllist" [Cat]="cat"></app-category>
+  <app-product *ngFor="let pro of ProductFulllist"[Pro]="pro"></app-product>
 </div>
 <app-category-create *ngIf="CatCreateScreen "></app-category-create>
 <app-category-edit *ngIf="CateditScreen"></app-category-edit>
