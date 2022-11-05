@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MainPageService} from "../../../Service/main-page.service";
-import {IPriceChange} from "../../../Interface/IPriceChange";
+import {MainPageService} from "../../../services/main-page.service";
+import {IPriceChange} from "../../../interfaces/IPriceChange";
 
 @Component({
   selector: 'app-price-change-request',

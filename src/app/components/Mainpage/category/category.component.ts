@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ICategory} from "../../../Interface/ICategory";
+import {ICategory} from "../../../interfaces/ICategory";
 
 @Component({
   selector: 'app-category',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MainPageService} from "../../../Service/main-page.service";
-import {ICategory} from "../../../Interface/ICategory";
-import {IProduct} from "../../../Interface/IProduct";
+import {MainPageService} from "../../../services/main-page.service";
+import {ICategory} from "../../../interfaces/ICategory";
+import {IProduct} from "../../../interfaces/IProduct";
 
 @Component({
   selector: 'app-main-shopping-page',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {IProduct} from "../Interface/IProduct";
-import {ICategory} from "../Interface/ICategory";
+import {IProduct} from "../interfaces/IProduct";
+import {ICategory} from "../interfaces/ICategory";
 
 @Injectable({
   providedIn: 'root'

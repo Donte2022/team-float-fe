@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MainPageService} from "../../../Service/main-page.service";
+import {MainPageService} from "../../../services/main-page.service";
 
 @Component({
   selector: 'app-product-create',
