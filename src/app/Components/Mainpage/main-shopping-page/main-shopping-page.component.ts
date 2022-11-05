@@ -35,8 +35,6 @@ export class MainShoppingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.MainPageService.getFullProductList()
-    this.MainPageService.getFullCategoryList()
   }
 
   oncanel () {
