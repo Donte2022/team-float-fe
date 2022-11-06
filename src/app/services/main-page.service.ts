@@ -75,7 +75,9 @@ export class MainPageService {
     this.FullProductList = []
     for (let pro of this.FullCategoryList){
       for (let ind of pro.Products){
-        this.FullProductList.push(ind)
+        if (-1 === this.FullProductList.findIndex(value => {return value.ID === ind.ID})){
+          this.FullProductList.push(ind)
+        }
       }
     }
     this.$FullProductList.next(this.FullProductList)
