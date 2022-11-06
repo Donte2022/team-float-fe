@@ -17,8 +17,11 @@ export class PriceChangeRequestComponent implements OnInit {
   }
 
   onPriceChangeEditScreen () {
-    this.MainPageService.setPriceChangeEditScreen(true)
-    this.MainPageService.setProductScreen(false)
+    if (this.Pri !== undefined) {
+      this.MainPageService.setIndPriceChange(this.Pri)
+      this.MainPageService.setPriceChangeEditScreen(true)
+      this.MainPageService.setProductScreen(false)
+    }
   }
 
 }

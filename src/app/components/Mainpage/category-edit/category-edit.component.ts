@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
+import {ICategory} from "../../../interfaces/ICategory";
 
 @Component({
   selector: 'app-category-edit',
@@ -8,14 +9,18 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class CategoryEditComponent implements OnInit {
 
-  constructor(private MainPageService: MainPageService) { }
+  Category: ICategory
+
+  constructor(private MainPageService: MainPageService) {
+    this.Category = {} as ICategory
+  }
 
   ngOnInit(): void {
+    this.Category = this.MainPageService.getIndCategory()
   }
 
   oncancel () {
     this.MainPageService.setCategoryEditScreen(false)
     this.MainPageService.setProductScreen(true)
-
   }
 }

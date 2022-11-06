@@ -1,7 +1,7 @@
 <div>Edit a Price Change Request</div>
-<div>Sale<input type="checkbox"></div>
-<div>New Price:<input type="number" min="0"></div>
-<div>Start Date:<input type="date"></div>
-<div>End Date:<input type="date"></div>
-<div>Coupons<input type="number" min="0"></div>
+<div>Sale<input type="checkbox" [checked]="PriceChange.Sale"></div>
+<div>New Price:<input type="number" min="0" [value]="PriceChange.NewPrice"></div>
+<div>Start Date:<input type="date" [valueAsDate]="PriceChange.StartDate"></div>
+<div>End Date:<input type="date" [valueAsDate]="PriceChange.EndDate"></div>
+<div>Coupons<input type="number" min="0" [value]="PriceChange.CouponLeft"></div>
 <div><button (click)="oncancel()">Cancel</button><button>Submit</button></div>

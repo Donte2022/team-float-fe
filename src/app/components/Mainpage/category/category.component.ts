@@ -17,8 +17,11 @@ export class CategoryComponent implements OnInit {
   }
 
   oncatedit () {
-    this.MainPageService.setCategoryEditScreen(true)
-    this.MainPageService.setProductScreen(false)
+    if (this.Cat !== undefined) {
+      this.MainPageService.setProductScreen(false)
+      this.MainPageService.setCategoryEditScreen(true)
+      this.MainPageService.setIndCategory({...this.Cat},true)
+    }
   }
 
 }

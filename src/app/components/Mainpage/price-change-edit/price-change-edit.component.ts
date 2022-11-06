@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
+import {IPriceChange} from "../../../interfaces/IPriceChange";
 
 @Component({
   selector: 'app-price-change-edit',
@@ -8,9 +9,14 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class PriceChangeEditComponent implements OnInit {
 
-  constructor(private MainPageService: MainPageService) { }
+  PriceChange : IPriceChange
+
+  constructor(private MainPageService: MainPageService) {
+    this.PriceChange = {} as IPriceChange
+  }
 
   ngOnInit(): void {
+    this.PriceChange = this.MainPageService.getIndPriceChange()
   }
 
   oncancel () {

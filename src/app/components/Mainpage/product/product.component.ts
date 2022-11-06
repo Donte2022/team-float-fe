@@ -29,8 +29,11 @@ export class ProductComponent implements OnInit {
   }
 
   onProductEdit () {
-    this.MainPageService.setProductEditScreen(true)
-    this.MainPageService.setProductScreen(false)
+    if (this.Pro !== undefined) {
+      this.MainPageService.setIndProduct({...this.Pro})
+      this.MainPageService.setProductEditScreen(true)
+      this.MainPageService.setProductScreen(false)
+    }
   }
   onPriceChangeCreateScreen () {
     this.MainPageService.setPriceChangeCreateScreen(true)
