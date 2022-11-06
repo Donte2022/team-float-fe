@@ -50,11 +50,11 @@ export class MainPageService {
 
   constructor(private http:HttpService) {
     this.rank = 0
-    this.FullCategoryList=[{ID: 0,Name:"Test Cat",OriginalOwnerIDUsername:"Joseph",Products:[]}]
-    this.FullProductList =[{ID:0 ,DisplayName:"jellybean",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
-    Description:"Bean",BasePrice:50,Image:"NA",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
-        {ID:0,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
-      ]}]
+    this.FullCategoryList=[{ID: 0,Name:"Test Cat",OriginalOwnerIDUsername:"Joseph",Products:[{ID:0 ,DisplayName:"jellybean",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
+        Description:"Bean",BasePrice:50,Image:"na",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
+          {ID:0,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
+        ]}]}]
+    this.FullProductList =[]
   }
 
 
@@ -72,6 +72,12 @@ export class MainPageService {
   }
 
   getFullProductList(): IProduct[] {
+    this.FullProductList = []
+    for (let pro of this.FullCategoryList){
+      for (let ind of pro.Products){
+        this.FullProductList.push(ind)
+      }
+    }
     this.$FullProductList.next(this.FullProductList)
     return this.FullProductList;
   }
