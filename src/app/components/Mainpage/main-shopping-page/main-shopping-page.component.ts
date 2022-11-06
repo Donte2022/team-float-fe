@@ -35,16 +35,15 @@ export class MainShoppingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.MainPageService.getFullCategoryList()
+    this.MainPageService.getFullProductList()
   }
 
   oncanel () {
     this.MainPageService.setMainShoppingPageScreen(false)
   }
 
-  oncatedit () {
-    this.MainPageService.setCategoryEditScreen(true)
-    this.MainPageService.setProductScreen(false)
-  }
+
   oncatcreate () {
     this.MainPageService.setCategoryCreateScreen(true)
     this.MainPageService.setProductScreen(false)

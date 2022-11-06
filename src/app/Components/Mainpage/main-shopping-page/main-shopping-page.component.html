@@ -1,10 +1,11 @@
 <div *ngIf="ProductScreen">
-<p>main-shopping-page works!</p>
-  <div><button (click)="oncanel()">Cancel</button></div>
-  <div><button (click)="oncatcreate()">Create cat</button></div>
-  <div><button (click)="oncatedit()">Edit Cat</button></div>
+<div>Shopping Page</div>
+  <div><button (click)="oncanel()">Reture to Main Page</button></div>
+  <div><button (click)="oncatcreate()">Create Category</button></div>
   <div><button (click)="onproductcreate()">Create Product</button></div>
+  <div>Categories</div>
   <app-category *ngFor="let cat of CatFulllist" [Cat]="cat"></app-category>
+  <div>Products</div>
   <app-product *ngFor="let pro of ProductFulllist"[Pro]="pro"></app-product>
 </div>
 <app-category-create *ngIf="CatCreateScreen "></app-category-create>
