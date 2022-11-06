@@ -16,9 +16,9 @@ export class AccountService {
   private readonly REGISTER_INVALID_ROLE_MESSAGE = 'Role is required'
   private readonly REGISTER_USER_EXISTS_ERROR_MESSAGE = 'Username already exists'
 
+  $account = new BehaviorSubject<IAccount | null>(null)
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
-  $account = new BehaviorSubject<IAccount | null>(null)
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +27,7 @@ export class AccountService {
       params: {username: username, password: password}})
   }
 
-  public createAccount(fname: string, lname: string, email: string, username: string, password: string, rank: number) {
+  public createAccount(fname: string, lname: string, email: string, username: string, password: string, rank: number): Observable<IAccount> {
     return this.http.post<IAccount>("http://localhost:8080/api/account", {
       firstname: fname,
       lastname: lname,
@@ -36,6 +36,30 @@ export class AccountService {
       password: password,
       rank: rank
     })
+  }
+
+  public updateAccount(fname: string, lname: string, email: string, username: string, password: string, rank: number): Observable<IAccount> {
+    const accountId = this.$account.getValue()?.id
+    //Todo If admin?
+    // if (accountId === 1) {}
+    //Todo If shopkeeper?
+    // if (accountId === 2) {}
+    //Todo If customer
+    // if (accountId === 3) {}
+      return this.http.put<IAccount>(`http://localhost:8080/api/account/${accountId}`, {
+        firstname: fname,
+        lastname: lname,
+        email: email,
+        username: username,
+        password: password,
+        rank: rank
+      })
+  }
+
+  public deleteAccount(): Observable<String> {
+    const accountId = this.$account.getValue()?.id
+    return this.http.delete<String>(`http://localhost:8080/api/account/${accountId}`)
+    //Todo logout
   }
 
 
@@ -80,6 +104,27 @@ export class AccountService {
           this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
         } else
           this.$loginErrorMessage.next(this.REGISTER_HTTP_ERROR_MESSAGE)
+      }
+    })
+  }
+
+  public attemptUpdateAccount(fname: string, lname: string, email: string, username: string, password: string, rank: number) {
+    if (username.length < 1) {
+      this.$loginErrorMessage.next(this.LOGIN_INVALID_USERNAME_MESSAGE)
+      return
+    }
+    if (password.length < 1) {
+      this.$loginErrorMessage.next(this.LOGIN_INVALID_PASSWORD_MESSAGE)
+      return
+    }
+    //Todo validation for lname, fname, email, rank
+    this.updateAccount(fname, lname, email, username, password, rank).pipe(first()).subscribe({
+      next: (account) => {
+        this.$account.next(account)
+      },
+      error: (err) => {
+        //Todo handle error
+        console.error(err)
       }
     })
   }
