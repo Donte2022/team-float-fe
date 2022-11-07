@@ -2,13 +2,15 @@
 <div>Name:<input [value]="Category.Name"></div>
 <div> Add Product:
   <select name="Aviable Products">
-    <option>
+    <option *ngFor="let p of OtherProductList">
+      {{p.DisplayName}}
     </option>
   </select>
 </div>
 <div> Remove Product:
   <select name="Aviable Products">
-    <option>
+    <option *ngFor="let r of Category.Products">
+      {{r.DisplayName}}
     </option>
   </select>
 </div>

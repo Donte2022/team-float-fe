@@ -2,7 +2,8 @@
 <div>Name:<input></div>
 <div> Add Product:
 <select name="Aviable Products">
-  <option>
+  <option *ngFor="let p of OtherProductList">
+    {{p.DisplayName}}
   </option>
 </select>
 </div>

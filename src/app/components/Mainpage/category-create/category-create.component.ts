@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
+import {IProduct} from "../../../interfaces/IProduct";
 
 @Component({
   selector: 'app-category-create',
@@ -8,7 +9,11 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class CategoryCreateComponent implements OnInit {
 
-  constructor(private MainPageService: MainPageService) { }
+  OtherProductList: IProduct []
+
+  constructor(private MainPageService: MainPageService) {
+    this.OtherProductList = [...this.MainPageService.getFullProductList()]
+  }
 
   ngOnInit(): void {
   }

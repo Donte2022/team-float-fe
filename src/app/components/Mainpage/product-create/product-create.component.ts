@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
+import {ICategory} from "../../../interfaces/ICategory";
 
 @Component({
   selector: 'app-product-create',
@@ -8,7 +9,10 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class ProductCreateComponent implements OnInit {
 
-  constructor(private MainPageService: MainPageService) { }
+  OtherCatList : ICategory []
+  constructor(private MainPageService: MainPageService) {
+    this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
+  }
 
   ngOnInit(): void {
   }
