@@ -14,13 +14,13 @@ export class ProductCreateComponent implements OnInit {
   DisplayName: string
   ProductName: string
   Description: string
-  BasePrice: number
+  BasePrice: number | undefined
   ImageUrl: string
   Discontinued: boolean
   AvaliableOnDate: Date
-  Weight: number
-  MAPPrice: number
-  CosttoMake: number
+  Weight: number | undefined
+  MAPPrice: number | undefined
+  CosttoMake: number | undefined
 
 
 
@@ -30,13 +30,13 @@ export class ProductCreateComponent implements OnInit {
     this.DisplayName = ""
     this.ProductName = ""
     this.Description = ""
-    this.BasePrice = 0
+    this.BasePrice = undefined
     this.ImageUrl = ""
     this.Discontinued = false
     this.AvaliableOnDate = new Date()
-    this.Weight = 0
-    this.MAPPrice = 0
-    this.CosttoMake = 0
+    this.Weight = undefined
+    this.MAPPrice = undefined
+    this.CosttoMake = undefined
 
   }
 
@@ -49,6 +49,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   onpost () {
+    if (this.BasePrice && this.Weight && this.MAPPrice && this.CosttoMake){
     this.MainPageService.postproduct(
       {productName: this.ProductName,
       displayName: this.DisplayName,
@@ -60,7 +61,7 @@ export class ProductCreateComponent implements OnInit {
       weight: this.Weight,
       map: this.MAPPrice,
       cost:this.CosttoMake}
-    )
+    )}
     this.oncancel()
   }
 }

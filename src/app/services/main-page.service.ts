@@ -186,16 +186,6 @@ export class MainPageService {
 
   /// Get Request
 
-  // getfulllist () {
-  //   let obs = this.http.onget("url") as Observable<ICategory[]>
-  //   obs.subscribe({
-  //     next: value => {
-  //       this.FullCategoryList = [...value]
-  //       this.getFullProductList()
-  //     },
-  //     error: err => {console.error(err)}
-  //   })
-  // }
 
   getfullproductlistrequest () {
     let obs = this.http.onget("/product") as Observable<IProduct[]>
@@ -254,40 +244,7 @@ export class MainPageService {
   }
 
 
-  //Post Methods
 
-  PostCategoryMethods () {
-  }
 
-  PostProductMethods () {
-
-  }
-
-  PostPriceChange () {
-
-  }
-
-  //Put Methods
-
-  PutCategoryMethods() {}
-
-  PutProductMethods () {}
-
-  PutPriceChange () {}
-
-  //Delete Methods
-
-  DeleteCategoryMethods () {
-  }
-
-  DeleteProductMethods () {}
-
-  DeletePriceChangeMethods () {}
-
-  // Push Request
-
-  // Put Request
-
-  // Delete Request
 
 }
