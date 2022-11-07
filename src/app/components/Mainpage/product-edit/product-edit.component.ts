@@ -14,14 +14,17 @@ export class ProductEditComponent implements OnInit {
   CurrentCatList : ICategory []
   OtherCatList : ICategory []
 
+
   constructor(private MainPageService: MainPageService) {
     this.Product = {} as IProduct
     this.CurrentCatList = []
     this.OtherCatList = []
+
   }
 
   ngOnInit(): void {
     this.Product = this.MainPageService.getIndProduct()
+    console.log(this.Product)
     this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
     this.filiter()
   }
@@ -35,6 +38,20 @@ export class ProductEditComponent implements OnInit {
   oncancel () {
     this.MainPageService.setProductEditScreen(false)
     this.MainPageService.setProductScreen(true)
+  }
+
+  onsubmit () {
+    this.MainPageService.putproduct({
+      ID: this.Product.ID,
+      displayName: this.Product.displayName,
+      productName: this.Product.productName,
+      description: this.Product.description,
+      price: this.Product.price,
+      imageUrl: this.Product.imageUrl,
+      discontinued: this.Product.discontinued,
+      dateAvailable: this.Product.dateAvailable,
+
+    })
   }
 
 }

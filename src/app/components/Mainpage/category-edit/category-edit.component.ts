@@ -13,9 +13,11 @@ export class CategoryEditComponent implements OnInit {
   OtherProductList: IProduct []
   Category: ICategory
 
+
   constructor(private MainPageService: MainPageService) {
     this.Category = {} as ICategory
     this.OtherProductList = []
+
 
   }
 
@@ -36,4 +38,6 @@ export class CategoryEditComponent implements OnInit {
     this.MainPageService.setCategoryEditScreen(false)
     this.MainPageService.setProductScreen(true)
   }
+
+
 }

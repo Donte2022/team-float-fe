@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {IProduct} from "../interfaces/IProduct";
 import {ICategory} from "../interfaces/ICategory";
 import {IPriceChange} from "../interfaces/IPriceChange";
+import {IsimpleProduct} from "../interfaces/IsimpleProduct";
 
 @Injectable({
   providedIn: 'root'
@@ -194,7 +195,7 @@ export class MainPageService {
   /// Get Request
 
   // getfulllist () {
-  //   let obs = this.http.onget("TODO") as Observable<ICategory[]>
+  //   let obs = this.http.onget("url") as Observable<ICategory[]>
   //   obs.subscribe({
   //     next: value => {
   //       this.FullCategoryList = [...value]
@@ -216,6 +217,30 @@ export class MainPageService {
     })
   }
 
+
+  //Post Request
+
+  postproduct (Input : IsimpleProduct) {
+    let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
+    obs.subscribe({
+      next: value => {
+        console.log(value)
+        this.FullProductList.push(value)
+        this.$FullProductList.next(this.FullProductList)
+      },
+      error: err => {console.error(err)}
+    })
+  }
+
+  //Put Request
+
+  putproduct (Input : IProduct){
+    let obs = this.http.onput("/product",Input) as Observable<any>
+    obs.subscribe({
+      next: value => {},
+      error: err => {console.error(err)}
+    })
+  }
 
   //Post Methods
 

@@ -15,6 +15,7 @@ import { ProductEditComponent } from './components/Mainpage/product-edit/product
 import { PriceChangeCreateComponent } from './components/Mainpage/price-change-create/price-change-create.component';
 import { PriceChangeRequestComponent } from './components/Mainpage/price-change-request/price-change-request.component';
 import { MainPageComponent } from './components/Mainpage/main-page/main-page.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MainPageComponent } from './components/Mainpage/main-page/main-page.com
   imports: [
     BrowserModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

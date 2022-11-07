@@ -1,18 +1,17 @@
 <div>Create a new Product</div>
-<div>Add to Category<select name="Add to Category">
-  <option *ngFor="let c of OtherCatList">
-    {{c.Name}}
-  </option>
-</select><button>add</button></div>
-<div>Display Name:<input></div>
-<div>Product Name:<input></div>
-<div>Description:<textarea></textarea></div>
-<div>Display Name:<input></div>
-<div>Base Price:<input type="number" min="0"></div>
-<div>Image:<input></div>
-<div>Discontinued:<input type="chackbox"></div>
-<div>Avaliable On Date:<input type="date"></div>
-<div>Weight: <input type="number" min="0"></div>
-<div>MAPPrice:<input type="numbe" min="0"></div>
-<div>Cost to Make:<input type="number" min="0"></div>
-<button (click)="oncancel()">Cancel</button><button>Submit</button>
+<!--<div>Add to Category<select name="Add to Category">-->
+<!--  <option *ngFor="let c of OtherCatList">-->
+<!--    {{c.Name}}-->
+<!--  </option>-->
+<!--</select><button>add</button></div>-->
+<div>Display Name:<input [(ngModel)]="DisplayName"></div>
+<div>Product Name:<input [(ngModel)]="ProductName"></div>
+<div>Description:<textarea [(ngModel)]="Description"></textarea></div>
+<div>Base Price:<input type="number" min="0" [(ngModel)]="BasePrice"></div>
+<div>Image Url:<input [(ngModel)]="ImageUrl"></div>
+<div>Discontinued:<input type="checkbox" [(ngModel)]="Discontinued"></div>
+<div>Avaliable On Date:<input type="date" [(ngModel)]="AvaliableOnDate"></div>
+<div>Weight: <input type="number" min="0" [(ngModel)]="Weight"></div>
+<div>MAPPrice:<input type="number" min="0" [(ngModel)]="MAPPrice"></div>
+<div>Cost to Make:<input type="number" min="0" [(ngModel)]="CosttoMake"></div>
+<button (click)="oncancel()">Cancel</button><button (click)="onpost()">Submit</button>
