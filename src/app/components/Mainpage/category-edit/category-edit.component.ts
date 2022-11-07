@@ -24,15 +24,15 @@ export class CategoryEditComponent implements OnInit {
   ngOnInit(): void {
     this.Category = {...this.MainPageService.getIndCategory()}
     this.OtherProductList = [...this.MainPageService.getFullProductList()]
-    this.filitarproductlist()
+
   }
 
 
-  filitarproductlist () {
-    this.OtherProductList = this.OtherProductList.filter(value => {return -1 ===
-      this.Category.Products.findIndex(value1 => {return value1.ID === value.ID})
-    }
-    )}
+  // filitarproductlist () {
+  //   this.OtherProductList = this.OtherProductList.filter(value => {return -1 ===
+  //     this.Category.Products.findIndex(value1 => {return value1.ID === value.ID})
+  //   }
+  //   )}
 
   oncancel () {
     this.MainPageService.setCategoryEditScreen(false)

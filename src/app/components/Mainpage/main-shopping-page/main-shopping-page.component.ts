@@ -22,7 +22,7 @@ export class MainShoppingPageComponent implements OnInit {
 
   constructor(private MainPageService: MainPageService) {
     this.CatFulllist= []
-    this.ProductFulllist= []
+    this.ProductFulllist = []
     this.MainPageService.$CategoryEditScreen.subscribe(value => {this.CateditScreen = value})
     this.MainPageService.$CategoryCreateScreen.subscribe(value => {this.CatCreateScreen = value})
     this.MainPageService.$ProductCreateScreen.subscribe(value => {this.ProductCreateScreen = value})
@@ -31,13 +31,13 @@ export class MainShoppingPageComponent implements OnInit {
     this.MainPageService.$PriceChangeEditScreen.subscribe(value => {this.PriceEditScreen = value})
     this.MainPageService.$ProductScreen.subscribe(value => {this.ProductScreen = value})
     this.MainPageService.$FullCategoryList.subscribe(value => {this.CatFulllist = value})
-    this.MainPageService.$FullProductList.subscribe(value => {this.ProductFulllist = value})
+    this.MainPageService.$FullProductList.subscribe(value => {this.ProductFulllist = [...value]})
   }
 
   ngOnInit(): void {
-    this.MainPageService.getfullproductlist()
+    this.MainPageService.getfullproductlistrequest()
     this.MainPageService.getFullCategoryList()
-    this.MainPageService.getFullProductList()
+    this.ProductFulllist = [...this.MainPageService.getFullProductList()]
   }
 
   oncanel () {

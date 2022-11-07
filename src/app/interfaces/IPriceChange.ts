@@ -1,8 +1,8 @@
 export interface IPriceChange {
-  ID:number
-  Sale:boolean
-  NewPrice:number
-  StartDate:Date
-  EndDate:Date
-  CouponLeft: number
+  id:number
+  sale:boolean
+  newPrice:number
+  startDate:Date
+  endDate:Date
+  couponLeft: number
 }

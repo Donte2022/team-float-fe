@@ -10,8 +10,10 @@ import {IProduct} from "../../../interfaces/IProduct";
 })
 export class ProductComponent implements OnInit {
 
+
   @Input() Pro :IProduct | undefined
-  img:String|undefined
+  img:string|undefined
+
 
   constructor(private MainPageService:MainPageService) {
     this.img = this.Pro?.imageUrl
@@ -19,8 +21,9 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.Pro?.imageUrl !== undefined)
+    if (this.Pro?.imageUrl !== undefined) {
       this.img = this.Pro.imageUrl
+    }
   }
 
 
@@ -40,5 +43,10 @@ export class ProductComponent implements OnInit {
     this.MainPageService.setPriceChangeCreateScreen(true)
     this.MainPageService.setProductScreen(false)
   }
+
+  ondelete () {
+    if (this.Pro !== undefined) {
+      this.MainPageService.deleteproduct(this.Pro.id)
+  }}
 
 }

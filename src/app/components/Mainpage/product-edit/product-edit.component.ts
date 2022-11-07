@@ -24,15 +24,14 @@ export class ProductEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.Product = this.MainPageService.getIndProduct()
-    console.log(this.Product)
     this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
-    this.filiter()
+    console.log(this.Product)
   }
 
-  filiter () {
-    this.CurrentCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID !== this.Product.ID })})]
-    this.OtherCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID === this.Product.ID })})]
-  }
+  // filiter () {
+  //   this.CurrentCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID !== this.Product.ID })})]
+  //   this.OtherCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID === this.Product.ID })})]
+  // }
 
 
   oncancel () {
@@ -40,18 +39,9 @@ export class ProductEditComponent implements OnInit {
     this.MainPageService.setProductScreen(true)
   }
 
-  onsubmit () {
-    this.MainPageService.putproduct({
-      ID: this.Product.ID,
-      displayName: this.Product.displayName,
-      productName: this.Product.productName,
-      description: this.Product.description,
-      price: this.Product.price,
-      imageUrl: this.Product.imageUrl,
-      discontinued: this.Product.discontinued,
-      dateAvailable: this.Product.dateAvailable,
-
-    })
+  onsubmit (input: IProduct) {
+    this.MainPageService.putproduct(input)
+    this.oncancel()
   }
 
 }
