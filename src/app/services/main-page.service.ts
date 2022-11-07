@@ -81,7 +81,7 @@ export class MainPageService {
     //         {ID:7,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
     //       ]}]}
     // ]
-    this.FullProductList =[]
+    this.FullProductList = []
   }
 
   // Ind variables Getters and Setters
@@ -132,14 +132,6 @@ export class MainPageService {
   }
 
   getFullProductList(): IProduct[] {
-    this.FullProductList = []
-    for (let pro of this.FullCategoryList){
-      for (let ind of pro.Products){
-        if (-1 === this.FullProductList.findIndex(value => {return value.ID === ind.ID})){
-          this.FullProductList.push(ind)
-        }
-      }
-    }
     this.$FullProductList.next(this.FullProductList)
     return this.FullProductList;
   }
@@ -205,11 +197,10 @@ export class MainPageService {
   //   })
   // }
 
-  getfullproductlist () {
+  getfullproductlistrequest () {
     let obs = this.http.onget("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
-        console.log(value)
         this.FullProductList = [...value]
         this.$FullProductList.next(this.FullProductList)
       },
@@ -237,10 +228,31 @@ export class MainPageService {
   putproduct (Input : IProduct){
     let obs = this.http.onput("/product",Input) as Observable<any>
     obs.subscribe({
-      next: value => {},
+      next: value => {
+        console.log(value)
+      let num =  this.FullProductList.findIndex(value1 => {return value1.id === Input.id})
+        this.FullProductList.splice(num,1,Input)
+        this.$FullProductList.next(this.FullProductList)
+      },
       error: err => {console.error(err)}
     })
   }
+
+  //Delete Request
+
+  deleteproduct (Input: number) {
+    let obs = this.http.ondelete("/product?id="+ Input ) as Observable<any>
+    obs.subscribe({
+      next: value => {
+        console.log(value)
+        let num = this.FullProductList.findIndex(value1 => {return value1.id === Input})
+        this.FullProductList.splice(num,1)
+        this.$FullProductList.next(this.FullProductList)
+      },
+      error: err => {console.error(err)}
+    })
+  }
+
 
   //Post Methods
 

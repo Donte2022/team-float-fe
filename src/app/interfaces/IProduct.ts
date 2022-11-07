@@ -1,7 +1,7 @@
 import {IPriceChange} from "./IPriceChange";
 
 export interface IProduct {
-  ID:number
+  id:number
   displayName:string
   productName:string
   description:string

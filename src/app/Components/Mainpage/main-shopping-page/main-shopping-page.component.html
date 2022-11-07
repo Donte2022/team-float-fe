@@ -6,7 +6,7 @@
   <div>Categories</div>
   <app-category *ngFor="let cat of CatFulllist" [Cat]="cat"></app-category>
   <div>Products</div>
-  <app-product *ngFor="let pro of ProductFulllist"[Pro]="pro"></app-product>
+  <app-product *ngFor="let pro of ProductFulllist"[Pro]="pro" ></app-product>
 </div>
 <app-category-create *ngIf="CatCreateScreen "></app-category-create>
 <app-category-edit *ngIf="CateditScreen"></app-category-edit>
