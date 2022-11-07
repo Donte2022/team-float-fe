@@ -9,14 +9,14 @@
     {{r.Name}}
   </option>
 </select><button>add</button></div>
-<div>Display Name:<input [value]="Product.DisplayName"></div>
-<div>Product Name:<input [value]="Product.ProductName"></div>
-<div>Description:<textarea [value]="Product.Description"></textarea></div>
-<div>Base Price:<input type="number" min="0" [value]="Product.BasePrice"></div>
-<div>Image:<input [value]="Product.Image"></div>
-<div>Discontinued:<input type="checkbox" [checked]="Product.Discontinued" ></div>
-<div>Avaliable On Date:<input type="date" [valueAsDate]="Product.AvaliableOnDate"></div>
-<div>Weight: <input type="number" min="0" [value]="Product.Weight"></div>
-<div>MAPPrice:<input type="numbe" min="0" [value]="Product.MAPPrice"></div>
-<div>Cost to Make:<input type="number" min="0" [value]="Product.CostToMake"></div>
+<div>Display Name:<input [value]="Product.displayName"></div>
+<div>Product Name:<input [value]="Product.productName"></div>
+<div>Description:<textarea [value]="Product.description"></textarea></div>
+<div>Base Price:<input type="number" min="0" [value]="Product.price"></div>
+<div>Image:<input [value]="Product.imageUrl"></div>
+<div>Discontinued:<input type="checkbox" [checked]="Product.discontinued" ></div>
+<div>Avaliable On Date:<input type="date" [valueAsDate]="Product.dateAvailable"></div>
+<div>Weight: <input type="number" min="0" [value]="Product.weight"></div>
+<div>MAPPrice:<input type="numbe" min="0" [value]="Product.map"></div>
+<div>Cost to Make:<input type="number" min="0" [value]="Product.costToMake"></div>
 <div><button (click)="oncancel()">Cancel</button><button>Submit</button></div>

@@ -14,18 +14,18 @@ export class ProductComponent implements OnInit {
   img:String|undefined
 
   constructor(private MainPageService:MainPageService) {
-    this.img = this.Pro?.Image
+    this.img = this.Pro?.imageUrl
 
   }
 
   ngOnInit(): void {
-    if (this.Pro?.Image !== undefined)
-      this.img = this.Pro.Image
+    if (this.Pro?.imageUrl !== undefined)
+      this.img = this.Pro.imageUrl
   }
 
 
   onimageerror () {
-    console.error( this.Pro?.Image + " Invaild Image URL")
+    console.error( this.Pro?.imageUrl + " Invaild Image URL")
     this.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
   }
 

@@ -1,14 +1,13 @@
 <div *ngIf="Pro !== undefined" style="border-style: solid">
   <div>Product</div>
-  <div>{{Pro.DisplayName}}</div>
-  <div>{{Pro.OriginalOwnerUsername}}</div>
+  <div>{{Pro.displayName}}</div>
   <div><img src="{{img}}" (error)="onimageerror()" id="image"></div>
-  <div>{{Pro.Description}}</div>
-  <div>{{Pro.Discontinued}}</div>
-  <div>{{Pro.AvaliableOnDate}}</div>
-  <div>{{Pro.BasePrice}}</div>
+  <div>{{Pro.description}}</div>
+  <div>{{Pro.discontinued}}</div>
+  <div>{{Pro.dateAvailable}}</div>
+  <div>{{Pro.price}}</div>
   <div><button (click)="onProductEdit()">Edit Product</button></div>
   <div><button (click)="onPriceChangeCreateScreen()">Price Change Create</button></div>
   <div>List of Price Change Request:</div>
-  <app-price-change-request *ngFor="let pri of Pro.PriceChangeRequest"[Pri]="pri"></app-price-change-request>
+<!--  <app-price-change-request *ngFor="let pri of Pro.PriceChangeRequest"[Pri]="pri"></app-price-change-request>-->
 </div>

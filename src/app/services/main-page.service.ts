@@ -68,17 +68,18 @@ export class MainPageService {
     this.IndCategory = {} as ICategory
     this.IndProduct = {} as IProduct
     this.IndPriceChange = {} as IPriceChange
-    this.FullCategoryList=[
-      {
-      ID: 0,Name:"Test Cat",OriginalOwnerIDUsername:"Joseph",Products:[{ID:0 ,DisplayName:"jellybean",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
-        Description:"Bean",BasePrice:50,Image:"https://www.opiescandystore.com/wp-content/uploads/2019/03/easter-jelly-beans.jpg",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
-          {ID:0,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
-        ]}]},       {
-        ID: 3,Name:"Test Cat2",OriginalOwnerIDUsername:"Joseph",Products:[{ID:2 ,DisplayName:"jellybean2",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
-          Description:"Bean",BasePrice:50,Image:"na",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
-            {ID:7,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
-          ]}]}
-    ]
+    this.FullCategoryList = []
+    // this.FullCategoryList=[
+    //   {
+    //   ID: 0,Name:"Test Cat",OriginalOwnerIDUsername:"Joseph",Products:[{ID:0 ,DisplayName:"jellybean",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
+    //     Description:"Bean",BasePrice:50,Image:"https://www.opiescandystore.com/wp-content/uploads/2019/03/easter-jelly-beans.jpg",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
+    //       {ID:0,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
+    //     ]}]},       {
+    //     ID: 3,Name:"Test Cat2",OriginalOwnerIDUsername:"Joseph",Products:[{ID:2 ,DisplayName:"jellybean2",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
+    //       Description:"Bean",BasePrice:50,Image:"na",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
+    //         {ID:7,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
+    //       ]}]}
+    // ]
     this.FullProductList =[]
   }
 
@@ -192,12 +193,23 @@ export class MainPageService {
 
   /// Get Request
 
-  getfulllist () {
-    let obs = this.http.onget("TODO") as Observable<ICategory[]>
+  // getfulllist () {
+  //   let obs = this.http.onget("TODO") as Observable<ICategory[]>
+  //   obs.subscribe({
+  //     next: value => {
+  //       this.FullCategoryList = [...value]
+  //       this.getFullProductList()
+  //     },
+  //     error: err => {console.error(err)}
+  //   })
+  // }
+
+  getfullproductlist () {
+    let obs = this.http.onget("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
-        this.FullCategoryList = [...value]
-        this.getFullProductList()
+        this.FullProductList = [...value]
+        this.$FullProductList.next(this.FullProductList)
       },
       error: err => {console.error(err)}
     })
