@@ -16,7 +16,7 @@ export class AccountService {
   private readonly REGISTER_INVALID_ROLE_MESSAGE = 'Role is required'
   private readonly REGISTER_USER_EXISTS_ERROR_MESSAGE = 'Username already exists'
 
-  $account = new BehaviorSubject<IAccount |  null>(null)
+  $account = new BehaviorSubject<IAccount | null>(null)
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
 
@@ -27,10 +27,11 @@ export class AccountService {
       params: {username: username, password: password}})
   }
 
-  public createAccount(firstname: string, lastname: string, email: string, username: string, password: string, rank: number): Observable<IAccount> {
+  public createAccount(newAccount: IAccount): Observable<IAccount> {
+    const { firstName, lastName, email, username, password, rank } = newAccount
     return this.http.post<IAccount>("http://localhost:8080/api/account", {
-      firstname: firstname,
-      lastname: lastname,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       username: username,
       password: password,
@@ -38,12 +39,13 @@ export class AccountService {
     })
   }
 
-  public updateAccount(firstname: string, lastname: string, email: string, username: string, password: string, rank: number, accountId: number): Observable<IAccount> {
+  public updateAccount(updatedAccount: IAccount): Observable<IAccount> {
+    const { firstName, lastName, email, username, password, rank, id } = updatedAccount
     //Todo If admin - automatically pass rank as 1?
     // if (accountId === 1) {}
-      return this.http.put<IAccount>(`http://localhost:8080/api/account/${accountId}`, {
-        firstname: firstname,
-        lastname: lastname,
+      return this.http.put<IAccount>(`http://localhost:8080/api/account/${id}`, {
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         username: username,
         password: password,
@@ -58,12 +60,10 @@ export class AccountService {
 
   public attemptDelete(accountId: number) {
     this.deleteAccount(accountId).pipe(first()).subscribe({
-      next: (res) => {
-        console.log(res)
-        this.$account.next(null)
-      },
+      next: () => this.$account.next(null),
       error: (err) => {
         console.error(err)
+        //Todo handle error
       }
     })
   }
@@ -83,51 +83,50 @@ export class AccountService {
         if (account) {
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
-        } else
+        }
+        else
           this.$loginErrorMessage.next(this.LOGIN_INVALID_CREDENTIALS_MESSAGE)
       },
       error: () => this.$loginErrorMessage.next(this.LOGIN_HTTP_ERROR_MESSAGE)
     })
   }
 
-  public attemptRegister(firstname: string, lastname: string, email: string, username: string, password: string, rank: number) {
-    if (username.length < 1) {
+  public attemptRegister(newAccount: IAccount) {
+    if (newAccount.username.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_USERNAME_MESSAGE)
       return
     }
-    if (password.length < 1) {
+    if (newAccount.password.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_PASSWORD_MESSAGE)
       return
     }
-    if (rank < 1 || rank > 3) {
+    if (newAccount.rank < 1 || newAccount.rank > 3) {
       this.$loginErrorMessage.next(this.REGISTER_INVALID_ROLE_MESSAGE)
       return
     }
-    //Todo validation for lastname, firstname, email
-    this.createAccount(firstname, lastname, email, username, password, rank).pipe(first()).subscribe({
-      next: () => this.attemptLogin(username, password),
+    //Todo validation for lastName, firstName, email
+    this.createAccount(newAccount).pipe(first()).subscribe({
+      next: () => this.attemptLogin(newAccount.username, newAccount.password),
       error: (err) => {
         if (err.status === 409) {
           this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
-        } else
+        }
+        else
           this.$loginErrorMessage.next(this.REGISTER_HTTP_ERROR_MESSAGE)
       }
     })
   }
 
-  public attemptUpdateAccount(firstname: string, lastname: string, email: string, username: string, password: string, rank: number, id: number) {
-    if (username.length < 1) {
+  public attemptUpdateAccount(updatedAccount: IAccount) {
+    if (updatedAccount.username.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_USERNAME_MESSAGE)
       return
     }
-    if (password.length < 1) {
-      this.$loginErrorMessage.next(this.LOGIN_INVALID_PASSWORD_MESSAGE)
-      return
-    }
-    //Todo validation for lastname, firstname, email, rank
-    this.updateAccount(firstname, lastname, email, username, password, rank, id).pipe(first()).subscribe({
-      next: (account) => {
-        this.$account.next(account)
+    //Todo validation for changing password, lastName, firstName, email, rank
+    this.updateAccount(updatedAccount).pipe(first()).subscribe({
+      next: () => {
+        this.$account.next(updatedAccount)
+        //Todo handle rendering of my account component?
       },
       error: (err) => {
         //Todo handle error

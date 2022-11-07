@@ -10,8 +10,8 @@ import {AccountService} from "../../../services/account.service";
 export class AccountInputComponent implements OnInit {
   account: IAccount = {
     id: 0,
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     username: "",
     password: "",
@@ -20,18 +20,16 @@ export class AccountInputComponent implements OnInit {
 
   constructor(private accountService: AccountService) {
     accountService.$account.subscribe(account => {
-      if (account !== null) {
+      if (account !== null)
         this.account = account
-      }
-    }
-  )
+    })
   }
 
   ngOnInit(): void {}
 
-  onSubmit(firstname: string, lastname: string, email: string, username: string, password: string, rank: number) {
+  onSave() {
     if (this.account !== null)
-      this.accountService.attemptUpdateAccount(firstname, lastname, email, username, password, rank, this.account.id)
+      this.accountService.attemptUpdateAccount(this.account)
   }
 
   onCancel() {

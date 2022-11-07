@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountService} from "../../../services/account.service";
+import {IAccount} from "../../../interfaces/IAccount";
 
 @Component({
   selector: 'app-register',
@@ -13,15 +14,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClickReg(accountInfo: {
-    firstname: string,
-    lastname: string,
-    email: string,
-    username: string,
-    password: string,
-    rank: number
-  }) {
-    this.accountService.attemptRegister(accountInfo.firstname, accountInfo.lastname, accountInfo.email, accountInfo.username, accountInfo.password, accountInfo.rank)
+  onClickReg(newAccount: IAccount) {
+    this.accountService.attemptRegister(newAccount)
   }
 
   onClickToLogin() {
