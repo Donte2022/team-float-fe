@@ -208,6 +208,7 @@ export class MainPageService {
     let obs = this.http.onget("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
+        console.log(value)
         this.FullProductList = [...value]
         this.$FullProductList.next(this.FullProductList)
       },
