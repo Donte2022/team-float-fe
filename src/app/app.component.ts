@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AccountService} from "./services/account.service";
+import {IAccount} from "./interfaces/IAccount";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import {AccountService} from "./services/account.service";
 export class AppComponent {
   errorMsg: string | null = null
   isRegistering: boolean = false
+  account: IAccount | null = null
 
   constructor(private accountService: AccountService) {
     accountService.$isRegistering.subscribe(
@@ -16,6 +18,9 @@ export class AppComponent {
     )
     accountService.$loginErrorMessage.subscribe(
       errorMsg => this.errorMsg = errorMsg
+    )
+    accountService.$account.subscribe(
+      account => this.account = account
     )
   }
 }

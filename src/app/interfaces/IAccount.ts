@@ -1,6 +1,6 @@
 export interface IAccount {
-  fname: string
-  lname: string
+  firstname: string
+  lastname: string
   id: number
   username: string
   password: string

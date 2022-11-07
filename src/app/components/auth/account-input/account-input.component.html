@@ -1,20 +1,22 @@
 <h3>My Account</h3>
-<form #myAccount="ngForm" (ngSubmit)="onSubmit(myAccount.value)">
-  <input ngModel name="fname" placeholder="first name">
-  <input ngModel name="lname" placeholder="last name">
-  <input ngModel name="email" placeholder="email">
-  <input ngModel name="username" placeholder="username">
-  <input ngModel name="password" placeholder="password" type="password">
-  <div *ngIf="account?.rank === 1">
-    <div class="mx-2">
-      <input ngModel type="radio" id="admin" name="rank" value=1>
-      <label for="customer" class="ms-1">Admin</label>
-    </div>
-    <div class="mx-2">
-      <input ngModel type="radio" id="customer" name="rank" value=3>
-      <label for="customer" class="ms-1">User</label>
-    </div>
-  </div>
+<form>
+  <input [(ngModel)]="account.firstname" name="firstname" placeholder="first name">
+  <input [(ngModel)]="account.lastname" name="lastname" placeholder="last name">
+  <input [(ngModel)]="account.email" name="email" placeholder="email">
+  <input [(ngModel)]="account.username" name="username" placeholder="username">
+<!--  Todo handle password not being passed -->
+  <input [(ngModel)]="account.password" name="password" placeholder="password" type="password">
+<!--  Todo allow account rank update if admin-->
+<!--  <div *ngIf="account.rank === 1">-->
+<!--    <div class="mx-2">-->
+<!--      <input [(ngModel)]="account.rank" type="radio" id="admin" name="rank" value=1>-->
+<!--      <label for="customer" class="ms-1">Admin</label>-->
+<!--    </div>-->
+<!--    <div class="mx-2">-->
+<!--      <input [(ngModel)]="account.rank" type="radio" id="customer" name="rank" value=3>-->
+<!--      <label for="customer" class="ms-1">Customer</label>-->
+<!--    </div>-->
+<!--  </div>-->
   <button class="btn btn-info" type="submit">Save</button>
   <button (click)="onDelete()" class="btn btn-danger" type="button">Delete</button>
   <button (click)="onCancel()" class="btn btn-warning" type="button">Cancel</button>

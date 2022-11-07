@@ -14,14 +14,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onClickReg(accountInfo: {
-    fname: string,
-    lname: string,
+    firstname: string,
+    lastname: string,
     email: string,
     username: string,
     password: string,
     rank: number
   }) {
-    this.accountService.attemptRegister(accountInfo.fname, accountInfo.lname, accountInfo.email, accountInfo.username, accountInfo.password, accountInfo.rank)
+    this.accountService.attemptRegister(accountInfo.firstname, accountInfo.lastname, accountInfo.email, accountInfo.username, accountInfo.password, accountInfo.rank)
   }
 
   onClickToLogin() {
