@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {IProduct} from "../interfaces/IProduct";
 import {ICategory} from "../interfaces/ICategory";
 import {IPriceChange} from "../interfaces/IPriceChange";
-import {IsimpleProduct} from "../interfaces/IsimpleProduct";
+import {ISimpleProduct} from "../interfaces/ISimpleProduct";
 
 @Injectable({
   providedIn: 'root'
@@ -213,7 +213,7 @@ export class MainPageService {
 
   //Post Request
 
-  postproduct (Input : IsimpleProduct) {
+  postproduct (Input : ISimpleProduct) {
     let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
