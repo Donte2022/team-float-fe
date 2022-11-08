@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
@@ -16,6 +15,10 @@ import { PriceChangeCreateComponent } from './components/Mainpage/price-change-c
 import { PriceChangeRequestComponent } from './components/Mainpage/price-change-request/price-change-request.component';
 import { MainPageComponent } from './components/Mainpage/main-page/main-page.component';
 import {FormsModule} from "@angular/forms";
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { AccountInputComponent } from './components/auth/account-input/account-input.component';
+
 
 @NgModule({
   declarations: [
@@ -31,12 +34,16 @@ import {FormsModule} from "@angular/forms";
     PriceChangeCreateComponent,
     PriceChangeRequestComponent,
     MainPageComponent
+    LoginComponent,
+    RegisterComponent,
+    AccountInputComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule,
     HttpClientModule,
     FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
