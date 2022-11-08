@@ -1,0 +1,4 @@
+<div *ngFor="let account of accountList">
+  <app-account-list-item  *ngIf="accountToEditId !== account.id" [account]="account"></app-account-list-item>
+  <app-account-input *ngIf="accountToEditId === account.id" [account]="account"></app-account-input>
+</div>
