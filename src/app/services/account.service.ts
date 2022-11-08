@@ -155,6 +155,7 @@ export class AccountService {
       next: () => {
         this.$account.next(updatedAccount)
         this.$showMyAccount.next(false)
+        this.$accountIdToEdit.next(null)
       },
       error: (err) => {
         //Todo handle error
