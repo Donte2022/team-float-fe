@@ -13,10 +13,12 @@ export class ProductComponent implements OnInit {
 
   @Input() Pro :IProduct | undefined
   img:string|undefined
+  rank: number
 
 
   constructor(private MainPageService:MainPageService) {
     this.img = this.Pro?.imageUrl
+    this.rank = 0
 
   }
 
@@ -24,6 +26,7 @@ export class ProductComponent implements OnInit {
     if (this.Pro?.imageUrl !== undefined) {
       this.img = this.Pro.imageUrl
     }
+    this.rank = this.MainPageService.getrank()
   }
 
 

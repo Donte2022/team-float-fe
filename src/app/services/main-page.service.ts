@@ -15,7 +15,8 @@ export class MainPageService {
   //TODO add endpoint url
   //TODO config Error to send messages
 
-  private rank :number
+  private rank :number = 3
+  $rank = new Subject<number>()
 
   // Full List
 
@@ -65,7 +66,6 @@ export class MainPageService {
 
 
   constructor(private http:HttpService) {
-    this.rank = 0
     this.IndCategory = {} as ICategory
     this.IndProduct = {} as IProduct
     this.IndPriceChange = {} as IPriceChange
@@ -84,7 +84,18 @@ export class MainPageService {
     this.FullProductList = []
   }
 
-  // Ind variables Getters and Setters
+  // Misc Getters and Setters
+
+
+  getrank(): number {
+    return this.rank;
+  }
+
+  setrank(value: number) {
+    this.rank = value;
+  }
+
+// Ind variables Getters and Setters
 
 
   getIndCategory(): ICategory {
@@ -191,6 +202,7 @@ export class MainPageService {
     let obs = this.http.onget("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
+        console.log(value)
         this.FullProductList = [...value]
         this.$FullProductList.next(this.FullProductList)
       },

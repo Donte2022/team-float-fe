@@ -19,6 +19,7 @@ export class MainShoppingPageComponent implements OnInit {
   ProductScreen: boolean = true
   CatFulllist: ICategory []
   ProductFulllist: IProduct []
+  rank : number = 0
 
   constructor(private MainPageService: MainPageService) {
     this.CatFulllist= []
@@ -38,6 +39,7 @@ export class MainShoppingPageComponent implements OnInit {
     this.MainPageService.getfullproductlistrequest()
     this.MainPageService.getFullCategoryList()
     this.ProductFulllist = [...this.MainPageService.getFullProductList()]
+    this.rank = this.MainPageService.getrank()
   }
 
   oncanel () {
