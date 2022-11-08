@@ -27,4 +27,10 @@ export class PriceChangeRequestComponent implements OnInit {
     }
   }
 
+  ondelete () {
+    if (this.Pro !== undefined && this.Pri !== undefined) {
+      this.MainPageService.deletepricechange(this.Pro.id,this.Pri.id)
+    }
+  }
+
 }

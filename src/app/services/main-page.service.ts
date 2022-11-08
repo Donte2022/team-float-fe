@@ -274,7 +274,6 @@ export class MainPageService {
     let obs = this.http.ondelete("/product?id="+ Input ) as Observable<any>
     obs.subscribe({
       next: value => {
-        console.log(value)
         let num = this.FullProductList.findIndex(value1 => {return value1.id === Input})
         this.FullProductList.splice(num,1)
         this.$FullProductList.next(this.FullProductList)
@@ -283,8 +282,16 @@ export class MainPageService {
     })
   }
 
-  deletepricechange () {
-
+  deletepricechange (proid: number, priid: number) {
+    let obs = this.http.ondelete("/pricechangerequest/" + proid + "/" + priid)
+    obs.subscribe({
+      next: value => {
+        let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
+        let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === priid})
+        this.FullProductList[num].PriceChange.splice(num2,1)
+      },
+      error: err => {console.error(err)}
+    })
   }
 
 
