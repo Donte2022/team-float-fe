@@ -1,0 +1,9 @@
+<div *ngIf="Pri !== undefined" style="border-style: solid">
+  <div>Price Change Request</div>
+  <div>{{Pri.newPrice}}</div>
+  <div>{{Pri.sale}}</div>
+  <div>{{Pri.startDate}}</div>
+  <div>{{Pri.endDate}}</div>
+  <div>{{Pri.couponLeft}}</div>
+<div><button (click)="onPriceChangeEditScreen()">Price Change Edit</button></div>
+</div>

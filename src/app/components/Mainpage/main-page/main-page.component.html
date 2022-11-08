@@ -1,0 +1,7 @@
+<div *ngIf="ShopingpageScreen === false">
+<div>Welcome to Team Float's Project!</div>
+<button (click)="onshopping()">Shopping</button>
+</div>
+<div *ngIf="ShopingpageScreen">
+<app-main-shopping-page></app-main-shopping-page>
+</div>

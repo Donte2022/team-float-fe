@@ -1,3 +1,6 @@
+
+<app-main-page></app-main-page>
+
 <!--Todo Not logged in-->
 <div *ngIf="!account">
   <div *ngIf="errorMsg">{{errorMsg}}</div>
@@ -10,4 +13,5 @@
 <!--  Todo conditional rendering for productList, cart, myAccount, pastOrders, etc.-->
   <app-account-input></app-account-input>
 </div>
+
 
