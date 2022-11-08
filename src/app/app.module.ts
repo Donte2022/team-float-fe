@@ -33,7 +33,7 @@ import { AccountInputComponent } from './components/auth/account-input/account-i
     ProductEditComponent,
     PriceChangeCreateComponent,
     PriceChangeRequestComponent,
-    MainPageComponent
+    MainPageComponent,
     LoginComponent,
     RegisterComponent,
     AccountInputComponent,
