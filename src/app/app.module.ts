@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { AccountInputComponent } from './components/auth/account-input/account-input.component';
 import { AccountListComponent } from './components/admin/account-list/account-list.component';
 import { AccountListItemComponent } from './components/admin/account-list-item/account-list-item.component';
+import { AddAccountComponent } from './components/admin/add-account/add-account.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AccountListItemComponent } from './components/admin/account-list-item/a
     AccountInputComponent,
     AccountListComponent,
     AccountListItemComponent,
+    AddAccountComponent,
   ],
   imports: [
     BrowserModule,

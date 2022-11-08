@@ -31,4 +31,8 @@ export class AccountListComponent implements OnInit, OnDestroy {
     this.sub2.unsubscribe()
   }
 
+  onClickCreate() {
+    this.accountService.$showAddAccount.next(true)
+  }
+
 }

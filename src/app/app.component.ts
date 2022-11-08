@@ -13,6 +13,8 @@ export class AppComponent {
   account: IAccount | null = null
   accountToEditId: number | null = null
   showMyAccount: boolean = false
+  showAddAccount: boolean = false
+  isAdmin: boolean = false
 
   constructor(private accountService: AccountService) {
     accountService.$isRegistering.subscribe(
@@ -29,6 +31,12 @@ export class AppComponent {
     )
     accountService.$showMyAccount.subscribe(
         showMyAccount => this.showMyAccount = showMyAccount
+    )
+    accountService.$showAddAccount.subscribe(
+        showAddAccount => this.showAddAccount = showAddAccount
+    )
+    accountService.$isAdmin.subscribe(
+      isAdmin => this.isAdmin = isAdmin
     )
   }
 

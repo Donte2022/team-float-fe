@@ -22,6 +22,7 @@ export class AccountService {
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
   $showMyAccount = new BehaviorSubject<boolean>(false)
+  $showAddAccount = new BehaviorSubject<boolean>(false)
   $isAdmin = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) { }
@@ -98,6 +99,7 @@ export class AccountService {
         if (account) {
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
+          this.$isRegistering.next(false)
           if (account.rank === 1) {
             this.refreshAccountList()
             this.$isAdmin.next(true)
@@ -111,22 +113,29 @@ export class AccountService {
     })
   }
 
-  public attemptRegister(newAccount: IAccount) {
-    if (newAccount.username.length < 1) {
+  public attemptRegister(accountToCreate: IAccount) {
+    if (accountToCreate.username.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_USERNAME_MESSAGE)
       return
     }
-    if (newAccount.password.length < 1) {
+    if (accountToCreate.password.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_PASSWORD_MESSAGE)
       return
     }
-    if (newAccount.rank < 1 || newAccount.rank > 3) {
+    if (accountToCreate.rank < 1 || accountToCreate.rank > 3) {
       this.$loginErrorMessage.next(this.REGISTER_INVALID_ROLE_MESSAGE)
       return
     }
     //Todo validation for lastName, firstName, email
-    this.createAccount(newAccount).pipe(first()).subscribe({
-      next: () => this.attemptLogin(newAccount.username, newAccount.password),
+    this.createAccount(accountToCreate).pipe(first()).subscribe({
+      next: (newAccount) => {
+        if (this.$isRegistering.getValue())
+          this.attemptLogin(accountToCreate.username, accountToCreate.password)
+        else {
+          this.$accountList.next([...this.$accountList.getValue(), newAccount])
+          this.$showAddAccount.next(false)
+        }
+      },
       error: (err) => {
         if (err.status === 409)
           this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
@@ -145,7 +154,7 @@ export class AccountService {
     this.updateAccount(updatedAccount).pipe(first()).subscribe({
       next: () => {
         this.$account.next(updatedAccount)
-        //Todo handle rendering of my account component?
+        this.$showMyAccount.next(false)
       },
       error: (err) => {
         //Todo handle error
