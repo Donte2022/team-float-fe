@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IPriceChange} from "../../../interfaces/IPriceChange";
+import {IProduct} from "../../../interfaces/IProduct";
 
 @Component({
   selector: 'app-price-change-request',
@@ -10,6 +11,7 @@ import {IPriceChange} from "../../../interfaces/IPriceChange";
 export class PriceChangeRequestComponent implements OnInit {
 
   @Input() Pri: IPriceChange | undefined
+  @Input() Pro: IProduct | undefined
 
   constructor(private MainPageService:MainPageService) { }
 
@@ -17,8 +19,9 @@ export class PriceChangeRequestComponent implements OnInit {
   }
 
   onPriceChangeEditScreen () {
-    if (this.Pri !== undefined) {
+    if (this.Pri !== undefined && this.Pro !== undefined) {
       this.MainPageService.setIndPriceChange(this.Pri)
+      this.MainPageService.setIndProduct(this.Pro)
       this.MainPageService.setPriceChangeEditScreen(true)
       this.MainPageService.setProductScreen(false)
     }

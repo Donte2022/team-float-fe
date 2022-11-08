@@ -10,7 +10,7 @@
   <div *ngIf="rank>1">Cost to Make:{{Pro.costToMake}}</div>
   <div *ngIf="rank>1"><button (click)="onProductEdit()">Edit Product</button></div>
   <div *ngIf="rank>1"><button (click)="ondelete()">Delete</button></div>
-<!--  <div><button (click)="onPriceChangeCreateScreen()">Price Change Create</button></div>-->
-<!--  <div>List of Price Change Request:</div>-->
-<!--  <app-price-change-request *ngFor="let pri of Pro.PriceChangeRequest"[Pri]="pri"></app-price-change-request>-->
+  <div><button (click)="onPriceChangeCreateScreen()">Price Change Create</button></div>
+  <div>List of Price Change Request:</div>
+  <app-price-change-request *ngFor="let pri of Pro.PriceChange" [Pri]="pri" [Pro]="Pro"></app-price-change-request>
 </div>

@@ -12,5 +12,5 @@ export interface IProduct {
   weight:number
   map:number
   costToMake:number
-  // PriceChangeRequest:IPriceChange []
+  PriceChange:IPriceChange []
 }

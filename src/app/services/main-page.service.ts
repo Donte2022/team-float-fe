@@ -5,6 +5,7 @@ import {IProduct} from "../interfaces/IProduct";
 import {ICategory} from "../interfaces/ICategory";
 import {IPriceChange} from "../interfaces/IPriceChange";
 import {IsimpleProduct} from "../interfaces/IsimpleProduct";
+import {IsimplePriceChange} from "../interfaces/IsimplePriceChange";
 
 @Injectable({
   providedIn: 'root'
@@ -225,6 +226,21 @@ export class MainPageService {
     })
   }
 
+
+  postpricechange (Input: IsimplePriceChange,proid : number) {
+    console.log(Input)
+    console.log(proid)
+    let obs = this.http.onpost("/pricechangerequest/" + proid,Input) as Observable<IPriceChange>
+    obs.subscribe({
+      next: value => {
+        let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
+        this.FullProductList[num].PriceChange.push(value)
+        this.$FullProductList.next(this.FullProductList)
+      },
+      error: err => {console.error(err)}
+    })
+  }
+
   //Put Request
 
   putproduct (Input : IProduct){
@@ -237,6 +253,18 @@ export class MainPageService {
         this.$FullProductList.next(this.FullProductList)
       },
       error: err => {console.error(err)}
+    })
+  }
+
+  putpricechange (input: IPriceChange,Pro : IProduct) {
+    let obs = this.http.onput("/pricechangerequest/" ,input) as Observable<any>
+    obs.subscribe({
+      next:value => {
+        let num = this.FullProductList.findIndex(value1 => {return value1.id === this.IndProduct.id})
+       let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === input.id})
+        this.FullProductList[num].PriceChange.splice(num2,1,input)
+      },
+      error:err => {console.error(err)}
     })
   }
 

@@ -43,9 +43,11 @@ export class ProductComponent implements OnInit {
     }
   }
   onPriceChangeCreateScreen () {
+    if (this.Pro !== undefined) {
+    this.MainPageService.setIndProduct(this.Pro)
     this.MainPageService.setPriceChangeCreateScreen(true)
     this.MainPageService.setProductScreen(false)
-  }
+  }}
 
   ondelete () {
     if (this.Pro !== undefined) {
