@@ -20,10 +20,12 @@ export class AccountInputComponent implements OnInit, OnDestroy {
   }
 
   accountToEditId: number | null = null
-  originalRank: number = 0
+  userIsAdmin: boolean = false
+  isAdminsAccount: boolean = false
 
   sub1: Subscription
   sub2: Subscription
+  sub3: Subscription
 
   constructor(private accountService: AccountService) {
       this.sub1 = accountService.$accountIdToEdit.subscribe(
@@ -33,10 +35,12 @@ export class AccountInputComponent implements OnInit, OnDestroy {
           if (!this.accountToEditId && account !== null)
             this.account = account
       })
+      this.sub3 = accountService.$isAdmin.subscribe(userIsAdmin => this.userIsAdmin = userIsAdmin)
   }
 
-  ngOnInit(): void {
-    this.originalRank = this.account.rank
+  ngOnInit() {
+    if (this.account.id === this.accountService.$account.getValue()?.id)
+      this.isAdminsAccount = true
   }
 
   ngOnDestroy() {

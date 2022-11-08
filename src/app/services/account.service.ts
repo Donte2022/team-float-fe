@@ -22,6 +22,7 @@ export class AccountService {
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
   $showMyAccount = new BehaviorSubject<boolean>(false)
+  $isAdmin = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) { }
 
@@ -97,8 +98,11 @@ export class AccountService {
         if (account) {
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
-          if (account.rank === 1)
+          if (account.rank === 1) {
             this.refreshAccountList()
+            this.$isAdmin.next(true)
+          }
+
         }
         else
           this.$loginErrorMessage.next(this.LOGIN_INVALID_CREDENTIALS_MESSAGE)

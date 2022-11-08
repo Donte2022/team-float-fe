@@ -6,7 +6,7 @@
 <!--  Todo handle password updating -->
 <!--<input [(ngModel)]="account.password" name="password" placeholder="new password" type="password">-->
 <!--  Todo allow account rank update if admin-->
-<div *ngIf="originalRank === 1">
+<div *ngIf="userIsAdmin && !isAdminsAccount">
   <div class="mx-2">
     <input [ngModel]="account.rank.toString()"
            (ngModelChange)="onRankChange($event)" type="radio" id="admin" name="rank" value="1">
@@ -22,5 +22,5 @@
   </div>
 </div>
 <button (click)="onSave()" class="btn btn-info" type="submit">Save</button>
-<button (click)="onDelete()" class="btn btn-danger" type="button">Delete</button>
+<button *ngIf="!isAdminsAccount" (click)="onDelete()" class="btn btn-danger" type="button">Delete</button>
 <button (click)="onCancel()" class="btn btn-warning" type="button">Cancel</button>
