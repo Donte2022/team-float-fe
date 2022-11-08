@@ -12,17 +12,16 @@ import {IProduct} from "../../../interfaces/IProduct";
 export class PriceChangeEditComponent implements OnInit {
 
   PriceChange : IPriceChange
-  Pro : IProduct
+
 
 
   constructor(private MainPageService: MainPageService) {
     this.PriceChange = {} as IPriceChange
-    this.Pro = {} as IProduct
+
   }
 
   ngOnInit(): void {
     this.PriceChange = this.MainPageService.getIndPriceChange()
-    this.Pro = this.MainPageService.getIndProduct()
   }
   oncancel () {
     this.MainPageService.setPriceChangeEditScreen(false)
@@ -33,7 +32,7 @@ export class PriceChangeEditComponent implements OnInit {
     this.MainPageService.putpricechange({
       id:this.PriceChange.id,sale:this.PriceChange.sale,newPrice:this.PriceChange.newPrice,
       startDate:this.PriceChange.startDate,endDate:this.PriceChange.endDate,couponLeft:this.PriceChange.couponLeft
-    },this.Pro
+    }
     )
     this.oncancel()
   }

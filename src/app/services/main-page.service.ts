@@ -256,7 +256,7 @@ export class MainPageService {
     })
   }
 
-  putpricechange (input: IPriceChange,Pro : IProduct) {
+  putpricechange (input: IPriceChange) {
     let obs = this.http.onput("/pricechangerequest/" ,input) as Observable<any>
     obs.subscribe({
       next:value => {
@@ -283,8 +283,9 @@ export class MainPageService {
     })
   }
 
+  deletepricechange () {
 
-
+  }
 
 
 }
