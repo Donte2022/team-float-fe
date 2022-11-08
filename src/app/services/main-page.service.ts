@@ -6,6 +6,8 @@ import {ICategory} from "../interfaces/ICategory";
 import {IPriceChange} from "../interfaces/IPriceChange";
 import {IsimpleProduct} from "../interfaces/IsimpleProduct";
 import {IsimplePriceChange} from "../interfaces/IsimplePriceChange";
+import {IPostCategory} from "../interfaces/IPostCategory";
+import {IsimpleCategory} from "../interfaces/IsimpleCategory";
 
 @Injectable({
   providedIn: 'root'
@@ -241,10 +243,19 @@ export class MainPageService {
     })
   }
 
+  postcategory (input: IPostCategory) {
+    // let arr: IPostCategory = {name: "red",proidList: [20,40]}
+    let obs = this.http.onpost("/categories",input) as Observable<ICategory>
+    obs.subscribe({
+      next: value => {console.log(value)},
+      error: err => {console.error(err)}
+    })
+  }
+
   //Put Request
 
   putproduct (Input : IProduct){
-    let obs = this.http.onput("/product",Input) as Observable<any>
+    let obs = this.http.onput("/product",Input)
     obs.subscribe({
       next: value => {
         console.log(value)
@@ -257,7 +268,7 @@ export class MainPageService {
   }
 
   putpricechange (input: IPriceChange) {
-    let obs = this.http.onput("/pricechangerequest/" ,input) as Observable<any>
+    let obs = this.http.onput("/pricechangerequest/" ,input)
     obs.subscribe({
       next:value => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === this.IndProduct.id})
@@ -268,10 +279,20 @@ export class MainPageService {
     })
   }
 
+
+  putcategory (input : IsimpleCategory) {
+    // let arr: IsimpleCategory = {id:20,name:"blue",proidList:[200,220]}
+    // console.log(arr)
+    let obs = this.http.onput("/categories",input)
+    obs.subscribe({
+      next: value => {console.log(value)},
+      error: err => {console.error(err)}
+    })
+  }
   //Delete Request
 
   deleteproduct (Input: number) {
-    let obs = this.http.ondelete("/product?id="+ Input ) as Observable<any>
+    let obs = this.http.ondelete("/product?id="+ Input )
     obs.subscribe({
       next: value => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === Input})
@@ -294,5 +315,12 @@ export class MainPageService {
     })
   }
 
+  deletecategory (input : number) {
+    let obs = this.http.ondelete("/categories"+input)
+    obs.subscribe({
+      next: value => {},
+      error: err => {console.error(err)}
+    })
+  }
 
 }

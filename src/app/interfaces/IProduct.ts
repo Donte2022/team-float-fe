@@ -1,4 +1,5 @@
 import {IPriceChange} from "./IPriceChange";
+import {ICategory} from "./ICategory";
 
 export interface IProduct {
   id:number
@@ -13,4 +14,5 @@ export interface IProduct {
   map:number
   costToMake:number
   PriceChange:IPriceChange []
+  Categories:ICategory []
 }
