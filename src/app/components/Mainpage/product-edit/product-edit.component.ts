@@ -40,7 +40,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onsubmit (input: IProduct) {
-    this.MainPageService.putproduct(input)
+    this.MainPageService.putProduct(input)
     this.oncancel()
   }
 

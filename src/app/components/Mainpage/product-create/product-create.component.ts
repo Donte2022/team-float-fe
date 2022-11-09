@@ -50,7 +50,7 @@ export class ProductCreateComponent implements OnInit {
 
   onpost () {
     if (this.BasePrice && this.Weight && this.MAPPrice && this.CosttoMake){
-    this.MainPageService.postproduct(
+    this.MainPageService.postProduct(
       {productName: this.ProductName,
       displayName: this.DisplayName,
       description: this.Description,

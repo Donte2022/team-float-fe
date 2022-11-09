@@ -36,7 +36,7 @@ export class PriceChangeCreateComponent implements OnInit {
 
   oncreate () {
     if (this.NewPrice !== undefined && this.couponsleft !== undefined && this.Indpro !== undefined) {
-    this.MainPageService.postpricechange(
+    this.MainPageService.postPriceChange(
       {sale: this.Sale, newPrice: this.NewPrice,startDate:this.StartDate,endDate:this.EndDate,couponLeft:this.couponsleft}
       ,this.Indpro.id
     )

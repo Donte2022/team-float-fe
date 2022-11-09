@@ -84,7 +84,7 @@ export class CategoryEditComponent implements OnInit {
     }
     console.log(proidList)
     console.log(oldlist)
-    this.MainPageService.putcategory({...{name:this.Category.name,id:this.Category.id,proidList:proidList}},oldlist)
+    this.MainPageService.putCategory({...{name:this.Category.name,id:this.Category.id,proidList:proidList}},oldlist)
     this.oncancel()
   }
 

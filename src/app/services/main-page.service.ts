@@ -190,7 +190,7 @@ export class MainPageService {
   /// Get Request
 
 
-  getfullproductlistrequest () {
+  getFullProductListRequest () {
     let obs = this.http.onget("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
@@ -202,7 +202,7 @@ export class MainPageService {
     })
   }
 
-  getfullcategorylistrequest () {
+  getFullCategoryListRequest () {
     let obs = this.http.onget("/categories") as Observable<ICategory[]>
     obs.subscribe({
       next: value => {console.log(value)
@@ -215,7 +215,7 @@ export class MainPageService {
 
   //Post Request
 
-  postproduct (Input : IsimpleProduct) {
+  postProduct (Input : IsimpleProduct) {
     let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
@@ -228,7 +228,7 @@ export class MainPageService {
   }
 
 
-  postpricechange (Input: IsimplePriceChange,proid : number) {
+  postPriceChange (Input: IsimplePriceChange, proid : number) {
     console.log(Input)
     console.log(proid)
     let obs = this.http.onpost("/pricechangerequest/" + proid,Input) as Observable<IPriceChange>
@@ -242,7 +242,7 @@ export class MainPageService {
     })
   }
 
-  postcategory (input: IPostCategory) {
+  postCategory (input: IPostCategory) {
     // let arr: IPostCategory = {name: "red",proidList: [20,40]}
     let obs = this.http.onpost("/categories",input) as Observable<ICategory>
     obs.subscribe({
@@ -261,7 +261,7 @@ export class MainPageService {
 
   //Put Request
 
-  putproduct (Input : IProduct){
+  putProduct (Input : IProduct){
     let obs = this.http.onput("/product",Input)
     obs.subscribe({
       next: value => {
@@ -274,7 +274,7 @@ export class MainPageService {
     })
   }
 
-  putpricechange (input: IPriceChange) {
+  putPriceChange (input: IPriceChange) {
     let obs = this.http.onput("/pricechangerequest/" ,input)
     obs.subscribe({
       next:value => {
@@ -287,7 +287,7 @@ export class MainPageService {
   }
 
 
-  putcategory (input : IsimpleCategory,oldlist : number []) {
+  putCategory (input : IsimpleCategory, oldlist : number []) {
     console.log(input)
     let obs = this.http.onput("/categories",input)
     obs.subscribe({
@@ -321,7 +321,7 @@ export class MainPageService {
   }
   //Delete Request
 
-  deleteproduct (Input: number) {
+  deleteProduct (Input: number) {
     let obs = this.http.ondelete("/product?id="+ Input )
     obs.subscribe({
       next: value => {
@@ -333,7 +333,7 @@ export class MainPageService {
     })
   }
 
-  deletepricechange (proid: number, priid: number) {
+  deletePriceChange (proid: number, priid: number) {
     let obs = this.http.ondelete("/pricechangerequest/" + proid + "/" + priid)
     obs.subscribe({
       next: value => {
@@ -345,10 +345,21 @@ export class MainPageService {
     })
   }
 
-  deletecategory (input : number) {
-    let obs = this.http.ondelete("/categories"+input)
+  deleteCategory (input : number) {
+    let obs = this.http.ondelete("/categories/"+input)
     obs.subscribe({
-      next: value => {},
+      next: value => {
+        for (let pro of this.FullProductList){
+       let num =  pro.Categories.findIndex(value1 => {return value1.id == input})
+          if (num != -1){
+            pro.Categories.splice(num,1)
+          }
+        }
+       let num2 = this.FullCategoryList.findIndex(value1 => {return value1.id == input})
+        this.FullCategoryList.splice(num2,1)
+        this.$FullCategoryList.next(this.FullCategoryList)
+        this.$FullProductList.next(this.FullProductList)
+      },
       error: err => {console.error(err)}
     })
   }

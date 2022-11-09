@@ -29,7 +29,7 @@ export class PriceChangeEditComponent implements OnInit {
   }
 
   onedit () {
-    this.MainPageService.putpricechange({
+    this.MainPageService.putPriceChange({
       id:this.PriceChange.id,sale:this.PriceChange.sale,newPrice:this.PriceChange.newPrice,
       startDate:this.PriceChange.startDate,endDate:this.PriceChange.endDate,couponLeft:this.PriceChange.couponLeft
     }

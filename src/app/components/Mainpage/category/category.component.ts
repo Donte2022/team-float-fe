@@ -23,5 +23,10 @@ export class CategoryComponent implements OnInit {
       this.MainPageService.setIndCategory({...this.Cat},true)
     }
   }
+  ondelete() {
+    if (this.Cat !== undefined){
+      this.MainPageService.deleteCategory(this.Cat.id)
+    }
+  }
 
 }

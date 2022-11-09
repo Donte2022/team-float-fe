@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
 
   ondelete () {
     if (this.Pro !== undefined) {
-      this.MainPageService.deleteproduct(this.Pro.id)
+      this.MainPageService.deleteProduct(this.Pro.id)
   }}
 
 }
