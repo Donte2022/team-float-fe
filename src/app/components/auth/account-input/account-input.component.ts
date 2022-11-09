@@ -16,7 +16,8 @@ export class AccountInputComponent implements OnInit, OnDestroy {
     email: "",
     username: "",
     password: "",
-    rank: 0
+    rank: 0,
+    orderId: 0
   }
 
   accountToEditId: number | null = null

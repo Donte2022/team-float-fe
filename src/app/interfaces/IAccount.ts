@@ -6,4 +6,5 @@ export interface IAccount {
   password: string
   email: string
   rank: number
+  orderId: number
 }

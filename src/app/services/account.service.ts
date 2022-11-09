@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, first, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IAccount} from "../interfaces/IAccount";
@@ -6,7 +6,7 @@ import {IAccount} from "../interfaces/IAccount";
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService implements OnInit {
+export class AccountService {
   private readonly LOGIN_INVALID_USERNAME_MESSAGE = "Username is required"
   private readonly LOGIN_INVALID_PASSWORD_MESSAGE = "Password is required"
   private readonly LOGIN_INVALID_CREDENTIALS_MESSAGE = 'Incorrect username or password'
@@ -40,18 +40,7 @@ export class AccountService implements OnInit {
 
   constructor(private http: HttpClient) { }
   public dummyLogin() {
-    try {
-      this.attemptRegister(this.dummyUser)
-      console.log("try dummy")
-    }
-    catch {
-      this.login(this.dummyUser.username, this.dummyUser.password)
-      console.log("catch dummy")
-    }
-  }
-
-  ngOnInit() {
-    // this.dummyLogin()
+    this.attemptRegister(this.dummyUser)
   }
 
   public login(username: string, password: string): Observable<IAccount> {
@@ -122,7 +111,6 @@ export class AccountService implements OnInit {
     this.login(username, password).pipe(first()).subscribe({
       next: (account) => {
         if (account) {
-          console.log("loginValid")
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
           this.$isRegistering.next(false)
@@ -165,6 +153,7 @@ export class AccountService implements OnInit {
       },
       error: (err) => {
         if (err.status === 409)
+          //Todo remove dummy login code when done
           // this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
           this.attemptLogin(this.dummyUser.username, this.dummyUser.password)
         else
