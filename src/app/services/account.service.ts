@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {BehaviorSubject, first, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IAccount} from "../interfaces/IAccount";
@@ -6,7 +6,7 @@ import {IAccount} from "../interfaces/IAccount";
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class AccountService implements OnInit {
   private readonly LOGIN_INVALID_USERNAME_MESSAGE = "Username is required"
   private readonly LOGIN_INVALID_PASSWORD_MESSAGE = "Password is required"
   private readonly LOGIN_INVALID_CREDENTIALS_MESSAGE = 'Incorrect username or password'
@@ -29,7 +29,30 @@ export class AccountService {
   //Admin = 1, Shopkeeper = 2, Customer = 3
   userRank: number = 3
 
+  dummyUser: any = {
+    firstName: "Dummy",
+    lastName: "Dumdum",
+    email: "dum@dumbmail.com",
+    username: "soDumb",
+    password: "password",
+    rank: 1
+  }
+
   constructor(private http: HttpClient) { }
+  public dummyLogin() {
+    try {
+      this.attemptRegister(this.dummyUser)
+      console.log("try dummy")
+    }
+    catch {
+      this.login(this.dummyUser.username, this.dummyUser.password)
+      console.log("catch dummy")
+    }
+  }
+
+  ngOnInit() {
+    // this.dummyLogin()
+  }
 
   public login(username: string, password: string): Observable<IAccount> {
     return this.http.get<IAccount>("http://localhost:8080/api/account", {
@@ -99,6 +122,7 @@ export class AccountService {
     this.login(username, password).pipe(first()).subscribe({
       next: (account) => {
         if (account) {
+          console.log("loginValid")
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
           this.$isRegistering.next(false)
@@ -141,7 +165,8 @@ export class AccountService {
       },
       error: (err) => {
         if (err.status === 409)
-          this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
+          // this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
+          this.attemptLogin(this.dummyUser.username, this.dummyUser.password)
         else
           this.$loginErrorMessage.next(this.REGISTER_HTTP_ERROR_MESSAGE)
       }
