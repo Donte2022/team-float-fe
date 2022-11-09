@@ -1,5 +1,6 @@
 <div *ngIf="Indpro !== undefined">
 <div>Create a new Price change Request for {{Indpro.displayName}}</div>
+  <div>{{message}}</div>
 <div>Sale<input type="checkbox" [(ngModel)]="Sale"></div>
 <div>New Price:<input type="number" min="0" [(ngModel)]="NewPrice"></div>
 <div>Start Date:<input type="date" [(ngModel)]="StartDate"></div>

@@ -14,12 +14,7 @@ import {IsimpleCategory} from "../interfaces/IsimpleCategory";
 })
 export class MainPageService {
 
-  //TODO add unsub
-  //TODO add endpoint url
-  //TODO config Error to send messages
-
   private rank :number = 3
-  $rank = new Subject<number>()
 
   // Full List
 
@@ -42,7 +37,6 @@ export class MainPageService {
   $MainShoppingPageMessage = new BehaviorSubject<string>("")
   $CategoryEditMessage = new BehaviorSubject<string>("")
   $CategoryCreateMessage = new BehaviorSubject<string>("")
-  $ProductMessage = new BehaviorSubject<string>("")
   $ProductCreateMessage = new BehaviorSubject<string>("")
   $ProductEditMessage = new BehaviorSubject<string>("")
   $PriceChangeCreateMessage = new BehaviorSubject<string>("")
@@ -83,13 +77,6 @@ export class MainPageService {
     return this.rank;
   }
 
-  setrank(value: number) {
-    this.rank = value;
-  }
-
-  setMainShoppingMessage (input:string) {
-    this.$MainShoppingPageMessage.next(input)
-  }
 
 // Ind variables Getters and Setters
 
@@ -99,7 +86,7 @@ export class MainPageService {
     return this.IndCategory;
   }
 
-  setIndCategory(value: ICategory, edit : boolean) {
+  setIndCategory(value: ICategory) {
     this.IndCategory = {...value};
     this.$IndCategory.next(this.IndCategory)
 
@@ -133,20 +120,12 @@ export class MainPageService {
     return this.FullCategoryList;
   }
 
-  setFullCategoryList(value: ICategory[]) {
-    this.FullCategoryList = value;
-    this.$FullCategoryList.next(this.FullCategoryList)
-  }
 
   getFullProductList(): IProduct[] {
     this.$FullProductList.next(this.FullProductList)
     return this.FullProductList;
   }
 
-  setFullProductList(value: IProduct[]) {
-    this.FullProductList = value;
-    this.$FullProductList.next(this.FullProductList)
-  }
 
 // Screen Setters
 
@@ -198,21 +177,22 @@ export class MainPageService {
     let obs = this.http.onget("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
-        console.log(value)
         this.FullProductList = [...value]
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err),this.$MainShoppingPageMessage.next(err.message)}
+      error: err => {console.error(err)
+        this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 
   getFullCategoryListRequest () {
     let obs = this.http.onget("/categories") as Observable<ICategory[]>
     obs.subscribe({
-      next: value => {console.log(value)
+      next: value => {
       this.FullCategoryList = [...value]
       this.$FullCategoryList.next(this.FullCategoryList)},
-      error:err => {console.error(err),this.$MainShoppingPageMessage.next(err.message)}
+      error:err => {console.error(err)
+        this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 
@@ -223,18 +203,16 @@ export class MainPageService {
     let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
-        console.log(value)
         this.FullProductList.push(value)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err),this.$ProductCreateScreen.next(err.message)}
+      error: err => {console.error(err)
+        this.$ProductCreateScreen.next(err.message)}
     })
   }
 
 
   postPriceChange (Input: IsimplePriceChange, proid : number) {
-    console.log(Input)
-    console.log(proid)
     let obs = this.http.onpost("/pricechangerequest/" + proid,Input) as Observable<IPriceChange>
     obs.subscribe({
       next: value => {
@@ -242,7 +220,8 @@ export class MainPageService {
         this.FullProductList[num].PriceChange.push(value)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err),this.$PriceChangeCreateScreen.next(err.message)}
+      error: err => {console.error(err)
+        this.$PriceChangeCreateScreen.next(err.message)}
     })
   }
 
@@ -250,16 +229,17 @@ export class MainPageService {
     // let arr: IPostCategory = {name: "red",proidList: [20,40]}
     let obs = this.http.onpost("/categories",input) as Observable<ICategory>
     obs.subscribe({
-      next: value => {console.log(value)
+      next: value => {
       this.FullCategoryList.push(value)
       this.$FullCategoryList.next(this.FullCategoryList)
       for (let pro of this.FullProductList){
         if (-1 != input.proidList.findIndex(value1 => {return value1 == pro.id})){
           pro.Categories.push(value)
         }
-      }console.log(this.FullProductList)
+      }
       },
-      error: err => {console.error(err),this.$CategoryCreateMessage.next(err.message)}
+      error: err => {console.error(err)
+        this.$CategoryCreateMessage.next(err.message)}
     })
   }
 
@@ -268,34 +248,34 @@ export class MainPageService {
   putProduct (Input : IProduct){
     let obs = this.http.onput("/product",Input)
     obs.subscribe({
-      next: value => {
-        console.log(value)
+      next: () => {
       let num =  this.FullProductList.findIndex(value1 => {return value1.id === Input.id})
         this.FullProductList.splice(num,1,Input)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err),this.$ProductEditScreen.next(err.message)}
+      error: err => {console.error(err)
+        this.$ProductEditScreen.next(err.message)}
     })
   }
 
   putPriceChange (input: IPriceChange) {
     let obs = this.http.onput("/pricechangerequest/" ,input)
     obs.subscribe({
-      next:value => {
+      next:() => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === this.IndProduct.id})
        let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === input.id})
         this.FullProductList[num].PriceChange.splice(num2,1,input)
       },
-      error:err => {console.error(err),this.$PriceChangeEditMessage.next(err.message)}
+      error:err => {console.error(err)
+        this.$PriceChangeEditMessage.next(err.message)}
     })
   }
 
 
   putCategory (input : IsimpleCategory, oldlist : number []) {
-    console.log(input)
     let obs = this.http.onput("/categories",input)
     obs.subscribe({
-      next: value => {
+      next: () => {
         for (let pro of this.FullProductList){
           let num = input.proidList.findIndex(value1 => {return value1 == pro.id})
           let num2 = oldlist.findIndex(value1 => {return value1 == pro.id})
@@ -315,7 +295,8 @@ export class MainPageService {
         this.FullCategoryList[val].name = input.name
         this.$FullCategoryList.next(this.FullCategoryList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err)
+        this.$CategoryEditMessage.next(err.message)}
     })
   }
   //Delete Request
@@ -323,31 +304,33 @@ export class MainPageService {
   deleteProduct (Input: number) {
     let obs = this.http.ondelete("/product?id="+ Input )
     obs.subscribe({
-      next: value => {
+      next: () => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === Input})
         this.FullProductList.splice(num,1)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err)
+        this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 
   deletePriceChange (proid: number, priid: number) {
     let obs = this.http.ondelete("/pricechangerequest/" + proid + "/" + priid)
     obs.subscribe({
-      next: value => {
+      next: () => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
         let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === priid})
         this.FullProductList[num].PriceChange.splice(num2,1)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err)
+        this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 
   deleteCategory (input : number) {
     let obs = this.http.ondelete("/categories/"+input)
     obs.subscribe({
-      next: value => {
+      next: () => {
         for (let pro of this.FullProductList){
        let num =  pro.Categories.findIndex(value1 => {return value1.id == input})
           if (num != -1){
@@ -359,7 +342,8 @@ export class MainPageService {
         this.$FullCategoryList.next(this.FullCategoryList)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err)
+        this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 

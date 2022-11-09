@@ -31,7 +31,6 @@ export class CategoryCreateComponent implements OnInit {
 
   onproductselect (input:any) {
     this.TempProduct = input.target.value
-    console.log(this.TempProduct)
   }
 
   onadd () {

@@ -1,28 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IPriceChange} from "../../../interfaces/IPriceChange";
-import {ICategory} from "../../../interfaces/ICategory";
-import {IProduct} from "../../../interfaces/IProduct";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-price-change-edit',
   templateUrl: './price-change-edit.component.html',
   styleUrls: ['./price-change-edit.component.css']
 })
-export class PriceChangeEditComponent implements OnInit {
+export class PriceChangeEditComponent implements OnInit,OnDestroy {
 
   PriceChange : IPriceChange
-
+  message : string
+  sub : Subscription
 
 
   constructor(private MainPageService: MainPageService) {
     this.PriceChange = {} as IPriceChange
-
+    this.message = ""
+    this.sub = this.MainPageService.$PriceChangeEditMessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {
     this.PriceChange = this.MainPageService.getIndPriceChange()
   }
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
+
   oncancel () {
     this.MainPageService.setPriceChangeEditScreen(false)
     this.MainPageService.setProductScreen(true)

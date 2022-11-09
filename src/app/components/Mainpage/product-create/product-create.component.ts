@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
-import {ICategory} from "../../../interfaces/ICategory";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
-
-  OtherCatList : ICategory []
+export class ProductCreateComponent implements OnInit,OnDestroy {
 
   DisplayName: string
   ProductName: string
@@ -21,12 +19,11 @@ export class ProductCreateComponent implements OnInit {
   Weight: number | undefined
   MAPPrice: number | undefined
   CosttoMake: number | undefined
-
-
-
+  message: string
+  sub : Subscription
 
   constructor(private MainPageService: MainPageService) {
-    this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
+    this.message = ""
     this.DisplayName = ""
     this.ProductName = ""
     this.Description = ""
@@ -37,10 +34,14 @@ export class ProductCreateComponent implements OnInit {
     this.Weight = undefined
     this.MAPPrice = undefined
     this.CosttoMake = undefined
+   this.sub = this.MainPageService.$ProductCreateMessage.subscribe(value => {this.message = value})
 
   }
 
   ngOnInit(): void {
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   oncancel () {

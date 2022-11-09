@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
     if (this.Cat !== undefined) {
       this.MainPageService.setProductScreen(false)
       this.MainPageService.setCategoryEditScreen(true)
-      this.MainPageService.setIndCategory({...this.Cat},true)
+      this.MainPageService.setIndCategory({...this.Cat})
     }
   }
   ondelete() {

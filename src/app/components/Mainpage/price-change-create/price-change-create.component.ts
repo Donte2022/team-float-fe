@@ -1,13 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-price-change-create',
   templateUrl: './price-change-create.component.html',
   styleUrls: ['./price-change-create.component.css']
 })
-export class PriceChangeCreateComponent implements OnInit {
+export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
 
   Sale:boolean
   NewPrice:number | undefined
@@ -15,6 +16,8 @@ export class PriceChangeCreateComponent implements OnInit {
   EndDate : Date
   couponsleft: number
   Indpro : IProduct
+  message : string
+  sub : Subscription
 
   constructor(private MainPageService:MainPageService) {
     this.Indpro = {} as IProduct
@@ -23,10 +26,15 @@ export class PriceChangeCreateComponent implements OnInit {
     this.StartDate = new Date()
     this.EndDate = new Date()
     this.couponsleft = 0
+    this.message = ""
+   this.sub = this.MainPageService.$PriceChangeCreateMessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {
     this.Indpro = this.MainPageService.getIndProduct()
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   oncancel () {

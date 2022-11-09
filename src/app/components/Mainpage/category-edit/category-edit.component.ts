@@ -46,7 +46,6 @@ export class CategoryEditComponent implements OnInit {
 
   onproductselect (input:any) {
     this.TempProduct = input.target.value
-    console.log(this.TempProduct)
   }
 
   onadd () {
@@ -82,8 +81,6 @@ export class CategoryEditComponent implements OnInit {
     for (let num2 of this.OtherProductList){
       oldlist.push(num2.id)
     }
-    console.log(proidList)
-    console.log(oldlist)
     this.MainPageService.putCategory({...{name:this.Category.name,id:this.Category.id,proidList:proidList}},oldlist)
     this.oncancel()
   }
