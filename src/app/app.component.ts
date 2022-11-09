@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AccountService} from "./services/account.service";
 import {IAccount} from "./interfaces/IAccount";
 
@@ -7,7 +7,7 @@ import {IAccount} from "./interfaces/IAccount";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   errorMsg: string | null = null
   isRegistering: boolean = false
   account: IAccount | null = null
@@ -27,9 +27,5 @@ export class AppComponent implements OnInit{
     accountService.$showAddAccount.subscribe(
         showAddAccount => this.showAddAccount = showAddAccount
     )
-  }
-  ngOnInit() {
-    console.log("On init")
-
   }
 }
