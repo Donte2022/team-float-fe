@@ -20,8 +20,10 @@ export class MainShoppingPageComponent implements OnInit {
   CatFulllist: ICategory []
   ProductFulllist: IProduct []
   rank : number = 0
+  message : string
 
   constructor(private MainPageService: MainPageService) {
+    this.message = ""
     this.CatFulllist= []
     this.ProductFulllist = []
     this.MainPageService.$CategoryEditScreen.subscribe(value => {this.CateditScreen = value})
@@ -33,6 +35,7 @@ export class MainShoppingPageComponent implements OnInit {
     this.MainPageService.$ProductScreen.subscribe(value => {this.ProductScreen = value})
     this.MainPageService.$FullCategoryList.subscribe(value => {this.CatFulllist = value})
     this.MainPageService.$FullProductList.subscribe(value => {this.ProductFulllist = [...value]})
+    this.MainPageService.$MainShoppingPageMessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {

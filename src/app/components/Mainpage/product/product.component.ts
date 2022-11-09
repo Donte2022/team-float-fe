@@ -31,7 +31,6 @@ export class ProductComponent implements OnInit {
 
 
   onimageerror () {
-    console.error( this.Pro?.imageUrl + " Invaild Image URL")
     this.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
   }
 

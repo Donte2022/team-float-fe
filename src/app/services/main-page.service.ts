@@ -87,6 +87,10 @@ export class MainPageService {
     this.rank = value;
   }
 
+  setMainShoppingMessage (input:string) {
+    this.$MainShoppingPageMessage.next(input)
+  }
+
 // Ind variables Getters and Setters
 
 
@@ -198,7 +202,7 @@ export class MainPageService {
         this.FullProductList = [...value]
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err),this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 
@@ -208,7 +212,7 @@ export class MainPageService {
       next: value => {console.log(value)
       this.FullCategoryList = [...value]
       this.$FullCategoryList.next(this.FullCategoryList)},
-      error:err => {console.error(err)}
+      error:err => {console.error(err),this.$MainShoppingPageMessage.next(err.message)}
     })
   }
 
@@ -223,7 +227,7 @@ export class MainPageService {
         this.FullProductList.push(value)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err),this.$ProductCreateScreen.next(err.message)}
     })
   }
 
@@ -238,7 +242,7 @@ export class MainPageService {
         this.FullProductList[num].PriceChange.push(value)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err),this.$PriceChangeCreateScreen.next(err.message)}
     })
   }
 
@@ -255,7 +259,7 @@ export class MainPageService {
         }
       }console.log(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err),this.$CategoryCreateMessage.next(err.message)}
     })
   }
 
@@ -270,7 +274,7 @@ export class MainPageService {
         this.FullProductList.splice(num,1,Input)
         this.$FullProductList.next(this.FullProductList)
       },
-      error: err => {console.error(err)}
+      error: err => {console.error(err),this.$ProductEditScreen.next(err.message)}
     })
   }
 
@@ -282,7 +286,7 @@ export class MainPageService {
        let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === input.id})
         this.FullProductList[num].PriceChange.splice(num2,1,input)
       },
-      error:err => {console.error(err)}
+      error:err => {console.error(err),this.$PriceChangeEditMessage.next(err.message)}
     })
   }
 
@@ -294,9 +298,7 @@ export class MainPageService {
       next: value => {
         for (let pro of this.FullProductList){
           let num = input.proidList.findIndex(value1 => {return value1 == pro.id})
-          console.log(num)
           let num2 = oldlist.findIndex(value1 => {return value1 == pro.id})
-          console.log(num2)
           if (num != -1) {
             let num3 = pro.Categories.findIndex(value1 => {return value1.id == input.id})
             if (num3 != -1) {
@@ -307,13 +309,10 @@ export class MainPageService {
           }
           if (num2 != -1){
             pro.Categories.splice(num2,1)
-            console.log(pro.Categories)
           }
         }
         let val = this.FullCategoryList.findIndex(value1 => {return value1.id == input.id})
         this.FullCategoryList[val].name = input.name
-        console.log(this.FullProductList)
-        console.log(this.FullCategoryList)
         this.$FullCategoryList.next(this.FullCategoryList)
       },
       error: err => {console.error(err)}
