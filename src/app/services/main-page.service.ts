@@ -73,17 +73,6 @@ export class MainPageService {
     this.IndProduct = {} as IProduct
     this.IndPriceChange = {} as IPriceChange
     this.FullCategoryList = []
-    // this.FullCategoryList=[
-    //   {
-    //   ID: 0,Name:"Test Cat",OriginalOwnerIDUsername:"Joseph",Products:[{ID:0 ,DisplayName:"jellybean",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
-    //     Description:"Bean",BasePrice:50,Image:"https://www.opiescandystore.com/wp-content/uploads/2019/03/easter-jelly-beans.jpg",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
-    //       {ID:0,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
-    //     ]}]},       {
-    //     ID: 3,Name:"Test Cat2",OriginalOwnerIDUsername:"Joseph",Products:[{ID:2 ,DisplayName:"jellybean2",ProductName:"JellyBean",CategoryID:0,OriginalOwnerUsername:"Joseph",
-    //       Description:"Bean",BasePrice:50,Image:"na",Discontinued:false,AvaliableOnDate:new Date(),Weight:20,MAPPrice: 25,CostToMake:25,PriceChangeRequest:[
-    //         {ID:7,Sale:true,NewPrice:45,StartDate:new Date(),EndDate: new Date(),CouponLeft: 100}
-    //       ]}]}
-    // ]
     this.FullProductList = []
   }
 
@@ -210,6 +199,16 @@ export class MainPageService {
         this.$FullProductList.next(this.FullProductList)
       },
       error: err => {console.error(err)}
+    })
+  }
+
+  getfullcategorylistrequest () {
+    let obs = this.http.onget("/categories") as Observable<ICategory[]>
+    obs.subscribe({
+      next: value => {console.log(value)
+      this.FullCategoryList = [...value]
+      this.$FullCategoryList.next(this.FullCategoryList)},
+      error:err => {console.error(err)}
     })
   }
 

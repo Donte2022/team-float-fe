@@ -37,8 +37,9 @@ export class MainShoppingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.MainPageService.getfullproductlistrequest()
-    this.MainPageService.getFullCategoryList()
+    this.MainPageService.getfullcategorylistrequest()
     this.ProductFulllist = [...this.MainPageService.getFullProductList()]
+    this.CatFulllist = [...this.MainPageService.getFullCategoryList()]
     this.rank = this.MainPageService.getrank()
   }
 
