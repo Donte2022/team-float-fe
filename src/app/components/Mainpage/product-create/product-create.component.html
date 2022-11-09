@@ -1,13 +1,13 @@
 <div>Create a new Product</div>
 <div>{{message}}</div>
-<div>Display Name:<input [(ngModel)]="DisplayName"></div>
-<div>Product Name:<input [(ngModel)]="ProductName"></div>
-<div>Description:<textarea [(ngModel)]="Description"></textarea></div>
-<div>Base Price:<input type="number" min="0" [(ngModel)]="BasePrice"></div>
-<div>Image Url:<input [(ngModel)]="ImageUrl"></div>
-<div>Discontinued:<input type="checkbox" [(ngModel)]="Discontinued"></div>
-<div>Avaliable On Date:<input type="date" [(ngModel)]="AvaliableOnDate"></div>
-<div>Weight: <input type="number" min="0" [(ngModel)]="Weight"></div>
-<div>MAPPrice:<input type="number" min="0" [(ngModel)]="MAPPrice"></div>
-<div>Cost to Make:<input type="number" min="0" [(ngModel)]="CosttoMake"></div>
+<div>Display Name:<input [(ngModel)]="displayName"></div>
+<div>Product Name:<input [(ngModel)]="productName"></div>
+<div>description:<textarea [(ngModel)]="description"></textarea></div>
+<div>Base Price:<input type="number" min="0" [(ngModel)]="basePrice"></div>
+<div>Image Url:<input [(ngModel)]="imageUrl"></div>
+<div>discontinued:<input type="checkbox" [(ngModel)]="discontinued"></div>
+<div>Avaliable On Date:<input type="date" [(ngModel)]="avaliableDate"></div>
+<div>weight: <input type="number" min="0" [(ngModel)]="weight"></div>
+<div>MAP:<input type="number" min="0" [(ngModel)]="MAP"></div>
+<div>Cost to Make:<input type="number" min="0" [(ngModel)]="costtoMake"></div>
 <button (click)="oncancel()">Cancel</button><button (click)="onpost()">Submit</button>

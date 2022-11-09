@@ -13,6 +13,6 @@ export interface IProduct {
   weight:number
   map:number
   costToMake:number
-  PriceChange:IPriceChange []
-  Categories:ICategory []
+  priceChange:IPriceChange []
+  categories:ICategory []
 }

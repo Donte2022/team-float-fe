@@ -1,18 +1,18 @@
 <div *ngIf="Pro !== undefined" style="border-style: solid">
   <div style="font-size: xxx-large">{{Pro.displayName}}</div>
   <div><img src="{{img}}" (error)="onimageerror()" id="image"></div>
-  <div>Description:{{Pro.description}}</div>
-  <div>Discontinued:{{Pro.discontinued}}</div>
+  <div>description:{{Pro.description}}</div>
+  <div>discontinued:{{Pro.discontinued}}</div>
   <div>Date available:{{Pro.dateAvailable}}</div>
   <div> Base Price:{{Pro.price}}</div>
-  <div *ngIf="Pro.PriceChange.length == 0">Price: {{displayPrice}}</div>
-  <div *ngIf="Pro.PriceChange.length != 0">Price:{{displayPrice}}</div>
-  <div>Weight:{{Pro.weight}}</div>
+  <div *ngIf="Pro.priceChange.length == 0">Price: {{displayPrice}}</div>
+  <div *ngIf="Pro.priceChange.length != 0">Price:{{displayPrice}}</div>
+  <div>weight:{{Pro.weight}}</div>
   <div *ngIf="rank>1">MAP price{{Pro.map}}</div>
   <div *ngIf="rank>1">Cost to Make:{{Pro.costToMake}}</div>
   <div *ngIf="rank>1"><button (click)="onProductEdit()">Edit Product</button></div>
   <div *ngIf="rank>1"><button (click)="ondelete()">Delete</button></div>
   <div><button (click)="onPriceChangeCreateScreen()">Price Change Create</button></div>
   <div>List of Price Change Request:</div>
-  <app-price-change-request *ngFor="let pri of Pro.PriceChange" [Pri]="pri" [Pro]="Pro"></app-price-change-request>
+  <app-price-change-request *ngFor="let pri of Pro.priceChange" [Pri]="pri" [Pro]="Pro"></app-price-change-request>
 </div>

@@ -63,7 +63,7 @@ export class CategoryCreateComponent implements OnInit {
       proidList.push(num.id)
     }
     this.MainPageService.postCategory({
-      name: this.Name,proidList: proidList}
+      name: this.Name,productList: proidList}
     )
     this.oncancel()
   }

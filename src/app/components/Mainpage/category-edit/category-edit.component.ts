@@ -31,7 +31,7 @@ export class CategoryEditComponent implements OnInit {
 
   fillitarprodut () {
     for (let pro of this.OtherProductList){
-      if (-1 != pro.Categories.findIndex(value => {return value.id == this.Category.id})){
+      if (-1 != pro.categories.findIndex(value => {return value.id == this.Category.id})){
         this.ListOfProducttoSubmit.push(pro)
         let num = this.OtherProductList.findIndex(value => {return value.id == pro.id})
         this.OtherProductList.splice(num,1)

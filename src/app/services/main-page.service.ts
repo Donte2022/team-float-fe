@@ -176,7 +176,7 @@ export class MainPageService {
 
   public onpricerequest (Pro : IProduct):{num:number,proid:number}{
     let num : number  = Pro.price
-      for (let pri of Pro.PriceChange) {
+      for (let pri of Pro.priceChange) {
         if (new Date() > new Date(pri.startDate) && new Date() < new Date(pri.endDate)) {
           num = pri.newPrice
         }
@@ -218,8 +218,8 @@ export class MainPageService {
     let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
-        value.PriceChange = []
-        value.Categories = []
+        value.priceChange = []
+        value.categories = []
         this.FullProductList.push(value)
         this.$FullProductList.next(this.FullProductList)
       },
@@ -230,11 +230,11 @@ export class MainPageService {
 
 
   postPriceChange (Input: IsimplePriceChange, proid : IProduct) {
-    let obs = this.http.onpost("/pricechangerequest/" + proid.id,Input) as Observable<IPriceChange>
+    let obs = this.http.onpost("/price/" + proid.id,Input) as Observable<IPriceChange>
     obs.subscribe({
       next: value => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === proid.id})
-        this.FullProductList[num].PriceChange.push(value)
+        this.FullProductList[num].priceChange.push(value)
         this.$FullProductList.next(this.FullProductList)
         this.onpricerequest(proid)
       },
@@ -251,8 +251,8 @@ export class MainPageService {
       this.FullCategoryList.push(value)
       this.$FullCategoryList.next(this.FullCategoryList)
       for (let pro of this.FullProductList){
-        if (-1 != input.proidList.findIndex(value1 => {return value1 == pro.id})){
-          pro.Categories.push(value)
+        if (-1 != input.productList.findIndex(value1 => {return value1 == pro.id})){
+          pro.categories.push(value)
         }
       }
       },
@@ -277,12 +277,12 @@ export class MainPageService {
   }
 
   putPriceChange (input: IPriceChange) {
-    let obs = this.http.onput("/pricechangerequest/" ,input)
+    let obs = this.http.onput("/price/" ,input)
     obs.subscribe({
       next:() => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === this.IndProduct.id})
-       let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === input.id})
-        this.FullProductList[num].PriceChange.splice(num2,1,input)
+       let num2 = this.FullProductList[num].priceChange.findIndex(value1 => {return value1.id === input.id})
+        this.FullProductList[num].priceChange.splice(num2,1,input)
         this.onpricerequest(this.IndProduct)
       },
       error:err => {console.error(err)
@@ -296,18 +296,18 @@ export class MainPageService {
     obs.subscribe({
       next: () => {
         for (let pro of this.FullProductList){
-          let num = input.proidList.findIndex(value1 => {return value1 == pro.id})
+          let num = input.productList.findIndex(value1 => {return value1 == pro.id})
           let num2 = oldlist.findIndex(value1 => {return value1 == pro.id})
           if (num != -1) {
-            let num3 = pro.Categories.findIndex(value1 => {return value1.id == input.id})
+            let num3 = pro.categories.findIndex(value1 => {return value1.id == input.id})
             if (num3 != -1) {
-            pro.Categories[num3].name = input.name}
+            pro.categories[num3].name = input.name}
             if (num3 == -1){
-              pro.Categories.push({id: input.id,name: input.name})
+              pro.categories.push({id: input.id,name: input.name})
             }
           }
           if (num2 != -1){
-            pro.Categories.splice(num2,1)
+            pro.categories.splice(num2,1)
           }
         }
         let val = this.FullCategoryList.findIndex(value1 => {return value1.id == input.id})
@@ -334,12 +334,12 @@ export class MainPageService {
   }
 
   deletePriceChange (proid: number, priid: number,pro: IProduct) {
-    let obs = this.http.ondelete("/pricechangerequest/" + proid + "/" + priid)
+    let obs = this.http.ondelete("/price/" + proid + "/" + priid)
     obs.subscribe({
       next: () => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
-        let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === priid})
-        this.FullProductList[num].PriceChange.splice(num2,1)
+        let num2 = this.FullProductList[num].priceChange.findIndex(value1 => {return value1.id === priid})
+        this.FullProductList[num].priceChange.splice(num2,1)
         this.onpricerequest(pro)
       },
       error: err => {console.error(err)
@@ -352,9 +352,9 @@ export class MainPageService {
     obs.subscribe({
       next: () => {
         for (let pro of this.FullProductList){
-       let num =  pro.Categories.findIndex(value1 => {return value1.id == input})
+       let num =  pro.categories.findIndex(value1 => {return value1.id == input})
           if (num != -1){
-            pro.Categories.splice(num,1)
+            pro.categories.splice(num,1)
           }
         }
        let num2 = this.FullCategoryList.findIndex(value1 => {return value1.id == input})

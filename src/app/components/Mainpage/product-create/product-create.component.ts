@@ -9,31 +9,31 @@ import {Subscription} from "rxjs";
 })
 export class ProductCreateComponent implements OnInit,OnDestroy {
 
-  DisplayName: string
-  ProductName: string
-  Description: string
-  BasePrice: number | undefined
-  ImageUrl: string
-  Discontinued: boolean
-  AvaliableOnDate: Date
-  Weight: number | undefined
-  MAPPrice: number | undefined
-  CosttoMake: number | undefined
+  displayName: string
+  productName: string
+  description: string
+  basePrice: number | undefined
+  imageUrl: string
+  discontinued: boolean
+  avaliableDate: Date
+  weight: number | undefined
+  MAP: number | undefined
+  costtoMake: number | undefined
   message: string
   sub : Subscription
 
   constructor(private MainPageService: MainPageService) {
     this.message = ""
-    this.DisplayName = ""
-    this.ProductName = ""
-    this.Description = ""
-    this.BasePrice = undefined
-    this.ImageUrl = ""
-    this.Discontinued = false
-    this.AvaliableOnDate = new Date()
-    this.Weight = undefined
-    this.MAPPrice = undefined
-    this.CosttoMake = undefined
+    this.displayName = ""
+    this.productName = ""
+    this.description = ""
+    this.basePrice = undefined
+    this.imageUrl = ""
+    this.discontinued = false
+    this.avaliableDate = new Date()
+    this.weight = undefined
+    this.MAP = undefined
+    this.costtoMake = undefined
    this.sub = this.MainPageService.$ProductCreateMessage.subscribe(value => {this.message = value})
 
   }
@@ -50,18 +50,18 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
   }
 
   onpost () {
-    if (this.BasePrice && this.Weight && this.MAPPrice && this.CosttoMake){
+    if (this.basePrice && this.weight && this.MAP && this.costtoMake){
     this.MainPageService.postProduct(
-      {productName: this.ProductName,
-      displayName: this.DisplayName,
-      description: this.Description,
-      price: this.BasePrice,
-      imageUrl: this.ImageUrl,
-      discontinued: this.Discontinued,
-      dateAvailable: this.AvaliableOnDate,
-      weight: this.Weight,
-      map: this.MAPPrice,
-      cost:this.CosttoMake}
+      {productName: this.productName,
+      displayName: this.displayName,
+      description: this.description,
+      price: this.basePrice,
+      imageUrl: this.imageUrl,
+      discontinued: this.discontinued,
+      dateAvailable: this.avaliableDate,
+      weight: this.weight,
+      map: this.MAP,
+      cost:this.costtoMake}
     )}
     this.oncancel()
   }

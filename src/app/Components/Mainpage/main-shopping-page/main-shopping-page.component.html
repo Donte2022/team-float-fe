@@ -4,7 +4,7 @@
   <div><button (click)="oncanel()">Reture to Main Page</button></div>
   <div><button (click)="oncatcreate()">Create Category</button></div>
   <div *ngIf="rank > 1"><button (click)="onproductcreate()">Create Product</button></div>
-  <div>Categories</div>
+  <div>categories</div>
   <app-category *ngFor="let cat of CatFulllist" [Cat]="cat"></app-category>
   <div>Products:</div>
   <app-product *ngFor="let pro of ProductFulllist" [Pro]="pro" ></app-product>

@@ -2,12 +2,12 @@
 <div>{{message}}</div>
 <div>Display Name:<input  [(ngModel)]="Product.displayName"></div>
 <div>Product Name:<input [(ngModel)]="Product.productName"></div>
-<div>Description:<textarea [(ngModel)]="Product.description"></textarea></div>
+<div>description:<textarea [(ngModel)]="Product.description"></textarea></div>
 <div>Base Price:<input type="number" min="0"  [(ngModel)]="Product.price"></div>
 <div>Image:<input  [(ngModel)]="Product.imageUrl"></div>
-<div>Discontinued:<input type="checkbox" [checked]="Product.discontinued" [(ngModel)]="Product.discontinued"></div>
+<div>discontinued:<input type="checkbox" [checked]="Product.discontinued" [(ngModel)]="Product.discontinued"></div>
 <div>Avaliable On Date:<input type="date"  [(ngModel)]="Product.dateAvailable"></div>
-<div>Weight: <input type="number" min="0"  [(ngModel)]="Product.weight"></div>
-<div>MAPPrice:<input type="numbe" min="0"  [(ngModel)]="Product.map"></div>
+<div>weight: <input type="number" min="0"  [(ngModel)]="Product.weight"></div>
+<div>MAP:<input type="numbe" min="0"  [(ngModel)]="Product.map"></div>
 <div>Cost to Make:<input type="number" min="0" [(ngModel)]="Product.costToMake"></div>
 <div><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(Product)">Submit</button></div>
