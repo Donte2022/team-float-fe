@@ -17,8 +17,13 @@ export class AccountService {
   private readonly REGISTER_USER_EXISTS_ERROR_MESSAGE = 'Username already exists'
 
   $account = new BehaviorSubject<IAccount | null>(null)
+  $accountIdToEdit = new BehaviorSubject<number | null>(null)
+  $accountList = new BehaviorSubject<IAccount[]>([])
+  $isAdmin = new BehaviorSubject<boolean>(false)
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
+  $showMyAccount = new BehaviorSubject<boolean>(false)
+  $showAddAccount = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) { }
 
@@ -41,8 +46,6 @@ export class AccountService {
 
   public updateAccount(updatedAccount: IAccount): Observable<IAccount> {
     const { firstName, lastName, email, username, password, rank, id } = updatedAccount
-    //Todo If admin - automatically pass rank as 1?
-    // if (accountId === 1) {}
       return this.http.put<IAccount>(`http://localhost:8080/api/account/${id}`, {
         firstName: firstName,
         lastName: lastName,
@@ -53,21 +56,32 @@ export class AccountService {
       })
   }
 
-  public deleteAccount(accountId: number): Observable<String> {
-    return this.http.delete<String>(`http://localhost:8080/api/account/${accountId}`)
+  public deleteAccount(accountId: number): Observable<string> {
+    return this.http.delete<string>(`http://localhost:8080/api/account/${accountId}`)
 
+  }
+
+  public getAllAccounts(): Observable<IAccount[]> {
+    return this.http.get<IAccount[]>("http://localhost:8080/api/account/all")
   }
 
   public attemptDelete(accountId: number) {
     this.deleteAccount(accountId).pipe(first()).subscribe({
-      next: () => this.$account.next(null),
+      next: () => {
+        if (accountId === this.$account.getValue()?.id)
+          this.$account.next(null)
+        else {
+          this.$accountList.next(
+            this.$accountList.getValue().filter(acct => acct.id !== accountId)
+          )
+        }
+      },
       error: (err) => {
         console.error(err)
         //Todo handle error
       }
     })
   }
-
 
   public attemptLogin(username: string, password: string) {
     if (username.length < 1) {
@@ -83,6 +97,12 @@ export class AccountService {
         if (account) {
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
+          this.$isRegistering.next(false)
+          if (account.rank === 1) {
+            this.refreshAccountList()
+            this.$isAdmin.next(true)
+          }
+
         }
         else
           this.$loginErrorMessage.next(this.LOGIN_INVALID_CREDENTIALS_MESSAGE)
@@ -91,26 +111,33 @@ export class AccountService {
     })
   }
 
-  public attemptRegister(newAccount: IAccount) {
-    if (newAccount.username.length < 1) {
+  public attemptRegister(accountToCreate: IAccount) {
+    if (accountToCreate.username.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_USERNAME_MESSAGE)
       return
     }
-    if (newAccount.password.length < 1) {
+    if (accountToCreate.password.length < 1) {
       this.$loginErrorMessage.next(this.LOGIN_INVALID_PASSWORD_MESSAGE)
       return
     }
-    if (newAccount.rank < 1 || newAccount.rank > 3) {
+    if (accountToCreate.rank < 1 || accountToCreate.rank > 3) {
       this.$loginErrorMessage.next(this.REGISTER_INVALID_ROLE_MESSAGE)
       return
     }
     //Todo validation for lastName, firstName, email
-    this.createAccount(newAccount).pipe(first()).subscribe({
-      next: () => this.attemptLogin(newAccount.username, newAccount.password),
-      error: (err) => {
-        if (err.status === 409) {
-          this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
+    this.createAccount(accountToCreate).pipe(first()).subscribe({
+      next: (newAccount) => {
+        if (this.$isRegistering.getValue())
+          this.attemptLogin(accountToCreate.username, accountToCreate.password)
+        else {
+          this.$accountList.next([...this.$accountList.getValue(), newAccount])
+          this.$showAddAccount.next(false)
+          this.$loginErrorMessage.next(null)
         }
+      },
+      error: (err) => {
+        if (err.status === 409)
+          this.$loginErrorMessage.next(this.REGISTER_USER_EXISTS_ERROR_MESSAGE)
         else
           this.$loginErrorMessage.next(this.REGISTER_HTTP_ERROR_MESSAGE)
       }
@@ -126,12 +153,42 @@ export class AccountService {
     this.updateAccount(updatedAccount).pipe(first()).subscribe({
       next: () => {
         this.$account.next(updatedAccount)
-        //Todo handle rendering of my account component?
+        this.$showMyAccount.next(false)
+        this.$accountIdToEdit.next(null)
       },
       error: (err) => {
         //Todo handle error
         console.error(err)
       }
     })
+  }
+
+  public refreshAccountList() {
+    if (this.$account.getValue() !== null) {
+      this.getAllAccounts().pipe(first()).subscribe({
+        next: (accountList) => {
+          this.$accountList.next(accountList)
+        },
+        error: (err) => {
+          console.error(err)
+          //Todo handle error
+        }
+      })
+    }
+    else {
+      console.log("Null account")
+      //Todo handle error
+    }
+  }
+
+  public resetSubjects() {
+    this.$account.next(null)
+    this.$accountList.next([])
+    this.$accountIdToEdit.next(null)
+    this.$showMyAccount.next(false)
+    this.$showAddAccount.next(false)
+    this.$isAdmin.next(false)
+    this.$isRegistering.next(false)
+    this.$loginErrorMessage.next(null)
   }
 }
