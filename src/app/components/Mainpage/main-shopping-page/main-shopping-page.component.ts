@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {ICategory} from "../../../interfaces/ICategory";
 import {IProduct} from "../../../interfaces/IProduct";
+import {AccountService} from "../../../services/account.service";
 
 @Component({
   selector: 'app-main-shopping-page',
@@ -10,53 +11,48 @@ import {IProduct} from "../../../interfaces/IProduct";
 })
 export class MainShoppingPageComponent implements OnInit {
 
-  CateditScreen: boolean = false
-  CatCreateScreen : boolean =false
-  ProductCreateScreen: boolean = false
-  ProductEditScreen: boolean = false
-  PriceChangeCreateScreen: boolean = false
-  PriceEditScreen  : boolean = false
-  ProductScreen: boolean = true
-  CatFulllist: ICategory []
-  ProductFulllist: IProduct []
+  catEditScreen: boolean = false
+  catCreateScreen : boolean =false
+  productCreateScreen: boolean = false
+  productEditScreen: boolean = false
+  priceChangeCreateScreen: boolean = false
+  priceEditScreen  : boolean = false
+  productScreen: boolean = true
+  catList: ICategory []
+  productList: IProduct []
   rank : number = 0
 
-  constructor(private MainPageService: MainPageService) {
-    this.CatFulllist= []
-    this.ProductFulllist = []
-    this.MainPageService.$CategoryEditScreen.subscribe(value => {this.CateditScreen = value})
-    this.MainPageService.$CategoryCreateScreen.subscribe(value => {this.CatCreateScreen = value})
-    this.MainPageService.$ProductCreateScreen.subscribe(value => {this.ProductCreateScreen = value})
-    this.MainPageService.$ProductEditScreen.subscribe(value => {this.ProductEditScreen = value})
-    this.MainPageService.$PriceChangeCreateScreen.subscribe(value => {this.PriceChangeCreateScreen = value})
-    this.MainPageService.$PriceChangeEditScreen.subscribe(value => {this.PriceEditScreen = value})
-    this.MainPageService.$ProductScreen.subscribe(value => {this.ProductScreen = value})
-    this.MainPageService.$FullCategoryList.subscribe(value => {this.CatFulllist = value})
-    this.MainPageService.$FullProductList.subscribe(value => {this.ProductFulllist = [...value]})
+  constructor(private accountService: AccountService, private mainPageService: MainPageService) {
+    this.catList= []
+    this.productList = []
+    this.mainPageService.$CategoryEditScreen.subscribe(value => {this.catEditScreen = value})
+    this.mainPageService.$CategoryCreateScreen.subscribe(value => {this.catCreateScreen = value})
+    this.mainPageService.$ProductCreateScreen.subscribe(value => {this.productCreateScreen = value})
+    this.mainPageService.$ProductEditScreen.subscribe(value => {this.productEditScreen = value})
+    this.mainPageService.$PriceChangeCreateScreen.subscribe(value => {this.priceChangeCreateScreen = value})
+    this.mainPageService.$PriceChangeEditScreen.subscribe(value => {this.priceEditScreen = value})
+    this.mainPageService.$ProductScreen.subscribe(value => {this.productScreen = value})
+    this.mainPageService.$FullCategoryList.subscribe(value => {this.catList = value})
+    this.mainPageService.$FullProductList.subscribe(value => {this.productList = [...value]})
   }
 
   ngOnInit(): void {
-    this.MainPageService.getfullproductlistrequest()
-    this.MainPageService.getFullCategoryList()
-    this.ProductFulllist = [...this.MainPageService.getFullProductList()]
-    this.rank = this.MainPageService.getrank()
+    this.mainPageService.getFullProductListRequest()
+    this.mainPageService.getFullCategoryList()
+    this.productList = [...this.mainPageService.getFullProductList()]
+    this.productScreen = this.mainPageService.ProductScreen
+    this.productCreateScreen = this.mainPageService.ProductCreateScreen
+    this.rank = this.accountService.userRank
   }
 
-  oncanel () {
-    this.MainPageService.setMainShoppingPageScreen(false)
+  onCancel () {
+    this.mainPageService.setMainShoppingPageScreen(false)
   }
 
 
-  oncatcreate () {
-    this.MainPageService.setCategoryCreateScreen(true)
-    this.MainPageService.setProductScreen(false)
+  onCatCreate () {
+    this.mainPageService.setCategoryCreateScreen(true)
+    this.mainPageService.setProductScreen(false)
 
   }
-
-  onproductcreate () {
-    this.MainPageService.setProductCreateScreen(true)
-    this.MainPageService.setProductScreen(false)
-
-  }
-
 }
