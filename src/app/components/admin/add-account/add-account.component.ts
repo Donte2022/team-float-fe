@@ -8,14 +8,16 @@ import {AccountService} from "../../../services/account.service";
   styleUrls: ['./add-account.component.css']
 })
 export class AddAccountComponent implements OnInit {
+  errMsg: string | null = null
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService) {
+    accountService.$loginErrorMessage.subscribe(errMsg => this.errMsg = errMsg)
+  }
 
   ngOnInit(): void {
   }
 
   onClickCreate(newAccount: IAccount) {
-    console.log(newAccount)
     this.accountService.attemptRegister(newAccount)
   }
 

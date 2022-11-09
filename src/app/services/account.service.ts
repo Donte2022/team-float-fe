@@ -19,11 +19,11 @@ export class AccountService {
   $account = new BehaviorSubject<IAccount | null>(null)
   $accountIdToEdit = new BehaviorSubject<number | null>(null)
   $accountList = new BehaviorSubject<IAccount[]>([])
+  $isAdmin = new BehaviorSubject<boolean>(false)
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
   $showMyAccount = new BehaviorSubject<boolean>(false)
   $showAddAccount = new BehaviorSubject<boolean>(false)
-  $isAdmin = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) { }
 
@@ -46,8 +46,6 @@ export class AccountService {
 
   public updateAccount(updatedAccount: IAccount): Observable<IAccount> {
     const { firstName, lastName, email, username, password, rank, id } = updatedAccount
-    //Todo If admin - automatically pass rank as 1?
-    // if (accountId === 1) {}
       return this.http.put<IAccount>(`http://localhost:8080/api/account/${id}`, {
         firstName: firstName,
         lastName: lastName,
@@ -134,6 +132,7 @@ export class AccountService {
         else {
           this.$accountList.next([...this.$accountList.getValue(), newAccount])
           this.$showAddAccount.next(false)
+          this.$loginErrorMessage.next(null)
         }
       },
       error: (err) => {

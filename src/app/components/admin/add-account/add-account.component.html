@@ -1,5 +1,6 @@
 <h3>Create Account</h3>
 <form #create="ngForm">
+  <div *ngIf="errMsg" class="alert alert-danger">{{errMsg}}</div>
   <input ngModel name="firstName" placeholder="first name">
   <input ngModel name="lastName" placeholder="last name">
   <input ngModel name="email" placeholder="email">
