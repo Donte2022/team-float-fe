@@ -12,11 +12,13 @@ export class CategoryCreateComponent implements OnInit {
   OtherProductList: IProduct []
   ListOfProductToAdd: IProduct []
   TempProduct: number | undefined
+  Name : string
 
   constructor(private MainPageService: MainPageService) {
     this.OtherProductList = [...this.MainPageService.getFullProductList()]
     this.ListOfProductToAdd = []
     this.TempProduct = undefined
+    this.Name = ""
   }
 
   ngOnInit(): void {
@@ -56,5 +58,14 @@ export class CategoryCreateComponent implements OnInit {
   }
 
 
-  onsubmit () {}
+  onsubmit () {
+    let proidList : number[] = []
+    for (let num of this.ListOfProductToAdd){
+      proidList.push(num.id)
+    }
+    this.MainPageService.postcategory({
+      name: this.Name,proidList: proidList}
+    )
+    this.oncancel()
+  }
 }

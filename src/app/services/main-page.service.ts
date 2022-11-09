@@ -246,7 +246,15 @@ export class MainPageService {
     // let arr: IPostCategory = {name: "red",proidList: [20,40]}
     let obs = this.http.onpost("/categories",input) as Observable<ICategory>
     obs.subscribe({
-      next: value => {console.log(value)},
+      next: value => {console.log(value)
+      this.FullCategoryList.push(value)
+      this.$FullCategoryList.next(this.FullCategoryList)
+      for (let pro of this.FullProductList){
+        if (-1 != input.proidList.findIndex(value1 => {return value1 == pro.id})){
+          pro.Categories.push(value)
+        }
+      }console.log(this.FullProductList)
+      },
       error: err => {console.error(err)}
     })
   }
@@ -279,12 +287,35 @@ export class MainPageService {
   }
 
 
-  putcategory (input : IsimpleCategory) {
-    // let arr: IsimpleCategory = {id:20,name:"blue",proidList:[200,220]}
-    // console.log(arr)
+  putcategory (input : IsimpleCategory,oldlist : number []) {
+    console.log(input)
     let obs = this.http.onput("/categories",input)
     obs.subscribe({
-      next: value => {console.log(value)},
+      next: value => {
+        for (let pro of this.FullProductList){
+          let num = input.proidList.findIndex(value1 => {return value1 == pro.id})
+          console.log(num)
+          let num2 = oldlist.findIndex(value1 => {return value1 == pro.id})
+          console.log(num2)
+          if (num != -1) {
+            let num3 = pro.Categories.findIndex(value1 => {return value1.id == input.id})
+            if (num3 != -1) {
+            pro.Categories[num3].name = input.name}
+            if (num3 == -1){
+              pro.Categories.push({id: input.id,name: input.name})
+            }
+          }
+          if (num2 != -1){
+            pro.Categories.splice(num2,1)
+            console.log(pro.Categories)
+          }
+        }
+        let val = this.FullCategoryList.findIndex(value1 => {return value1.id == input.id})
+        this.FullCategoryList[val].name = input.name
+        console.log(this.FullProductList)
+        console.log(this.FullCategoryList)
+        this.$FullCategoryList.next(this.FullCategoryList)
+      },
       error: err => {console.error(err)}
     })
   }

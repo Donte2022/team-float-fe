@@ -1,6 +1,6 @@
 import {IProduct} from "./IProduct";
 
 export interface ICategory {
-  iD:number
+  id:number
   name:string
 }

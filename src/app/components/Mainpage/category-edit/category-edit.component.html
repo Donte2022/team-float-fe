@@ -1,17 +1,14 @@
 <div>Edit Category</div>
-<div>Name:<input [value]="Category.name"></div>
+<div>Name:<input [(ngModel)]="Category.name"></div>
 <div> Add Product:
-  <select name="Aviable Products">
-    <option *ngFor="let p of OtherProductList">
-      {{p}}
+  <select name="Aviable Products" (change)="onproductselect($event)">
+    <option [value]="undefined">Please pick a Product</option>
+    <option *ngFor="let p of OtherProductList" [value]="p.id">
+      {{p.displayName}}
     </option>
   </select>
+  <button (click)="onadd()">Add</button>
 </div>
-<!--<div> Remove Product:-->
-<!--  <select name="Aviable Products">-->
-<!--    <option *ngFor="let r of Category">-->
-<!--      {{r}}-->
-<!--    </option>-->
-<!--  </select>-->
-<!--</div>-->
-<button (click)="oncancel()">Cancel</button><button>Submit</button>
+<div *ngIf="ListOfProducttoSubmit.length != 0"> Remove Product:</div>
+<div *ngFor="let r of ListOfProducttoSubmit">{{r.displayName}}<button (click)="ondelete(r)">X</button></div>
+<button (click)="oncancel()">Cancel</button><button (click)="onsubmit()">Submit</button>

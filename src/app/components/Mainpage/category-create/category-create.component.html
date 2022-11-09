@@ -1,5 +1,5 @@
 <div>Create new Category</div>
-<div>Name:<input></div>
+<div>Name:<input [(ngModel)]="Name"></div>
 <div> Add Product:
 <select name="Aviable Products" (change)="onproductselect($event)">
   <option [value]="undefined">Add to Category</option>
@@ -11,4 +11,4 @@
 </div>
 <div *ngFor="let l of ListOfProductToAdd">{{l.displayName}}<button (click)="ondelete(l)">X</button></div>
 <button (click)="oncancel()">Cancel</button>
-<button>Submit</button>
+<button (click)="onsubmit()">Submit</button>
