@@ -9,14 +9,14 @@
 <!--    {{r.Name}}-->
 <!--  </option>-->
 <!--</select><button>add</button></div>-->
-<div>Display Name:<input  [(ngModel)]="Product.displayName"></div>
-<div>Product Name:<input [(ngModel)]="Product.productName"></div>
-<div>Description:<textarea [(ngModel)]="Product.description"></textarea></div>
-<div>Base Price:<input type="number" min="0"  [(ngModel)]="Product.price"></div>
-<div>Image:<input  [(ngModel)]="Product.imageUrl"></div>
-<div>Discontinued:<input type="checkbox" [checked]="Product.discontinued" [(ngModel)]="Product.discontinued"></div>
-<div>Avaliable On Date:<input type="date"  [(ngModel)]="Product.dateAvailable"></div>
-<div>Weight: <input type="number" min="0"  [(ngModel)]="Product.weight"></div>
-<div>MAPPrice:<input type="numbe" min="0"  [(ngModel)]="Product.map"></div>
-<div>Cost to Make:<input type="number" min="0" [(ngModel)]="Product.costToMake"></div>
-<div><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(Product)">Submit</button></div>
+<div>Display Name:<input  [(ngModel)]="product.displayName"></div>
+<div>Product Name:<input [(ngModel)]="product.productName"></div>
+<div>Description:<textarea [(ngModel)]="product.description"></textarea></div>
+<div>Base Price:<input type="number" min="0"  [(ngModel)]="product.price"></div>
+<div>Image:<input  [(ngModel)]="product.imageUrl"></div>
+<div>Discontinued:<input type="checkbox" [checked]="product.discontinued" [(ngModel)]="product.discontinued"></div>
+<div>Available On Date:<input type="date"  [(ngModel)]="product.dateAvailable"></div>
+<div>Weight: <input type="number" min="0"  [(ngModel)]="product.weight"></div>
+<div>MAPPrice:<input type="number" min="0"  [(ngModel)]="product.map"></div>
+<div>Cost to Make:<input type="number" min="0" [(ngModel)]="product.costToMake"></div>
+<div><button (click)="onCancel()">Cancel</button><button (click)="onSubmit(product)">Submit</button></div>

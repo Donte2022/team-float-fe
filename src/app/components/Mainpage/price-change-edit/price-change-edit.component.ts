@@ -10,19 +10,19 @@ import {ICategory} from "../../../interfaces/ICategory";
 })
 export class PriceChangeEditComponent implements OnInit {
 
-  PriceChange : IPriceChange
+  priceChange : IPriceChange
 
 
-  constructor(private MainPageService: MainPageService) {
-    this.PriceChange = {} as IPriceChange
+  constructor(private mainPageService: MainPageService) {
+    this.priceChange = {} as IPriceChange
   }
 
   ngOnInit(): void {
-    this.PriceChange = this.MainPageService.getIndPriceChange()
+    this.priceChange = this.mainPageService.getIndPriceChange()
   }
-  oncancel () {
-    this.MainPageService.setPriceChangeEditScreen(false)
-    this.MainPageService.setProductScreen(true)
+  onCancel () {
+    this.mainPageService.setPriceChangeEditScreen(false)
+    this.mainPageService.setProductScreen(true)
   }
 
 }

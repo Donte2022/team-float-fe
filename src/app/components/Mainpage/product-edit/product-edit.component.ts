@@ -10,38 +10,37 @@ import {ICategory} from "../../../interfaces/ICategory";
 })
 export class ProductEditComponent implements OnInit {
 
-  Product: IProduct
-  CurrentCatList : ICategory []
-  OtherCatList : ICategory []
+  product: IProduct
+  currentCatList : ICategory []
+  otherCatList : ICategory []
 
 
-  constructor(private MainPageService: MainPageService) {
-    this.Product = {} as IProduct
-    this.CurrentCatList = []
-    this.OtherCatList = []
+  constructor(private mainPageService: MainPageService) {
+    this.product = {} as IProduct
+    this.currentCatList = []
+    this.otherCatList = []
 
   }
 
   ngOnInit(): void {
-    this.Product = this.MainPageService.getIndProduct()
-    this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
-    console.log(this.Product)
+    this.product = this.mainPageService.getIndProduct()
+    this.otherCatList = [...this.mainPageService.getFullCategoryList()]
+    console.log(this.product)
   }
 
-  // filiter () {
-  //   this.CurrentCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID !== this.Product.ID })})]
-  //   this.OtherCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID === this.Product.ID })})]
+  // filter () {
+  //   this.currentCatList = [...this.otherCatList.filter(value => { return -1 === value.products.findIndex(value1 => {return value1.ID !== this.product.ID })})]
+  //   this.otherCatList = [...this.otherCatList.filter(value => { return -1 === value.products.findIndex(value1 => {return value1.ID === this.product.ID })})]
   // }
 
 
-  oncancel () {
-    this.MainPageService.setProductEditScreen(false)
-    this.MainPageService.setProductScreen(true)
+  onCancel () {
+    this.mainPageService.setProductEditScreen(false)
+    this.mainPageService.setProductScreen(true)
   }
 
-  onsubmit (input: IProduct) {
-    this.MainPageService.putproduct(input)
-    this.oncancel()
+  onSubmit (input: IProduct) {
+    this.mainPageService.putProduct(input)
+    this.onCancel()
   }
-
 }

@@ -8,13 +8,13 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class PriceChangeCreateComponent implements OnInit {
 
-  constructor(private MainPageService:MainPageService) { }
+  constructor(private mainPageService:MainPageService) { }
 
   ngOnInit(): void {
   }
 
-  oncancel () {
-    this.MainPageService.setPriceChangeCreateScreen(false)
-    this.MainPageService.setProductScreen(true)
+  onCancel () {
+    this.mainPageService.setPriceChangeCreateScreen(false)
+    this.mainPageService.setProductScreen(true)
   }
 }

@@ -9,18 +9,18 @@ import {IPriceChange} from "../../../interfaces/IPriceChange";
 })
 export class PriceChangeRequestComponent implements OnInit {
 
-  @Input() Pri: IPriceChange | undefined
+  @Input() pri: IPriceChange | undefined
 
-  constructor(private MainPageService:MainPageService) { }
+  constructor(private mainPageService:MainPageService) { }
 
   ngOnInit(): void {
   }
 
   onPriceChangeEditScreen () {
-    if (this.Pri !== undefined) {
-      this.MainPageService.setIndPriceChange(this.Pri)
-      this.MainPageService.setPriceChangeEditScreen(true)
-      this.MainPageService.setProductScreen(false)
+    if (this.pri !== undefined) {
+      this.mainPageService.setIndPriceChange(this.pri)
+      this.mainPageService.setPriceChangeEditScreen(true)
+      this.mainPageService.setProductScreen(false)
     }
   }
 
