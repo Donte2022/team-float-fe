@@ -15,6 +15,7 @@ import {IsimpleCategory} from "../interfaces/IsimpleCategory";
 export class MainPageService {
 
   private rank :number = 3
+  $displayprice = new Subject<{num:number,proid:number}>()
 
   // Full List
 
@@ -170,6 +171,20 @@ export class MainPageService {
     this.$PriceChangeEditScreen.next(this.PriceChangeEditScreen)
   }
 
+
+  /// Logic
+
+  public onpricerequest (Pro : IProduct):{num:number,proid:number}{
+    let num : number  = Pro.price
+      for (let pri of Pro.PriceChange) {
+        if (new Date() > new Date(pri.startDate) && new Date() < new Date(pri.endDate)) {
+          num = pri.newPrice
+        }
+      }
+      this.$displayprice.next({num:num,proid:Pro.id})
+    return {num:num,proid:Pro.id}
+  }
+
   /// Get Request
 
 
@@ -212,13 +227,14 @@ export class MainPageService {
   }
 
 
-  postPriceChange (Input: IsimplePriceChange, proid : number) {
-    let obs = this.http.onpost("/pricechangerequest/" + proid,Input) as Observable<IPriceChange>
+  postPriceChange (Input: IsimplePriceChange, proid : IProduct) {
+    let obs = this.http.onpost("/pricechangerequest/" + proid.id,Input) as Observable<IPriceChange>
     obs.subscribe({
       next: value => {
-        let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
+        let num = this.FullProductList.findIndex(value1 => {return value1.id === proid.id})
         this.FullProductList[num].PriceChange.push(value)
         this.$FullProductList.next(this.FullProductList)
+        this.onpricerequest(proid)
       },
       error: err => {console.error(err)
         this.$PriceChangeCreateScreen.next(err.message)}
@@ -265,6 +281,7 @@ export class MainPageService {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === this.IndProduct.id})
        let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === input.id})
         this.FullProductList[num].PriceChange.splice(num2,1,input)
+        this.onpricerequest(this.IndProduct)
       },
       error:err => {console.error(err)
         this.$PriceChangeEditMessage.next(err.message)}
@@ -314,13 +331,14 @@ export class MainPageService {
     })
   }
 
-  deletePriceChange (proid: number, priid: number) {
+  deletePriceChange (proid: number, priid: number,pro: IProduct) {
     let obs = this.http.ondelete("/pricechangerequest/" + proid + "/" + priid)
     obs.subscribe({
       next: () => {
         let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
         let num2 = this.FullProductList[num].PriceChange.findIndex(value1 => {return value1.id === priid})
         this.FullProductList[num].PriceChange.splice(num2,1)
+        this.onpricerequest(pro)
       },
       error: err => {console.error(err)
         this.$MainShoppingPageMessage.next(err.message)}

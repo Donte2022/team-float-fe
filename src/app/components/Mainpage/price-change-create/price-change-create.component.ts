@@ -46,7 +46,7 @@ export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
     if (this.NewPrice !== undefined && this.couponsleft !== undefined && this.Indpro !== undefined) {
     this.MainPageService.postPriceChange(
       {sale: this.Sale, newPrice: this.NewPrice,startDate:this.StartDate,endDate:this.EndDate,couponLeft:this.couponsleft}
-      ,this.Indpro.id
+      ,this.Indpro
     )
       this.oncancel()
   }}

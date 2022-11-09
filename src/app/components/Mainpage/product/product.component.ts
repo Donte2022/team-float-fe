@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -8,25 +9,35 @@ import {IProduct} from "../../../interfaces/IProduct";
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit,OnDestroy {
 
 
   @Input() Pro :IProduct | undefined
   img:string|undefined
   rank: number
+  displayPrice : number
+  sub : Subscription
 
 
   constructor(private MainPageService:MainPageService) {
     this.img = this.Pro?.imageUrl
     this.rank = 0
-
+    this.displayPrice = 0
+   this.sub = this.MainPageService.$displayprice.subscribe(value => {if (value.proid === this.Pro?.id){
+       this.displayPrice = value.num;
+    }})
   }
 
   ngOnInit(): void {
     if (this.Pro?.imageUrl !== undefined) {
       this.img = this.Pro.imageUrl
+      this.displayPrice = this.MainPageService.onpricerequest(this.Pro).num
     }
     this.rank = this.MainPageService.getrank()
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
 
@@ -51,6 +62,7 @@ export class ProductComponent implements OnInit {
   ondelete () {
     if (this.Pro !== undefined) {
       this.MainPageService.deleteProduct(this.Pro.id)
-  }}
+  }
+  }
 
 }
