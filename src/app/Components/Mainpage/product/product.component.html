@@ -5,7 +5,8 @@
   <div>Discontinued:{{Pro.discontinued}}</div>
   <div>Date available:{{Pro.dateAvailable}}</div>
   <div> Base Price:{{Pro.price}}</div>
-  <div>Price:{{displayPrice}}</div>
+  <div *ngIf="Pro.PriceChange.length == 0">Price: {{displayPrice}}</div>
+  <div *ngIf="Pro.PriceChange.length != 0">Price:{{displayPrice}}</div>
   <div>Weight:{{Pro.weight}}</div>
   <div *ngIf="rank>1">MAP price{{Pro.map}}</div>
   <div *ngIf="rank>1">Cost to Make:{{Pro.costToMake}}</div>

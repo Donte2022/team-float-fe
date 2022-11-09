@@ -218,6 +218,8 @@ export class MainPageService {
     let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
+        value.PriceChange = []
+        value.Categories = []
         this.FullProductList.push(value)
         this.$FullProductList.next(this.FullProductList)
       },
