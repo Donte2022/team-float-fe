@@ -1,17 +1,19 @@
-<div *ngIf="ProductScreen">
-<div style="font-size: xxx-large">Shopping Page</div>
-  <div><button (click)="oncanel()">Reture to Main Page</button></div>
-<!--  <div><button (click)="oncatcreate()">Create Category</button></div>-->
-  <div *ngIf="rank > 1"><button (click)="onproductcreate()">Create Product</button></div>
-<!--  <div>Categories</div>-->
-<!--  <app-category *ngFor="let cat of CatFulllist" [Cat]="cat"></app-category>-->
-  <div>Products:</div>
-  <app-product *ngFor="let pro of ProductFulllist" [Pro]="pro" ></app-product>
+<div class="m-3">
+  <div *ngIf="productScreen">
+    <div style="font-size: xxx-large">Shopping Page</div>
+    <!--  <div><button (click)="onCatCreate()">Create Category</button></div>-->
+    <!--  <div>Categories</div>-->
+    <!--  <app-category *ngFor="let cat of catList" [cat]="cat"></app-category>-->
+    <div>Products:</div>
+    <app-product *ngFor="let pro of productList" [pro]="pro" ></app-product>
+  </div>
+
+  <app-category-create *ngIf="catCreateScreen && rank < 3"></app-category-create>
+  <app-category-edit *ngIf="catEditScreen && rank < 3"></app-category-edit>
+  <app-product-create *ngIf="productCreateScreen && rank < 3"></app-product-create>
+  <app-product-edit *ngIf="productEditScreen && rank < 3"></app-product-edit>
+  <app-price-change-create *ngIf="priceChangeCreateScreen && rank < 3"></app-price-change-create>
+  <app-price-change-edit *ngIf="priceEditScreen && rank < 3"></app-price-change-edit>
 </div>
-<app-category-create *ngIf="CatCreateScreen && rank>1"></app-category-create>
-<app-category-edit *ngIf="CateditScreen && rank > 1"></app-category-edit>
-<app-product-create *ngIf="ProductCreateScreen && rank > 1"></app-product-create>
-<app-product-edit *ngIf="ProductEditScreen && rank >1"></app-product-edit>
-<app-price-change-create *ngIf="PriceChangeCreateScreen && rank> 1"></app-price-change-create>
-<app-price-change-edit *ngIf="PriceEditScreen && rank > 1"></app-price-change-edit>
+
 

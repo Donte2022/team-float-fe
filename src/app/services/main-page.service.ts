@@ -15,9 +15,6 @@ export class MainPageService {
   //TODO add endpoint url
   //TODO config Error to send messages
 
-  private rank :number = 3
-  $rank = new Subject<number>()
-
   // Full List
 
   private FullCategoryList : ICategory []
@@ -54,9 +51,9 @@ export class MainPageService {
   $CategoryCreateScreen = new Subject<boolean>()
   private CategoryCreateScreen: boolean = false
   $ProductScreen = new Subject<boolean>()
-  private ProductScreen : boolean = false
+  private _ProductScreen : boolean = true
   $ProductCreateScreen = new Subject<boolean>()
-  private ProductCreateScreen : boolean = false
+  private _ProductCreateScreen : boolean = false
   $ProductEditScreen = new Subject<boolean>()
   private ProductEditScreen : boolean = false
   $PriceChangeCreateScreen = new Subject<boolean>()
@@ -84,19 +81,7 @@ export class MainPageService {
     this.FullProductList = []
   }
 
-  // Misc Getters and Setters
-
-
-  getrank(): number {
-    return this.rank;
-  }
-
-  setrank(value: number) {
-    this.rank = value;
-  }
-
 // Ind variables Getters and Setters
-
 
   getIndCategory(): ICategory {
     this.$IndCategory.next(this.IndCategory)
@@ -152,7 +137,7 @@ export class MainPageService {
     this.$FullProductList.next(this.FullProductList)
   }
 
-// Screen Setters
+// Screen Getters & Setters
 
 
   setMainShoppingPageScreen(value: boolean) {
@@ -170,14 +155,23 @@ export class MainPageService {
     this.$CategoryCreateScreen.next(this.CategoryCreateScreen)
   }
 
+  get ProductScreen(): boolean {
+    return this._ProductScreen;
+  }
+
   setProductScreen(value: boolean) {
-    this.ProductScreen = value;
-    this.$ProductScreen.next(this.ProductScreen)
+    this._ProductScreen = value;
+    this.$ProductScreen.next(this._ProductScreen)
+  }
+
+
+  get ProductCreateScreen(): boolean {
+    return this._ProductCreateScreen;
   }
 
   setProductCreateScreen(value: boolean) {
-    this.ProductCreateScreen = value;
-    this.$ProductCreateScreen.next(this.ProductCreateScreen)
+    this._ProductCreateScreen = value;
+    this.$ProductCreateScreen.next(this._ProductCreateScreen)
   }
 
   setProductEditScreen(value: boolean) {
@@ -198,8 +192,8 @@ export class MainPageService {
   /// Get Request
 
 
-  getfullproductlistrequest () {
-    let obs = this.http.onget("/product") as Observable<IProduct[]>
+  getFullProductListRequest () {
+    let obs = this.http.get("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
         console.log(value)
@@ -213,8 +207,8 @@ export class MainPageService {
 
   //Post Request
 
-  postproduct (Input : ISimpleProduct) {
-    let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
+  postProduct (Input : ISimpleProduct) {
+    let obs = this.http.post("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
         console.log(value)
@@ -227,8 +221,8 @@ export class MainPageService {
 
   //Put Request
 
-  putproduct (Input : IProduct){
-    let obs = this.http.onput("/product",Input) as Observable<any>
+  putProduct (Input : IProduct){
+    let obs = this.http.put("/product",Input) as Observable<any>
     obs.subscribe({
       next: value => {
         console.log(value)
@@ -242,8 +236,8 @@ export class MainPageService {
 
   //Delete Request
 
-  deleteproduct (Input: number) {
-    let obs = this.http.ondelete("/product?id="+ Input ) as Observable<any>
+  deleteProduct (Input: number) {
+    let obs = this.http.delete("/product?id="+ Input ) as Observable<any>
     obs.subscribe({
       next: value => {
         console.log(value)
@@ -254,9 +248,4 @@ export class MainPageService {
       error: err => {console.error(err)}
     })
   }
-
-
-
-
-
 }

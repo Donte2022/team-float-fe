@@ -24,6 +24,10 @@ export class AccountService {
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
   $showMyAccount = new BehaviorSubject<boolean>(false)
   $showAddAccount = new BehaviorSubject<boolean>(false)
+  $showAccountList = new BehaviorSubject<boolean>(false)
+
+  //Admin = 1, Shopkeeper = 2, Customer = 3
+  userRank: number = 3
 
   constructor(private http: HttpClient) { }
 
@@ -98,9 +102,9 @@ export class AccountService {
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
           this.$isRegistering.next(false)
+          this.userRank = account.rank
           if (account.rank === 1) {
             this.refreshAccountList()
-            this.$isAdmin.next(true)
           }
 
         }
@@ -181,14 +185,15 @@ export class AccountService {
     }
   }
 
-  public resetSubjects() {
+  public resetAccountState() {
     this.$account.next(null)
     this.$accountList.next([])
     this.$accountIdToEdit.next(null)
     this.$showMyAccount.next(false)
     this.$showAddAccount.next(false)
-    this.$isAdmin.next(false)
+    this.$showAccountList.next(false)
     this.$isRegistering.next(false)
     this.$loginErrorMessage.next(null)
+    this.userRank = 3
   }
 }

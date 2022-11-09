@@ -6,11 +6,8 @@
 
 <div *ngIf="account">
 <!--  Todo conditional rendering for productList, cart, myAccount, pastOrders, etc.-->
-  <button (click)="onClickMyAccount()">My Account</button>
-  <button (click)="onClickLogout()">Logout</button>
-  <app-account-list *ngIf="isAdmin"></app-account-list>
+  <app-nav></app-nav>
   <app-main-page></app-main-page>
-  <app-account-input *ngIf="showMyAccount"></app-account-input>
   <app-add-account *ngIf="showAddAccount"></app-add-account>
 </div>
 
