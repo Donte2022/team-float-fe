@@ -180,4 +180,15 @@ export class AccountService {
       //Todo handle error
     }
   }
+
+  public resetSubjects() {
+    this.$account.next(null)
+    this.$accountList.next([])
+    this.$accountIdToEdit.next(null)
+    this.$showMyAccount.next(false)
+    this.$showAddAccount.next(false)
+    this.$isAdmin.next(false)
+    this.$isRegistering.next(false)
+    this.$loginErrorMessage.next(null)
+  }
 }

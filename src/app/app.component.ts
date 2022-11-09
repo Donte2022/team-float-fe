@@ -46,6 +46,6 @@ export class AppComponent {
   }
 
   onClickLogout() {
-    this.accountService.$account.next(null)
+    this.accountService.resetSubjects()
   }
 }
