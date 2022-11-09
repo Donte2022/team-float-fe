@@ -35,7 +35,8 @@ export class AccountService {
     email: "dum@dumbmail.com",
     username: "soDumb",
     password: "password",
-    rank: 1
+    rank: 1,
+    orderId: 1
   }
 
   constructor(private http: HttpClient) { }
@@ -56,7 +57,8 @@ export class AccountService {
       email: email,
       username: username,
       password: password,
-      rank: rank
+      rank: rank,
+      orderId: 1
     })
   }
 
