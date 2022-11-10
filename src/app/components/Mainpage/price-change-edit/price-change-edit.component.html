@@ -1,7 +1,8 @@
 <div>Edit a Price Change Request</div>
-<div>Sale<input type="checkbox" [checked]="priceChange.sale"></div>
-<div>New Price:<input type="number" min="0" [value]="priceChange.newPrice"></div>
-<div>Start Date:<input type="date" [valueAsDate]="priceChange.startDate"></div>
-<div>End Date:<input type="date" [valueAsDate]="priceChange.endDate"></div>
-<div>Coupons<input type="number" min="0" [value]="priceChange.couponLeft"></div>
-<div><button (click)="onCancel()">Cancel</button><button>Submit</button></div>
+<div>{{message}}</div>
+<div>sale<input type="checkbox" [checked]="priceChange.sale" [(ngModel)]="priceChange.sale"></div>
+<div>New Price:<input type="number" min="0" [(ngModel)]="priceChange.newPrice"></div>
+<div>Start Date:<input type="date" [(ngModel)]="priceChange.startDate"></div>
+<div>End Date:<input type="date" [(ngModel)]="priceChange.endDate"></div>
+<div>Coupons<input type="number" min="0" [(ngModel)]="priceChange.couponLeft"></div>
+<div><button (click)="oncancel()">Cancel</button><button (click)="onedit()">Submit</button></div>

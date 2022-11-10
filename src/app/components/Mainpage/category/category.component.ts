@@ -9,7 +9,7 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class CategoryComponent implements OnInit {
 
-  @Input() Cat:ICategory | undefined
+  @Input() cat:ICategory | undefined
 
   constructor(private MainPageService:MainPageService) { }
 
@@ -17,10 +17,15 @@ export class CategoryComponent implements OnInit {
   }
 
   oncatedit () {
-    if (this.Cat !== undefined) {
+    if (this.cat !== undefined) {
       this.MainPageService.setProductScreen(false)
       this.MainPageService.setCategoryEditScreen(true)
-      this.MainPageService.setIndCategory({...this.Cat},true)
+      this.MainPageService.setIndCategory({...this.cat})
+    }
+  }
+  ondelete() {
+    if (this.cat !== undefined){
+      this.MainPageService.deleteCategory(this.cat.id)
     }
   }
 
