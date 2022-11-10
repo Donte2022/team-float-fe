@@ -1,6 +1,8 @@
 import {IProduct} from "./IProduct";
 
 export interface ICategory {
-  id:number
+  iD:number
   name:string
+  originalOwneridUsername: string
+  Products: IProduct []
 }
