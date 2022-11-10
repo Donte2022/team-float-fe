@@ -18,9 +18,11 @@ export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
   pro : IProduct
   message : string
   sub : Subscription
+  confirmMessage: boolean
 
   constructor(private MainPageService:MainPageService) {
     this.pro = {} as IProduct
+    this.confirmMessage = false
     this.sale = false
     this.newPrice = undefined
     this.startDate = new Date()
@@ -44,10 +46,24 @@ export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
 
   oncreate () {
     if (this.newPrice !== undefined && this.couponsleft !== undefined && this.pro !== undefined) {
+      if (this.pro.map > this.newPrice) {
+        
+      }
     this.MainPageService.postPriceChange(
       {sale: this.sale, newPrice: this.newPrice,startDate:this.startDate,endDate:this.endDate,couponLeft:this.couponsleft}
       ,this.pro
     )
       this.oncancel()
-  }}
+  }
+  }
+
+  confirm(){
+    if (this.newPrice !== undefined && this.couponsleft !== undefined && this.pro !== undefined) {
+      this.MainPageService.postPriceChange(
+        {sale: this.sale, newPrice: this.newPrice,startDate:this.startDate,endDate:this.endDate,couponLeft:this.couponsleft}
+        ,this.pro
+      )
+      this.oncancel()
+    }
+  }
 }

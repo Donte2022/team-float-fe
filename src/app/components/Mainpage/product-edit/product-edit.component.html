@@ -10,4 +10,5 @@
 <div>weight: <input type="number" min="0"  [(ngModel)]="product.weight"></div>
 <div>MAP:<input type="numbe" min="0"  [(ngModel)]="product.map"></div>
 <div>Cost to Make:<input type="number" min="0" [(ngModel)]="product.costToMake"></div>
-<div><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(product)">Submit</button></div>
+<div *ngIf="confirmMessage">Are you sure you want to set your price below the MAP price?<button (click)="confirm()">Confirm</button></div>
+<div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(product)">Submit</button></div>
