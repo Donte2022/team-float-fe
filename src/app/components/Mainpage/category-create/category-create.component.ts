@@ -9,16 +9,16 @@ import {IProduct} from "../../../interfaces/IProduct";
 })
 export class CategoryCreateComponent implements OnInit {
 
-  OtherProductList: IProduct []
-  ListOfProductToAdd: IProduct []
-  TempProduct: number | undefined
-  Name : string
+  otherProduct: IProduct []
+  productList: IProduct []
+  tempProduct: number | undefined
+  name : string
 
   constructor(private MainPageService: MainPageService) {
-    this.OtherProductList = [...this.MainPageService.getFullProductList()]
-    this.ListOfProductToAdd = []
-    this.TempProduct = undefined
-    this.Name = ""
+    this.otherProduct = [...this.MainPageService.getFullProductList()]
+    this.productList = []
+    this.tempProduct = undefined
+    this.name = ""
   }
 
   ngOnInit(): void {
@@ -30,40 +30,40 @@ export class CategoryCreateComponent implements OnInit {
   }
 
   onproductselect (input:any) {
-    this.TempProduct = input.target.value
+    this.tempProduct = input.target.value
   }
 
   onadd () {
-    if (this.TempProduct === undefined){
+    if (this.tempProduct === undefined){
       return;
     }
     else {
-    let n = this.TempProduct
-    let num = this.OtherProductList.findIndex(val => {return val.id == n})
+    let n = this.tempProduct
+    let num = this.otherProduct.findIndex(val => {return val.id == n})
       if (num === -1){
         return;
       }
-    let data = {...this.OtherProductList[num]}
-    this.ListOfProductToAdd.push(data)
-    this.OtherProductList.splice(num,1)
-    this.TempProduct = undefined
+    let data = {...this.otherProduct[num]}
+    this.productList.push(data)
+    this.otherProduct.splice(num,1)
+    this.tempProduct = undefined
   }}
 
   ondelete (input: IProduct) {
-    let num = this.ListOfProductToAdd.findIndex(value => {return value.id == input.id})
-    let data = {...this.ListOfProductToAdd[num]}
-    this.OtherProductList.push(data)
-    this.ListOfProductToAdd.splice(num,1)
+    let num = this.productList.findIndex(value => {return value.id == input.id})
+    let data = {...this.productList[num]}
+    this.otherProduct.push(data)
+    this.productList.splice(num,1)
   }
 
 
   onsubmit () {
     let proidList : number[] = []
-    for (let num of this.ListOfProductToAdd){
+    for (let num of this.productList){
       proidList.push(num.id)
     }
     this.MainPageService.postCategory({
-      name: this.Name,productList: proidList}
+      name: this.name,productList: proidList}
     )
     this.oncancel()
   }

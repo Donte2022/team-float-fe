@@ -10,39 +10,39 @@ import {IProduct} from "../../../interfaces/IProduct";
 })
 export class MainShoppingPageComponent implements OnInit {
 
-  CateditScreen: boolean = false
-  CatCreateScreen : boolean =false
-  ProductCreateScreen: boolean = false
-  ProductEditScreen: boolean = false
-  PriceChangeCreateScreen: boolean = false
-  PriceEditScreen  : boolean = false
-  ProductScreen: boolean = true
-  CatFulllist: ICategory []
-  ProductFulllist: IProduct []
+  categoryEdit: boolean = false
+  categoryCreate : boolean =false
+  productCreate: boolean = false
+  productEdit: boolean = false
+  priceCreate: boolean = false
+  priceEdit  : boolean = false
+  productScreen: boolean = true
+  fullList: ICategory []
+  productList: IProduct []
   rank : number = 0
   message : string
 
   constructor(private MainPageService: MainPageService) {
     this.message = ""
-    this.CatFulllist= []
-    this.ProductFulllist = []
-    this.MainPageService.$CategoryEditScreen.subscribe(value => {this.CateditScreen = value})
-    this.MainPageService.$CategoryCreateScreen.subscribe(value => {this.CatCreateScreen = value})
-    this.MainPageService.$ProductCreateScreen.subscribe(value => {this.ProductCreateScreen = value})
-    this.MainPageService.$ProductEditScreen.subscribe(value => {this.ProductEditScreen = value})
-    this.MainPageService.$PriceChangeCreateScreen.subscribe(value => {this.PriceChangeCreateScreen = value})
-    this.MainPageService.$PriceChangeEditScreen.subscribe(value => {this.PriceEditScreen = value})
-    this.MainPageService.$ProductScreen.subscribe(value => {this.ProductScreen = value})
-    this.MainPageService.$FullCategoryList.subscribe(value => {this.CatFulllist = value})
-    this.MainPageService.$FullProductList.subscribe(value => {this.ProductFulllist = [...value]})
-    this.MainPageService.$MainShoppingPageMessage.subscribe(value => {this.message = value})
+    this.fullList= []
+    this.productList = []
+    this.MainPageService.$categoryEditscreen.subscribe(value => {this.categoryEdit = value})
+    this.MainPageService.$categoryCreatescreen.subscribe(value => {this.categoryCreate = value})
+    this.MainPageService.$productCreatescreen.subscribe(value => {this.productCreate = value})
+    this.MainPageService.$productEditscreen.subscribe(value => {this.productEdit = value})
+    this.MainPageService.$priceCreatescreen.subscribe(value => {this.priceCreate = value})
+    this.MainPageService.$priceEditscreen.subscribe(value => {this.priceEdit = value})
+    this.MainPageService.$productScreen.subscribe(value => {this.productScreen = value})
+    this.MainPageService.$fullCategory.subscribe(value => {this.fullList = value})
+    this.MainPageService.$fullProduct.subscribe(value => {this.productList = [...value]})
+    this.MainPageService.$mainShoppingpageMessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {
     this.MainPageService.getFullProductListRequest()
     this.MainPageService.getFullCategoryListRequest()
-    this.ProductFulllist = [...this.MainPageService.getFullProductList()]
-    this.CatFulllist = [...this.MainPageService.getFullCategoryList()]
+    this.productList = [...this.MainPageService.getFullProductList()]
+    this.fullList = [...this.MainPageService.getFullCategoryList()]
     this.rank = this.MainPageService.getrank()
   }
 

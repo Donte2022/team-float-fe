@@ -34,7 +34,7 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
     this.weight = undefined
     this.MAP = undefined
     this.costtoMake = undefined
-   this.sub = this.MainPageService.$ProductCreateMessage.subscribe(value => {this.message = value})
+   this.sub = this.MainPageService.$productCreatemessage.subscribe(value => {this.message = value})
 
   }
 

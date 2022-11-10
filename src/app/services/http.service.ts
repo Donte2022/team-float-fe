@@ -11,19 +11,19 @@ export class HttpService {
 
   }
 
-  onget (url:String):Observable<any>{
+  get (url:String):Observable<any>{
     return this.database.get("http://localhost:8080/api"+url) as Observable<any>
   }
 
-  onput (url:String,putdata:any):Observable<any> {
+  put (url:String, putdata:any):Observable<any> {
     return this.database.put("http://localhost:8080/api"+url,putdata) as Observable<any>
   }
 
-  onpost (url:String,postdata:any):Observable<any>{
+  post (url:String, postdata:any):Observable<any>{
     return this.database.post("http://localhost:8080/api"+url,postdata) as Observable<any>
   }
 
-  ondelete(url:String):Observable<any>{
+  del(url:String):Observable<any>{
     return this.database.delete("http://localhost:8080/api"+url) as Observable<any>
   }
 }

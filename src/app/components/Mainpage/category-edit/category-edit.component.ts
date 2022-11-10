@@ -10,31 +10,31 @@ import {IProduct} from "../../../interfaces/IProduct";
 })
 export class CategoryEditComponent implements OnInit {
 
-  OtherProductList: IProduct []
-  Category: ICategory
-  ListOfProducttoSubmit : IProduct []
-  TempProduct : number | undefined
+  otherList: IProduct []
+  category: ICategory
+  producttoSubmit : IProduct []
+  tempProduct : number | undefined
 
 
   constructor(private MainPageService: MainPageService) {
-    this.Category = {} as ICategory
-    this.OtherProductList = []
-    this.ListOfProducttoSubmit = []
-    this.TempProduct = undefined
+    this.category = {} as ICategory
+    this.otherList = []
+    this.producttoSubmit = []
+    this.tempProduct = undefined
   }
 
   ngOnInit(): void {
-    this.Category = {...this.MainPageService.getIndCategory()}
-    this.OtherProductList = [...this.MainPageService.getFullProductList()]
+    this.category = {...this.MainPageService.getIndCategory()}
+    this.otherList = [...this.MainPageService.getFullProductList()]
     this.fillitarprodut()
   }
 
   fillitarprodut () {
-    for (let pro of this.OtherProductList){
-      if (-1 != pro.categories.findIndex(value => {return value.id == this.Category.id})){
-        this.ListOfProducttoSubmit.push(pro)
-        let num = this.OtherProductList.findIndex(value => {return value.id == pro.id})
-        this.OtherProductList.splice(num,1)
+    for (let pro of this.otherList){
+      if (-1 != pro.categories.findIndex(value => {return value.id == this.category.id})){
+        this.producttoSubmit.push(pro)
+        let num = this.otherList.findIndex(value => {return value.id == pro.id})
+        this.otherList.splice(num,1)
       }
     }
   }
@@ -45,43 +45,43 @@ export class CategoryEditComponent implements OnInit {
   }
 
   onproductselect (input:any) {
-    this.TempProduct = input.target.value
+    this.tempProduct = input.target.value
   }
 
   onadd () {
-    if (this.TempProduct === undefined){
+    if (this.tempProduct === undefined){
       return;
     }
     else {
-      let n = this.TempProduct
-      let num = this.OtherProductList.findIndex(val => {return val.id == n})
+      let n = this.tempProduct
+      let num = this.otherList.findIndex(val => {return val.id == n})
       if (num === -1){
         return;
       }
-      let data = {...this.OtherProductList[num]}
-      this.ListOfProducttoSubmit.push(data)
-      this.OtherProductList.splice(num,1)
-      this.TempProduct = undefined
+      let data = {...this.otherList[num]}
+      this.producttoSubmit.push(data)
+      this.otherList.splice(num,1)
+      this.tempProduct = undefined
     }}
 
   ondelete (input: IProduct) {
-    let num = this.ListOfProducttoSubmit.findIndex(value => {return value.id == input.id})
-    let data = {...this.ListOfProducttoSubmit[num]}
-    this.OtherProductList.push(data)
-    this.ListOfProducttoSubmit.splice(num,1)
+    let num = this.producttoSubmit.findIndex(value => {return value.id == input.id})
+    let data = {...this.producttoSubmit[num]}
+    this.otherList.push(data)
+    this.producttoSubmit.splice(num,1)
   }
 
 
   onsubmit () {
     let proidList : number[] = []
-    for (let num of this.ListOfProducttoSubmit){
+    for (let num of this.producttoSubmit){
       proidList.push(num.id)
     }
     let oldlist : number[] = []
-    for (let num2 of this.OtherProductList){
+    for (let num2 of this.otherList){
       oldlist.push(num2.id)
     }
-    this.MainPageService.putCategory({...{name:this.Category.name,id:this.Category.id,proidList:proidList}},oldlist)
+    this.MainPageService.putCategory({...{name:this.category.name,id:this.category.id,productList:proidList}},oldlist)
     this.oncancel()
   }
 

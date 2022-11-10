@@ -10,19 +10,19 @@ import {Subscription} from "rxjs";
 })
 export class PriceChangeEditComponent implements OnInit,OnDestroy {
 
-  PriceChange : IPriceChange
+  priceChange : IPriceChange
   message : string
   sub : Subscription
 
 
   constructor(private MainPageService: MainPageService) {
-    this.PriceChange = {} as IPriceChange
+    this.priceChange = {} as IPriceChange
     this.message = ""
-    this.sub = this.MainPageService.$PriceChangeEditMessage.subscribe(value => {this.message = value})
+    this.sub = this.MainPageService.$priceChangemessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {
-    this.PriceChange = this.MainPageService.getIndPriceChange()
+    this.priceChange = this.MainPageService.getIndPriceChange()
   }
   ngOnDestroy() {
     this.sub.unsubscribe()
@@ -35,8 +35,8 @@ export class PriceChangeEditComponent implements OnInit,OnDestroy {
 
   onedit () {
     this.MainPageService.putPriceChange({
-      id:this.PriceChange.id,sale:this.PriceChange.sale,newPrice:this.PriceChange.newPrice,
-      startDate:this.PriceChange.startDate,endDate:this.PriceChange.endDate,couponLeft:this.PriceChange.couponLeft
+      id:this.priceChange.id,sale:this.priceChange.sale,newPrice:this.priceChange.newPrice,
+      startDate:this.priceChange.startDate,endDate:this.priceChange.endDate,couponLeft:this.priceChange.couponLeft
     }
     )
     this.oncancel()

@@ -10,28 +10,28 @@ import {Subscription} from "rxjs";
 })
 export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
 
-  Sale:boolean
-  NewPrice:number | undefined
-  StartDate : Date
-  EndDate : Date
+  sale:boolean
+  newPrice:number | undefined
+  startDate : Date
+  endDate : Date
   couponsleft: number
-  Indpro : IProduct
+  pro : IProduct
   message : string
   sub : Subscription
 
   constructor(private MainPageService:MainPageService) {
-    this.Indpro = {} as IProduct
-    this.Sale = false
-    this.NewPrice = undefined
-    this.StartDate = new Date()
-    this.EndDate = new Date()
+    this.pro = {} as IProduct
+    this.sale = false
+    this.newPrice = undefined
+    this.startDate = new Date()
+    this.endDate = new Date()
     this.couponsleft = 0
     this.message = ""
-   this.sub = this.MainPageService.$PriceChangeCreateMessage.subscribe(value => {this.message = value})
+   this.sub = this.MainPageService.$priceCreatemessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {
-    this.Indpro = this.MainPageService.getIndProduct()
+    this.pro = this.MainPageService.getIndProduct()
   }
   ngOnDestroy() {
     this.sub.unsubscribe()
@@ -43,10 +43,10 @@ export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
   }
 
   oncreate () {
-    if (this.NewPrice !== undefined && this.couponsleft !== undefined && this.Indpro !== undefined) {
+    if (this.newPrice !== undefined && this.couponsleft !== undefined && this.pro !== undefined) {
     this.MainPageService.postPriceChange(
-      {sale: this.Sale, newPrice: this.NewPrice,startDate:this.StartDate,endDate:this.EndDate,couponLeft:this.couponsleft}
-      ,this.Indpro
+      {sale: this.sale, newPrice: this.newPrice,startDate:this.startDate,endDate:this.endDate,couponLeft:this.couponsleft}
+      ,this.pro
     )
       this.oncancel()
   }}

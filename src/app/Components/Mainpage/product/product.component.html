@@ -10,9 +10,9 @@
   <div>weight:{{Pro.weight}}</div>
   <div *ngIf="rank>1">MAP price{{Pro.map}}</div>
   <div *ngIf="rank>1">Cost to Make:{{Pro.costToMake}}</div>
-  <div *ngIf="rank>1"><button (click)="onProductEdit()">Edit Product</button></div>
+  <div *ngIf="rank>1"><button (click)="onProductEdit()">Edit product</button></div>
   <div *ngIf="rank>1"><button (click)="ondelete()">Delete</button></div>
   <div><button (click)="onPriceChangeCreateScreen()">Price Change Create</button></div>
   <div>List of Price Change Request:</div>
-  <app-price-change-request *ngFor="let pri of Pro.priceChange" [Pri]="pri" [Pro]="Pro"></app-price-change-request>
+  <app-price-change-request *ngFor="let pri of Pro.priceChange" [pri]="pri" [pro]="Pro"></app-price-change-request>
 </div>

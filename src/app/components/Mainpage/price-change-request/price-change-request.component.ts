@@ -10,8 +10,8 @@ import {IProduct} from "../../../interfaces/IProduct";
 })
 export class PriceChangeRequestComponent implements OnInit {
 
-  @Input() Pri: IPriceChange | undefined
-  @Input() Pro: IProduct | undefined
+  @Input() pri: IPriceChange | undefined
+  @Input() pro: IProduct | undefined
 
   constructor(private MainPageService:MainPageService) { }
 
@@ -19,17 +19,17 @@ export class PriceChangeRequestComponent implements OnInit {
   }
 
   onPriceChangeEditScreen () {
-    if (this.Pri !== undefined && this.Pro !== undefined) {
-      this.MainPageService.setIndPriceChange(this.Pri)
-      this.MainPageService.setIndProduct(this.Pro)
+    if (this.pri !== undefined && this.pro !== undefined) {
+      this.MainPageService.setIndPriceChange(this.pri)
+      this.MainPageService.setIndProduct(this.pro)
       this.MainPageService.setPriceChangeEditScreen(true)
       this.MainPageService.setProductScreen(false)
     }
   }
 
   ondelete () {
-    if (this.Pro !== undefined && this.Pri !== undefined) {
-      this.MainPageService.deletePriceChange(this.Pro.id,this.Pri.id,this.Pro)
+    if (this.pro !== undefined && this.pri !== undefined) {
+      this.MainPageService.deletePriceChange(this.pro.id,this.pri.id,this.pro)
     }
   }
 

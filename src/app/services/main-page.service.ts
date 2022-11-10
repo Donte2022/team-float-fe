@@ -19,56 +19,56 @@ export class MainPageService {
 
   // Full List
 
-  private FullCategoryList : ICategory []
-  $FullCategoryList = new Subject<ICategory[]>()
-  private FullProductList: IProduct []
-  $FullProductList = new Subject<IProduct[]>()
+  private fullCategory : ICategory []
+  $fullCategory = new Subject<ICategory[]>()
+  private fullProduct: IProduct []
+  $fullProduct = new Subject<IProduct[]>()
 
   // Ind variable
 
-  private IndCategory : ICategory
-  $IndCategory = new Subject<ICategory>()
-  private IndProduct : IProduct
-  $IndProduct = new Subject<IProduct>()
-  private IndPriceChange : IPriceChange
-  $IndPriceChange = new Subject<IPriceChange>()
+  private indCategory : ICategory
+  $indCategory = new Subject<ICategory>()
+  private indProduct : IProduct
+  $indProduct = new Subject<IProduct>()
+  private indPrice : IPriceChange
+  $indPrice = new Subject<IPriceChange>()
 
   // Message Subjects
 
-  $MainShoppingPageMessage = new BehaviorSubject<string>("")
-  $CategoryEditMessage = new BehaviorSubject<string>("")
-  $CategoryCreateMessage = new BehaviorSubject<string>("")
-  $ProductCreateMessage = new BehaviorSubject<string>("")
-  $ProductEditMessage = new BehaviorSubject<string>("")
-  $PriceChangeCreateMessage = new BehaviorSubject<string>("")
-  $PriceChangeEditMessage = new BehaviorSubject<string>("")
+  $mainShoppingpageMessage = new BehaviorSubject<string>("")
+  $categoryEditmessage = new BehaviorSubject<string>("")
+  $categoryCreatemessage = new BehaviorSubject<string>("")
+  $productCreatemessage = new BehaviorSubject<string>("")
+  $productEditmessage = new BehaviorSubject<string>("")
+  $priceCreatemessage = new BehaviorSubject<string>("")
+  $priceChangemessage = new BehaviorSubject<string>("")
 
   // Screen Subject
 
-  $MainShoppingPageScreen = new Subject<boolean>()
-  private MainShoppingPageScreen : boolean = false
-  $CategoryEditScreen = new Subject<boolean>()
-  private CategoryEditScreen : boolean = false
-  $CategoryCreateScreen = new Subject<boolean>()
-  private CategoryCreateScreen: boolean = false
-  $ProductScreen = new Subject<boolean>()
-  private ProductScreen : boolean = false
-  $ProductCreateScreen = new Subject<boolean>()
-  private ProductCreateScreen : boolean = false
-  $ProductEditScreen = new Subject<boolean>()
-  private ProductEditScreen : boolean = false
-  $PriceChangeCreateScreen = new Subject<boolean>()
-  private PriceChangeCreateScreen : boolean = false
-  $PriceChangeEditScreen = new Subject<boolean>()
-  private PriceChangeEditScreen : boolean = false
+  $mainShoppingpageScreen = new Subject<boolean>()
+  private mainShoppingpageScreen : boolean = false
+  $categoryEditscreen = new Subject<boolean>()
+  private categoryEditscreen : boolean = false
+  $categoryCreatescreen = new Subject<boolean>()
+  private categoryCreatescreen: boolean = false
+  $productScreen = new Subject<boolean>()
+  private productScreen : boolean = false
+  $productCreatescreen = new Subject<boolean>()
+  private productCreatescreen : boolean = false
+  $productEditscreen = new Subject<boolean>()
+  private productEditscreen : boolean = false
+  $priceCreatescreen = new Subject<boolean>()
+  private priceCreatescreen : boolean = false
+  $priceEditscreen = new Subject<boolean>()
+  private priceChangescreen : boolean = false
 
 
   constructor(private http:HttpService) {
-    this.IndCategory = {} as ICategory
-    this.IndProduct = {} as IProduct
-    this.IndPriceChange = {} as IPriceChange
-    this.FullCategoryList = []
-    this.FullProductList = []
+    this.indCategory = {} as ICategory
+    this.indProduct = {} as IProduct
+    this.indPrice = {} as IPriceChange
+    this.fullCategory = []
+    this.fullProduct = []
   }
 
   // Misc Getters and Setters
@@ -83,48 +83,48 @@ export class MainPageService {
 
 
   getIndCategory(): ICategory {
-    this.$IndCategory.next(this.IndCategory)
-    return this.IndCategory;
+    this.$indCategory.next(this.indCategory)
+    return this.indCategory;
   }
 
   setIndCategory(value: ICategory) {
-    this.IndCategory = {...value};
-    this.$IndCategory.next(this.IndCategory)
+    this.indCategory = {...value};
+    this.$indCategory.next(this.indCategory)
 
   }
 
   getIndProduct(): IProduct {
-    this.$IndProduct.next(this.IndProduct)
-    return this.IndProduct;
+    this.$indProduct.next(this.indProduct)
+    return this.indProduct;
   }
 
   setIndProduct(value: IProduct) {
-    this.IndProduct = {...value};
-    this.$IndProduct.next(this.IndProduct)
+    this.indProduct = {...value};
+    this.$indProduct.next(this.indProduct)
   }
 
   getIndPriceChange(): IPriceChange {
-    this.$IndPriceChange.next(this.IndPriceChange)
-    return this.IndPriceChange;
+    this.$indPrice.next(this.indPrice)
+    return this.indPrice;
   }
 
   setIndPriceChange(value: IPriceChange) {
-    this.IndPriceChange = {...value};
-    this.$IndPriceChange.next(this.IndPriceChange)
+    this.indPrice = {...value};
+    this.$indPrice.next(this.indPrice)
   }
 
 // Full List Getters and Setters
 
 
   getFullCategoryList(): ICategory[] {
-    this.$FullCategoryList.next(this.FullCategoryList)
-    return this.FullCategoryList;
+    this.$fullCategory.next(this.fullCategory)
+    return this.fullCategory;
   }
 
 
   getFullProductList(): IProduct[] {
-    this.$FullProductList.next(this.FullProductList)
-    return this.FullProductList;
+    this.$fullProduct.next(this.fullProduct)
+    return this.fullProduct;
   }
 
 
@@ -132,43 +132,43 @@ export class MainPageService {
 
 
   setMainShoppingPageScreen(value: boolean) {
-    this.MainShoppingPageScreen = value;
-    this.$MainShoppingPageScreen.next(this.MainShoppingPageScreen)
+    this.mainShoppingpageScreen = value;
+    this.$mainShoppingpageScreen.next(this.mainShoppingpageScreen)
   }
 
   setCategoryEditScreen(value: boolean) {
-    this.CategoryEditScreen = value;
-    this.$CategoryEditScreen.next(this.CategoryEditScreen)
+    this.categoryEditscreen = value;
+    this.$categoryEditscreen.next(this.categoryEditscreen)
   }
 
   setCategoryCreateScreen(value: boolean) {
-    this.CategoryCreateScreen = value;
-    this.$CategoryCreateScreen.next(this.CategoryCreateScreen)
+    this.categoryCreatescreen = value;
+    this.$categoryCreatescreen.next(this.categoryCreatescreen)
   }
 
   setProductScreen(value: boolean) {
-    this.ProductScreen = value;
-    this.$ProductScreen.next(this.ProductScreen)
+    this.productScreen = value;
+    this.$productScreen.next(this.productScreen)
   }
 
   setProductCreateScreen(value: boolean) {
-    this.ProductCreateScreen = value;
-    this.$ProductCreateScreen.next(this.ProductCreateScreen)
+    this.productCreatescreen = value;
+    this.$productCreatescreen.next(this.productCreatescreen)
   }
 
   setProductEditScreen(value: boolean) {
-    this.ProductEditScreen = value;
-    this.$ProductEditScreen.next(this.ProductEditScreen)
+    this.productEditscreen = value;
+    this.$productEditscreen.next(this.productEditscreen)
   }
 
   setPriceChangeCreateScreen(value: boolean) {
-    this.PriceChangeCreateScreen = value;
-    this.$PriceChangeCreateScreen.next(this.PriceChangeCreateScreen)
+    this.priceCreatescreen = value;
+    this.$priceCreatescreen.next(this.priceCreatescreen)
   }
 
   setPriceChangeEditScreen(value: boolean) {
-    this.PriceChangeEditScreen = value;
-    this.$PriceChangeEditScreen.next(this.PriceChangeEditScreen)
+    this.priceChangescreen = value;
+    this.$priceEditscreen.next(this.priceChangescreen)
   }
 
 
@@ -189,25 +189,25 @@ export class MainPageService {
 
 
   getFullProductListRequest () {
-    let obs = this.http.onget("/product") as Observable<IProduct[]>
+    let obs = this.http.get("/product") as Observable<IProduct[]>
     obs.subscribe({
       next: value => {
-        this.FullProductList = [...value]
-        this.$FullProductList.next(this.FullProductList)
+        this.fullProduct = [...value]
+        this.$fullProduct.next(this.fullProduct)
       },
       error: err => {console.error(err)
-        this.$MainShoppingPageMessage.next(err.message)}
+        this.$mainShoppingpageMessage.next(err.message)}
     })
   }
 
   getFullCategoryListRequest () {
-    let obs = this.http.onget("/categories") as Observable<ICategory[]>
+    let obs = this.http.get("/categories") as Observable<ICategory[]>
     obs.subscribe({
       next: value => {
-      this.FullCategoryList = [...value]
-      this.$FullCategoryList.next(this.FullCategoryList)},
+      this.fullCategory = [...value]
+      this.$fullCategory.next(this.fullCategory)},
       error:err => {console.error(err)
-        this.$MainShoppingPageMessage.next(err.message)}
+        this.$mainShoppingpageMessage.next(err.message)}
     })
   }
 
@@ -215,87 +215,87 @@ export class MainPageService {
   //Post Request
 
   postProduct (Input : IsimpleProduct) {
-    let obs = this.http.onpost("/product",Input) as  Observable<IProduct>
+    let obs = this.http.post("/product",Input) as  Observable<IProduct>
     obs.subscribe({
       next: value => {
         value.priceChange = []
         value.categories = []
-        this.FullProductList.push(value)
-        this.$FullProductList.next(this.FullProductList)
+        this.fullProduct.push(value)
+        this.$fullProduct.next(this.fullProduct)
       },
       error: err => {console.error(err)
-        this.$ProductCreateScreen.next(err.message)}
+        this.$productCreatescreen.next(err.message)}
     })
   }
 
 
   postPriceChange (Input: IsimplePriceChange, proid : IProduct) {
-    let obs = this.http.onpost("/price/" + proid.id,Input) as Observable<IPriceChange>
+    let obs = this.http.post("/price/" + proid.id,Input) as Observable<IPriceChange>
     obs.subscribe({
       next: value => {
-        let num = this.FullProductList.findIndex(value1 => {return value1.id === proid.id})
-        this.FullProductList[num].priceChange.push(value)
-        this.$FullProductList.next(this.FullProductList)
+        let num = this.fullProduct.findIndex(value1 => {return value1.id === proid.id})
+        this.fullProduct[num].priceChange.push(value)
+        this.$fullProduct.next(this.fullProduct)
         this.onpricerequest(proid)
       },
       error: err => {console.error(err)
-        this.$PriceChangeCreateScreen.next(err.message)}
+        this.$priceCreatescreen.next(err.message)}
     })
   }
 
   postCategory (input: IPostCategory) {
     // let arr: IPostCategory = {name: "red",proidList: [20,40]}
-    let obs = this.http.onpost("/categories",input) as Observable<ICategory>
+    let obs = this.http.post("/categories",input) as Observable<ICategory>
     obs.subscribe({
       next: value => {
-      this.FullCategoryList.push(value)
-      this.$FullCategoryList.next(this.FullCategoryList)
-      for (let pro of this.FullProductList){
+      this.fullCategory.push(value)
+      this.$fullCategory.next(this.fullCategory)
+      for (let pro of this.fullProduct){
         if (-1 != input.productList.findIndex(value1 => {return value1 == pro.id})){
           pro.categories.push(value)
         }
       }
       },
       error: err => {console.error(err)
-        this.$CategoryCreateMessage.next(err.message)}
+        this.$categoryCreatemessage.next(err.message)}
     })
   }
 
   //Put Request
 
   putProduct (Input : IProduct){
-    let obs = this.http.onput("/product",Input)
+    let obs = this.http.put("/product",Input)
     obs.subscribe({
       next: () => {
-      let num =  this.FullProductList.findIndex(value1 => {return value1.id === Input.id})
-        this.FullProductList.splice(num,1,Input)
-        this.$FullProductList.next(this.FullProductList)
+      let num =  this.fullProduct.findIndex(value1 => {return value1.id === Input.id})
+        this.fullProduct.splice(num,1,Input)
+        this.$fullProduct.next(this.fullProduct)
       },
       error: err => {console.error(err)
-        this.$ProductEditScreen.next(err.message)}
+        this.$productEditscreen.next(err.message)}
     })
   }
 
   putPriceChange (input: IPriceChange) {
-    let obs = this.http.onput("/price/" ,input)
+    let obs = this.http.put("/price/" ,input)
     obs.subscribe({
       next:() => {
-        let num = this.FullProductList.findIndex(value1 => {return value1.id === this.IndProduct.id})
-       let num2 = this.FullProductList[num].priceChange.findIndex(value1 => {return value1.id === input.id})
-        this.FullProductList[num].priceChange.splice(num2,1,input)
-        this.onpricerequest(this.IndProduct)
+        let num = this.fullProduct.findIndex(value1 => {return value1.id === this.indProduct.id})
+       let num2 = this.fullProduct[num].priceChange.findIndex(value1 => {return value1.id === input.id})
+        this.fullProduct[num].priceChange.splice(num2,1,input)
+        this.onpricerequest(this.indProduct)
       },
       error:err => {console.error(err)
-        this.$PriceChangeEditMessage.next(err.message)}
+        this.$priceChangemessage.next(err.message)}
     })
   }
 
 
   putCategory (input : IsimpleCategory, oldlist : number []) {
-    let obs = this.http.onput("/categories",input)
+    let obs = this.http.put("/categories",input)
     obs.subscribe({
       next: () => {
-        for (let pro of this.FullProductList){
+        for (let pro of this.fullProduct){
           let num = input.productList.findIndex(value1 => {return value1 == pro.id})
           let num2 = oldlist.findIndex(value1 => {return value1 == pro.id})
           if (num != -1) {
@@ -310,60 +310,60 @@ export class MainPageService {
             pro.categories.splice(num2,1)
           }
         }
-        let val = this.FullCategoryList.findIndex(value1 => {return value1.id == input.id})
-        this.FullCategoryList[val].name = input.name
-        this.$FullCategoryList.next(this.FullCategoryList)
+        let val = this.fullCategory.findIndex(value1 => {return value1.id == input.id})
+        this.fullCategory[val].name = input.name
+        this.$fullCategory.next(this.fullCategory)
       },
       error: err => {console.error(err)
-        this.$CategoryEditMessage.next(err.message)}
+        this.$categoryEditmessage.next(err.message)}
     })
   }
   //Delete Request
 
   deleteProduct (Input: number) {
-    let obs = this.http.ondelete("/product?id="+ Input )
+    let obs = this.http.del("/product?id="+ Input )
     obs.subscribe({
       next: () => {
-        let num = this.FullProductList.findIndex(value1 => {return value1.id === Input})
-        this.FullProductList.splice(num,1)
-        this.$FullProductList.next(this.FullProductList)
+        let num = this.fullProduct.findIndex(value1 => {return value1.id === Input})
+        this.fullProduct.splice(num,1)
+        this.$fullProduct.next(this.fullProduct)
       },
       error: err => {console.error(err)
-        this.$MainShoppingPageMessage.next(err.message)}
+        this.$mainShoppingpageMessage.next(err.message)}
     })
   }
 
   deletePriceChange (proid: number, priid: number,pro: IProduct) {
-    let obs = this.http.ondelete("/price/" + proid + "/" + priid)
+    let obs = this.http.del("/price/" + proid + "/" + priid)
     obs.subscribe({
       next: () => {
-        let num = this.FullProductList.findIndex(value1 => {return value1.id === proid})
-        let num2 = this.FullProductList[num].priceChange.findIndex(value1 => {return value1.id === priid})
-        this.FullProductList[num].priceChange.splice(num2,1)
+        let num = this.fullProduct.findIndex(value1 => {return value1.id === proid})
+        let num2 = this.fullProduct[num].priceChange.findIndex(value1 => {return value1.id === priid})
+        this.fullProduct[num].priceChange.splice(num2,1)
         this.onpricerequest(pro)
       },
       error: err => {console.error(err)
-        this.$MainShoppingPageMessage.next(err.message)}
+        this.$mainShoppingpageMessage.next(err.message)}
     })
   }
 
   deleteCategory (input : number) {
-    let obs = this.http.ondelete("/categories/"+input)
+    let obs = this.http.del("/categories/"+input)
     obs.subscribe({
       next: () => {
-        for (let pro of this.FullProductList){
+        for (let pro of this.fullProduct){
        let num =  pro.categories.findIndex(value1 => {return value1.id == input})
           if (num != -1){
             pro.categories.splice(num,1)
           }
         }
-       let num2 = this.FullCategoryList.findIndex(value1 => {return value1.id == input})
-        this.FullCategoryList.splice(num2,1)
-        this.$FullCategoryList.next(this.FullCategoryList)
-        this.$FullProductList.next(this.FullProductList)
+       let num2 = this.fullCategory.findIndex(value1 => {return value1.id == input})
+        this.fullCategory.splice(num2,1)
+        this.$fullCategory.next(this.fullCategory)
+        this.$fullProduct.next(this.fullProduct)
       },
       error: err => {console.error(err)
-        this.$MainShoppingPageMessage.next(err.message)}
+        this.$mainShoppingpageMessage.next(err.message)}
     })
   }
 

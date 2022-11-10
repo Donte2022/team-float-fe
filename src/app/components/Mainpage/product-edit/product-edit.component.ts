@@ -10,19 +10,19 @@ import {Subscription} from "rxjs";
 })
 export class ProductEditComponent implements OnInit,OnDestroy {
 
-  Product: IProduct
+  product: IProduct
   message : string
   sub : Subscription
 
   constructor(private MainPageService: MainPageService) {
-    this.Product = {} as IProduct
+    this.product = {} as IProduct
     this.message = ""
-   this.sub = this.MainPageService.$ProductEditMessage.subscribe(value => {this.message = value})
+   this.sub = this.MainPageService.$productEditmessage.subscribe(value => {this.message = value})
 
   }
 
   ngOnInit(): void {
-    this.Product = this.MainPageService.getIndProduct()
+    this.product = this.MainPageService.getIndProduct()
   }
 
   ngOnDestroy() {

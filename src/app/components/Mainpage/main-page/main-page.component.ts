@@ -8,10 +8,10 @@ import {MainPageService} from "../../../services/main-page.service";
 })
 export class MainPageComponent implements OnInit {
 
-  ShopingpageScreen : boolean = false
+  shopingpageScreen : boolean = false
 
   constructor(private MainPageService: MainPageService) {
-    this.MainPageService.$MainShoppingPageScreen.subscribe(value => {this.ShopingpageScreen = value})
+    this.MainPageService.$mainShoppingpageScreen.subscribe(value => {this.shopingpageScreen = value})
   }
 
   ngOnInit(): void {
