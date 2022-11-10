@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
+import {CartService} from "../../../services/cart.service";
 
 
 @Component({
@@ -14,9 +15,10 @@ export class ProductComponent implements OnInit {
   @Input() Pro :IProduct | undefined
   img:string|undefined
   rank: number
+  quantity: number = 1
 
 
-  constructor(private MainPageService:MainPageService) {
+  constructor(private MainPageService:MainPageService, private cartService: CartService) {
     this.img = this.Pro?.imageUrl
     this.rank = 0
 
@@ -51,5 +53,11 @@ export class ProductComponent implements OnInit {
     if (this.Pro !== undefined) {
       this.MainPageService.deleteproduct(this.Pro.id)
   }}
+
+  addToCart() {
+    if (this.Pro!==undefined) {
+      this.cartService.addFromProduct(this.Pro, this.quantity);
+    }
+  }
 
 }

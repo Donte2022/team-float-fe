@@ -18,26 +18,30 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AccountInputComponent } from './components/auth/account-input/account-input.component';
+import {CartComponent} from "./components/cart/cart/cart.component";
+import {CartProductComponent} from "./components/cart/cart-product/cart-product.component"
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainShoppingPageComponent,
-    ProductComponent,
-    CategoryCreateComponent,
-    CategoryEditComponent,
-    CategoryComponent,
-    ProductCreateComponent,
-    PriceChangeEditComponent,
-    ProductEditComponent,
-    PriceChangeCreateComponent,
-    PriceChangeRequestComponent,
-    MainPageComponent,
-    LoginComponent,
-    RegisterComponent,
-    AccountInputComponent,
-  ],
+    declarations: [
+        AppComponent,
+        MainShoppingPageComponent,
+        ProductComponent,
+        CategoryCreateComponent,
+        CategoryEditComponent,
+        CategoryComponent,
+        ProductCreateComponent,
+        PriceChangeEditComponent,
+        ProductEditComponent,
+        PriceChangeCreateComponent,
+        PriceChangeRequestComponent,
+        MainPageComponent,
+        LoginComponent,
+        RegisterComponent,
+        AccountInputComponent,
+        CartComponent,
+        CartProductComponent
+    ],
   imports: [
     BrowserModule,
     NgbModule,

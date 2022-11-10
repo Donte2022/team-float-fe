@@ -20,6 +20,7 @@ export class MainShoppingPageComponent implements OnInit {
   CatFulllist: ICategory []
   ProductFulllist: IProduct []
   rank : number = 0
+  showCart: boolean = false
 
   constructor(private MainPageService: MainPageService) {
     this.CatFulllist= []
@@ -57,6 +58,10 @@ export class MainShoppingPageComponent implements OnInit {
     this.MainPageService.setProductCreateScreen(true)
     this.MainPageService.setProductScreen(false)
 
+  }
+
+  onCartClick() {
+    this.showCart = true
   }
 
 }

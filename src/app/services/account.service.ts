@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, first, Observable} from "rxjs";
+import {BehaviorSubject, first, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IAccount} from "../interfaces/IAccount";
 
@@ -19,12 +19,14 @@ export class AccountService {
   $account = new BehaviorSubject<IAccount | null>(null)
   $isRegistering = new BehaviorSubject<boolean>(false)
   $loginErrorMessage = new BehaviorSubject<string | null>(null)
+  $loggedIn = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
   public login(username: string, password: string): Observable<IAccount> {
     return this.http.get<IAccount>("http://localhost:8080/api/account", {
       params: {username: username, password: password}})
+
   }
 
   public createAccount(newAccount: IAccount): Observable<IAccount> {
@@ -83,12 +85,14 @@ export class AccountService {
         if (account) {
           this.$account.next(account)
           this.$loginErrorMessage.next(null)
+          this.$loggedIn.next(true)
         }
         else
           this.$loginErrorMessage.next(this.LOGIN_INVALID_CREDENTIALS_MESSAGE)
       },
       error: () => this.$loginErrorMessage.next(this.LOGIN_HTTP_ERROR_MESSAGE)
     })
+
   }
 
   public attemptRegister(newAccount: IAccount) {

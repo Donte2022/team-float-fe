@@ -60,7 +60,7 @@ export class ProductCreateComponent implements OnInit {
       dateAvailable: this.AvaliableOnDate,
       weight: this.Weight,
       map: this.MAPPrice,
-      cost:this.CosttoMake}
+      costToMake:this.CosttoMake}
     )}
     this.oncancel()
   }

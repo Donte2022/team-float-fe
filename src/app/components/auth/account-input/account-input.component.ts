@@ -15,7 +15,8 @@ export class AccountInputComponent implements OnInit {
     email: "",
     username: "",
     password: "",
-    rank: 0
+    rank: 0,
+    orderId: 1
   }
 
   constructor(private accountService: AccountService) {

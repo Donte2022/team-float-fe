@@ -1,0 +1,17 @@
+<h1>Cart</h1>
+<div>
+<button (click)="continueShopping()">Continue Shopping</button>
+</div>
+<app-cart-product
+  *ngFor="let cartProduct of cartProductList"
+[cartProduct]="cartProduct">
+</app-cart-product>
+
+
+<p>Sub Total: {{this.subTotal}} </p>
+<p>Discount: {{this.discount}}</p>
+<p>Shipping: {{this.shipping}} </p>
+<p>Tax: {{this.tax}} </p>
+<p>Total: {{this.total}}</p>
+
+
