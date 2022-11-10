@@ -1,4 +1,4 @@
-export interface IsimpleProduct {
+export interface ISimpleProduct {
   productName : string
   displayName: string
   map: number

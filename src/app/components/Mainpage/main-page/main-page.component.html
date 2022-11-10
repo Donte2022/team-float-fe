@@ -1,0 +1,5 @@
+<div>
+  <app-main-shopping-page *ngIf="!showAccountList && !showMyAccount"></app-main-shopping-page>
+  <app-account-input *ngIf="showMyAccount"></app-account-input>
+  <app-account-list *ngIf="showAccountList"></app-account-list>
+</div>

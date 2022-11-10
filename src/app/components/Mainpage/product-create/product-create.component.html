@@ -1,0 +1,17 @@
+<div>Create a new Product</div>
+<!--<div>Add to Category<select name="Add to Category">-->
+<!--  <option *ngFor="let c of OtherCatList">-->
+<!--    {{c.Name}}-->
+<!--  </option>-->
+<!--</select><button>add</button></div>-->
+<div>Display Name:<input [(ngModel)]="displayName"></div>
+<div>Product Name:<input [(ngModel)]="productName"></div>
+<div>Description:<textarea [(ngModel)]="description"></textarea></div>
+<div>Base Price:<input type="number" min="0" [(ngModel)]="basePrice"></div>
+<div>Image Url:<input [(ngModel)]="imageUrl"></div>
+<div>Discontinued:<input type="checkbox" [(ngModel)]="discontinued"></div>
+<div>Available On Date:<input type="date" [(ngModel)]="availableOnDate"></div>
+<div>Weight: <input type="number" min="0" [(ngModel)]="weight"></div>
+<div>MAPPrice:<input type="number" min="0" [(ngModel)]="mapPrice"></div>
+<div>Cost to Make:<input type="number" min="0" [(ngModel)]="costToMake"></div>
+<button (click)="onCancel()">Cancel</button><button (click)="onPost()">Submit</button>

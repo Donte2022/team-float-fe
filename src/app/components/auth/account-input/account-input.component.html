@@ -1,21 +1,24 @@
-<h3>My Account</h3>
+<h3>Update Account</h3>
 <input [(ngModel)]="account.firstName" name="firstName" placeholder="first name">
 <input [(ngModel)]="account.lastName" name="lastName" placeholder="last name">
 <input [(ngModel)]="account.email" name="email" placeholder="email">
 <input [(ngModel)]="account.username" name="username" placeholder="username">
-<!--  Todo handle password updating -->
-<!--<input [(ngModel)]="account.password" name="password" placeholder="new password" type="password">-->
-<!--  Todo allow account rank update if admin-->
-<!--<div *ngIf="account.rank === 1">-->
-<!--    <div class="mx-2">-->
-<!--      <input [(ngModel)]="account.rank" type="radio" id="admin" name="rank" value=1>-->
-<!--      <label for="customer" class="ms-1">Admin</label>-->
-<!--    </div>-->
-<!--    <div class="mx-2">-->
-<!--      <input [(ngModel)]="account.rank" type="radio" id="customer" name="rank" value=3>-->
-<!--      <label for="customer" class="ms-1">Customer</label>-->
-<!--    </div>-->
-<!--</div>-->
+<input [(ngModel)]="account.password" name="password" placeholder="new password" type="password">
+<div *ngIf="userIsAdmin && !isAdminsAccount">
+  <div class="mx-2">
+    <input [ngModel]="account.rank.toString()"
+           (ngModelChange)="onRankChange($event)" type="radio" id="admin" name="rank" value="1">
+    <label for="admin" class="ms-1">Admin</label>
+  </div>
+  <div class="mx-2">
+    <input [ngModel]="account.rank.toString()" (ngModelChange)="onRankChange($event)" type="radio" id="shopkeeper" name="rank" value="2">
+    <label for="shopkeeper" class="ms-1">Shopkeeper</label>
+  </div>
+  <div class="mx-2">
+    <input [ngModel]="account.rank.toString()" (ngModelChange)="onRankChange($event)" type="radio" id="customer" name="rank" value="3">
+    <label for="customer" class="ms-1">Customer</label>
+  </div>
+</div>
 <button (click)="onSave()" class="btn btn-info" type="submit">Save</button>
-<button (click)="onDelete()" class="btn btn-danger" type="button">Delete</button>
+<button *ngIf="!isAdminsAccount" (click)="onDelete()" class="btn btn-danger" type="button">Delete</button>
 <button (click)="onCancel()" class="btn btn-warning" type="button">Cancel</button>

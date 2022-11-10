@@ -15,15 +15,15 @@ export class HttpService {
     return this.database.get("http://localhost:8080/api"+url) as Observable<any>
   }
 
-  put (url:String, putdata:any):Observable<any> {
+  put (url:String,putdata:any):Observable<any> {
     return this.database.put("http://localhost:8080/api"+url,putdata) as Observable<any>
   }
 
-  post (url:String, postdata:any):Observable<any>{
+  post (url:String,postdata:any):Observable<any>{
     return this.database.post("http://localhost:8080/api"+url,postdata) as Observable<any>
   }
 
-  del(url:String):Observable<any>{
+  delete(url:String):Observable<any>{
     return this.database.delete("http://localhost:8080/api"+url) as Observable<any>
   }
 }

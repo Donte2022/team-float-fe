@@ -1,17 +1,14 @@
+<div *ngIf="!account">
+  <div *ngIf="errorMsg">{{errorMsg}}</div>
+  <app-login *ngIf="!isRegistering"></app-login>
+  <app-register *ngIf="isRegistering"></app-register>
+</div>
 
-<app-main-page></app-main-page>
-
-<!--&lt;!&ndash;Todo Not logged in&ndash;&gt;-->
-<!--<div *ngIf="!account">-->
-<!--  <div *ngIf="errorMsg">{{errorMsg}}</div>-->
-<!--  <app-login *ngIf="!isRegistering"></app-login>-->
-<!--  <app-register *ngIf="isRegistering"></app-register>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;Todo If logged in&ndash;&gt;-->
-<!--<div *ngIf="account">-->
-<!--&lt;!&ndash;  Todo conditional rendering for productList, cart, myAccount, pastOrders, etc.&ndash;&gt;-->
-<!--  <app-account-input></app-account-input>-->
-<!--</div>-->
+<div *ngIf="account">
+<!--  Todo conditional rendering for productList, cart, myAccount, pastOrders, etc.-->
+  <app-nav></app-nav>
+  <app-main-page></app-main-page>
+  <app-add-account *ngIf="showAddAccount"></app-add-account>
+</div>
 
 
