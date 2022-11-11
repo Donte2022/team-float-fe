@@ -22,33 +22,25 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
   productList: IProduct []
   rank : number = 0
   message : string
-  sub : Subscription
-  sub2 : Subscription
-  sub3 : Subscription
-  sub4 : Subscription
-  sub5 : Subscription
-  sub6 : Subscription
-  sub7 : Subscription
-  sub8 : Subscription
-  sub9 : Subscription
-  sub10 : Subscription
+  sub : Subscription []
 
 
 
   constructor(private MainPageService: MainPageService) {
     this.message = ""
+    this.sub = []
     this.fullList= []
     this.productList = []
-  this.sub =  this.MainPageService.$categoryEditscreen.subscribe(value => {this.categoryEdit = value})
-  this.sub2 =  this.MainPageService.$categoryCreatescreen.subscribe(value => {this.categoryCreate = value})
-  this.sub3 =  this.MainPageService.$productCreatescreen.subscribe(value => {this.productCreate = value})
-  this.sub4 =  this.MainPageService.$productEditscreen.subscribe(value => {this.productEdit = value})
-  this.sub5 =  this.MainPageService.$priceCreatescreen.subscribe(value => {this.priceCreate = value})
-  this.sub6 =  this.MainPageService.$priceEditscreen.subscribe(value => {this.priceEdit = value})
-  this.sub7 =  this.MainPageService.$productScreen.subscribe(value => {this.productScreen = value})
-  this.sub8 =  this.MainPageService.$fullCategory.subscribe(value => {this.fullList = value})
-  this.sub9 = this.MainPageService.$fullProduct.subscribe(value => {this.productList = [...value]})
-  this.sub10 = this.MainPageService.$mainShoppingpageMessage.subscribe(value => {this.message = value})
+    this.sub.push(this.MainPageService.$categoryEditscreen.subscribe(value => {this.categoryEdit = value}))
+    this.sub.push(this.MainPageService.$categoryCreatescreen.subscribe(value => {this.categoryCreate = value}))
+    this.sub.push(this.MainPageService.$productCreatescreen.subscribe(value => {this.productCreate = value}))
+    this.sub.push(this.MainPageService.$productEditscreen.subscribe(value => {this.productEdit = value}))
+    this.sub.push(this.MainPageService.$priceCreatescreen.subscribe(value => {this.priceCreate = value}))
+    this.sub.push(this.MainPageService.$priceEditscreen.subscribe(value => {this.priceEdit = value}))
+    this.sub.push(this.MainPageService.$productScreen.subscribe(value => {this.productScreen = value}))
+    this.sub.push(this.MainPageService.$fullCategory.subscribe(value => {this.fullList = value}))
+    this.sub.push(this.MainPageService.$fullProduct.subscribe(value => {this.productList = [...value]}))
+    this.sub.push(this.MainPageService.$mainShoppingpageMessage.subscribe(value => {this.message = value}))
   }
 
   ngOnInit(): void {
@@ -60,16 +52,9 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe()
-    this.sub2.unsubscribe()
-    this.sub3.unsubscribe()
-    this.sub4.unsubscribe()
-    this.sub5.unsubscribe()
-    this.sub6.unsubscribe()
-    this.sub7.unsubscribe()
-    this.sub8.unsubscribe()
-    this.sub9.unsubscribe()
-    this.sub10.unsubscribe()
+    for (let s of this.sub){
+      s.unsubscribe()
+    }
   }
 
   oncanel () {
