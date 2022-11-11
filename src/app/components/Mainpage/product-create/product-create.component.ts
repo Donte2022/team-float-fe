@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
+import {Subscription} from "rxjs";
+import {IProduct} from "../../../interfaces/IProduct";
 import {ICategory} from "../../../interfaces/ICategory";
 
 @Component({
@@ -7,40 +9,25 @@ import {ICategory} from "../../../interfaces/ICategory";
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent implements OnInit,OnDestroy {
 
-  OtherCatList : ICategory []
-
-  DisplayName: string
-  ProductName: string
-  Description: string
-  BasePrice: number | undefined
-  ImageUrl: string
-  Discontinued: boolean
-  AvaliableOnDate: Date
-  Weight: number | undefined
-  MAPPrice: number | undefined
-  CosttoMake: number | undefined
-
-
-
+  pro : IProduct
+  message: string
+  sub : Subscription
+  confirmMessage: boolean
 
   constructor(private MainPageService: MainPageService) {
-    this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
-    this.DisplayName = ""
-    this.ProductName = ""
-    this.Description = ""
-    this.BasePrice = undefined
-    this.ImageUrl = ""
-    this.Discontinued = false
-    this.AvaliableOnDate = new Date()
-    this.Weight = undefined
-    this.MAPPrice = undefined
-    this.CosttoMake = undefined
+    this.pro = {} as IProduct
+    this.message = ""
+    this.confirmMessage = false
+   this.sub = this.MainPageService.$productCreatemessage.subscribe(value => {this.message = value})
 
   }
 
   ngOnInit(): void {
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe()
   }
 
   oncancel () {
@@ -49,19 +36,28 @@ export class ProductCreateComponent implements OnInit {
   }
 
   onpost () {
-    if (this.BasePrice && this.Weight && this.MAPPrice && this.CosttoMake){
-    this.MainPageService.postproduct(
-      {productName: this.ProductName,
-      displayName: this.DisplayName,
-      description: this.Description,
-      price: this.BasePrice,
-      imageUrl: this.ImageUrl,
-      discontinued: this.Discontinued,
-      dateAvailable: this.AvaliableOnDate,
-      weight: this.Weight,
-      map: this.MAPPrice,
-      costToMake:this.CosttoMake}
-    )}
+    if (this.pro.price < this.pro.map){
+      this.confirmMessage =true
+    }
+    else {
+      this.confirm()
+    }
+  }
+
+
+  confirm () {
+    this.MainPageService.postProduct(
+      {productName: this.pro.productName,
+        displayName: this.pro.displayName,
+        description: this.pro.description,
+        price: this.pro.price,
+        imageUrl: this.pro.imageUrl,
+        discontinued: this.pro.discontinued,
+        dateAvailable: this.pro.dateAvailable,
+        weight: this.pro.weight,
+        map: this.pro.map,
+        costToMake:this.pro.costToMake
+      })
     this.oncancel()
   }
 }

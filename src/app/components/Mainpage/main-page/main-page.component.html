@@ -1,7 +1,6 @@
-<div *ngIf="ShopingpageScreen === false">
-<div>Welcome to Team Float's Project!</div>
-<button (click)="onshopping()">Shopping</button>
-</div>
-<div *ngIf="ShopingpageScreen">
-<app-main-shopping-page></app-main-shopping-page>
+<div>
+  <app-main-shopping-page *ngIf="!showAccountList && !showMyAccount && !showCouponList"></app-main-shopping-page>
+  <app-account-input *ngIf="showMyAccount"></app-account-input>
+  <app-account-list *ngIf="showAccountList"></app-account-list>
+  <app-coupon-list *ngIf="showCouponList"></app-coupon-list>
 </div>

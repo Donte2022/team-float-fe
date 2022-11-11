@@ -1,17 +1,14 @@
-<div>Create a new Product</div>
-<!--<div>Add to Category<select name="Add to Category">-->
-<!--  <option *ngFor="let c of OtherCatList">-->
-<!--    {{c.Name}}-->
-<!--  </option>-->
-<!--</select><button>add</button></div>-->
-<div>Display Name:<input [(ngModel)]="DisplayName"></div>
-<div>Product Name:<input [(ngModel)]="ProductName"></div>
-<div>Description:<textarea [(ngModel)]="Description"></textarea></div>
-<div>Base Price:<input type="number" min="0" [(ngModel)]="BasePrice"></div>
-<div>Image Url:<input [(ngModel)]="ImageUrl"></div>
-<div>Discontinued:<input type="checkbox" [(ngModel)]="Discontinued"></div>
-<div>Avaliable On Date:<input type="date" [(ngModel)]="AvaliableOnDate"></div>
-<div>Weight: <input type="number" min="0" [(ngModel)]="Weight"></div>
-<div>MAPPrice:<input type="number" min="0" [(ngModel)]="MAPPrice"></div>
-<div>Cost to Make:<input type="number" min="0" [(ngModel)]="CosttoMake"></div>
-<button (click)="oncancel()">Cancel</button><button (click)="onpost()">Submit</button>
+<div>Create a new product</div>
+<div>{{message}}</div>
+<div>Display name:<input [(ngModel)]="pro.displayName"></div>
+<div>product name:<input [(ngModel)]="pro.productName"></div>
+<div>description:<textarea [(ngModel)]="pro.description"></textarea></div>
+<div>Base Price:<input type="number" min="0" [(ngModel)]="pro.price"></div>
+<div>Image Url:<input [(ngModel)]="pro.imageUrl"></div>
+<div>discontinued:<input type="checkbox" [(ngModel)]="pro.discontinued"></div>
+<div>Avaliable On Date:<input type="date" [(ngModel)]="pro.dateAvailable"></div>
+<div>weight: <input type="number" min="0" [(ngModel)]="pro.weight"></div>
+<div>MAP:<input type="number" min="0" [(ngModel)]="pro.map"></div>
+<div>Cost to Make:<input type="number" min="0" [(ngModel)]="pro.costToMake"></div>
+<div *ngIf="confirmMessage">Are you sure you want to set the sale price below the MAP?<button (click)="confirm()">Confirm</button></div>
+<div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onpost()">Submit</button></div>

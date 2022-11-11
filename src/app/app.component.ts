@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AccountService} from "./services/account.service";
 import {IAccount} from "./interfaces/IAccount";
 
@@ -11,8 +11,10 @@ export class AppComponent {
   errorMsg: string | null = null
   isRegistering: boolean = false
   account: IAccount | null = null
+  showAddAccount: boolean = false
 
   constructor(private accountService: AccountService) {
+    this.accountService.dummyLogin()
     accountService.$isRegistering.subscribe(
       isRegistering => this.isRegistering = isRegistering
     )
@@ -21,6 +23,9 @@ export class AppComponent {
     )
     accountService.$account.subscribe(
       account => this.account = account
+    )
+    accountService.$showAddAccount.subscribe(
+        showAddAccount => this.showAddAccount = showAddAccount
     )
   }
 }

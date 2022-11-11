@@ -31,7 +31,7 @@ export class CartService {
     console.log(this.accountService.$account.getValue())
     this.account = this.accountService.$account.getValue();
     if (this.account !== null) {
-      this.http.onget(`/cart/${this.account.id}/${this.account.orderId}`).subscribe(cartProducts => this.cartProducts = cartProducts)
+      this.http.get(`/cart/${this.account.id}/${this.account.orderId}`).subscribe(cartProducts => this.cartProducts = cartProducts)
     }
 
 
@@ -51,14 +51,14 @@ export class CartService {
 
             quantity: quantity,
           }
-        this.http.onpost("/cart", newCartItem).subscribe(()=>this.onLogIn())
+        this.http.post("/cart", newCartItem).subscribe(()=>this.onLogIn())
 
       }
     } else {
      let index = this.cartProducts.findIndex((item) => item.productId === product.id)
       this.cartProducts[index].quantity += quantity
       console.log("inded:" + this.cartProducts[index].cartId)
-      this.http.onput(`/cart/${this.cartProducts[index].cartId}`, this.cartProducts[index]).subscribe()
+      this.http.put(`/cart/${this.cartProducts[index].cartId}`, this.cartProducts[index]).subscribe()
     }
   }
 
@@ -66,13 +66,13 @@ export class CartService {
   updateFromCart(cartItem: ICart) {
    let index =  this.cartProducts.findIndex(item => item.cartId === cartItem.cartId)
     this.cartProducts[index].quantity = cartItem.quantity
-    this.http.onput(`/cart/${cartItem.cartId}`,cartItem).subscribe()
+    this.http.put(`/cart/${cartItem.cartId}`,cartItem).subscribe()
   }
 
   removeProduct(cartId: number) {
     this.cartProducts = this.cartProducts.filter(item => item.cartId!==cartId)
     this.$cartProducts.next(this.cartProducts)
-    this.http.ondelete(`/cart/${cartId}`).subscribe()
+    this.http.delete(`/cart/${cartId}`).subscribe()
 
 
   }

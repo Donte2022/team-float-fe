@@ -1,22 +1,14 @@
-<div>Edit a Product</div>
-<!--<div>Add to Category<select name="Add to Category">-->
-<!--  <option *ngFor="let a of OtherCatList">-->
-<!--    {{a.Name}}-->
-<!--  </option>-->
-<!--</select><button>add</button></div>-->
-<!--<div>Remove from Category<select name="Remove from Category">-->
-<!--  <option *ngFor="let r of CurrentCatList">-->
-<!--    {{r.Name}}-->
-<!--  </option>-->
-<!--</select><button>add</button></div>-->
-<div>Display Name:<input  [(ngModel)]="Product.displayName"></div>
-<div>Product Name:<input [(ngModel)]="Product.productName"></div>
-<div>Description:<textarea [(ngModel)]="Product.description"></textarea></div>
-<div>Base Price:<input type="number" min="0"  [(ngModel)]="Product.price"></div>
-<div>Image:<input  [(ngModel)]="Product.imageUrl"></div>
-<div>Discontinued:<input type="checkbox" [checked]="Product.discontinued" [(ngModel)]="Product.discontinued"></div>
-<div>Avaliable On Date:<input type="date"  [(ngModel)]="Product.dateAvailable"></div>
-<div>Weight: <input type="number" min="0"  [(ngModel)]="Product.weight"></div>
-<div>MAPPrice:<input type="numbe" min="0"  [(ngModel)]="Product.map"></div>
-<div>Cost to Make:<input type="number" min="0" [(ngModel)]="Product.costToMake"></div>
-<div><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(Product)">Submit</button></div>
+<div>Edit a product</div>
+<div>{{message}}</div>
+<div>Display name:<input  [(ngModel)]="product.displayName"></div>
+<div>product name:<input [(ngModel)]="product.productName"></div>
+<div>description:<textarea [(ngModel)]="product.description"></textarea></div>
+<div>Base Price:<input type="number" min="0"  [(ngModel)]="product.price"></div>
+<div>Image:<input  [(ngModel)]="product.imageUrl"></div>
+<div>discontinued:<input type="checkbox" [checked]="product.discontinued" [(ngModel)]="product.discontinued"></div>
+<div>Avaliable On Date:<input type="date"  [(ngModel)]="product.dateAvailable"></div>
+<div>weight: <input type="number" min="0"  [(ngModel)]="product.weight"></div>
+<div>MAP:<input type="numbe" min="0"  [(ngModel)]="product.map"></div>
+<div>Cost to Make:<input type="number" min="0" [(ngModel)]="product.costToMake"></div>
+<div *ngIf="confirmMessage">Are you sure you want to set your price below the MAP price?<button (click)="confirm()">Confirm</button></div>
+<div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(product)">Submit</button></div>

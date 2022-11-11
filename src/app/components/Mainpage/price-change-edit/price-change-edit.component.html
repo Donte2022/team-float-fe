@@ -1,7 +1,10 @@
 <div>Edit a Price Change Request</div>
-<div>Sale<input type="checkbox" [checked]="PriceChange.sale"></div>
-<div>New Price:<input type="number" min="0" [value]="PriceChange.newPrice"></div>
-<div>Start Date:<input type="date" [valueAsDate]="PriceChange.startDate"></div>
-<div>End Date:<input type="date" [valueAsDate]="PriceChange.endDate"></div>
-<div>Coupons<input type="number" min="0" [value]="PriceChange.couponLeft"></div>
-<div><button (click)="oncancel()">Cancel</button><button>Submit</button></div>
+<div>MAP price is {{pro.map}}</div>
+<div>{{message}}</div>
+<div>sale<input type="checkbox" [checked]="priceChange.sale" [(ngModel)]="priceChange.sale"></div>
+<div>New Price:<input type="number" min="0" [(ngModel)]="priceChange.newPrice"></div>
+<div>Start Date:<input type="date" [(ngModel)]="priceChange.startDate"></div>
+<div>End Date:<input type="date" [(ngModel)]="priceChange.endDate"></div>
+<div>Coupons<input type="number" min="0" [(ngModel)]="priceChange.couponLeft"></div>
+<div *ngIf="confirmMessage">Are you sure you want to set the sale price below the MAP?<button (click)="confirm()">Confirm</button></div>
+<div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onedit()">Submit</button></div>

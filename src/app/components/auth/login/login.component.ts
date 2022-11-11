@@ -23,4 +23,8 @@ export class LoginComponent implements OnInit {
     this.accountService.$isRegistering.next(true)
   }
 
+  dummyLogin() {
+    this.accountService.dummyLogin()
+  }
+
 }

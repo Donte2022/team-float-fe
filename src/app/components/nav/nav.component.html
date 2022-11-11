@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-between mb-3 p-3">
+  <div (click)="onClickShopName()" role="button">The Candy Shoppe</div>
+  <button (click)="onClickMyAccount()">My Account</button>
+  <button *ngIf="userRank === 1" (click)="onClickManageAccounts()">Manage Accounts</button>
+  <button *ngIf="userRank < 3" (click)="onClickKeepShop()">Keep Shop</button>
+  <button *ngIf="userRank < 3" (click)="onClickCreateProduct()">Create Product</button>
+  <button>Cart</button>
+  <button (click)="onClickLogout()">Logout</button>
+</div>

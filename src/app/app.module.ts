@@ -18,30 +18,46 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AccountInputComponent } from './components/auth/account-input/account-input.component';
+import { AccountListComponent } from './components/admin/account-list/account-list.component';
+import { AccountListItemComponent } from './components/admin/account-list-item/account-list-item.component';
+import { AddAccountComponent } from './components/admin/add-account/add-account.component';
+import { NavComponent } from './components/nav/nav.component';
+import { CouponListComponent } from './components/shopkeep/coupon-list/coupon-list.component';
+import { CouponListItemComponent } from './components/shopkeep/coupon-list-item/coupon-list-item.component';
+import { ShopNavComponent } from './components/shopkeep/shop-nav/shop-nav.component';
+import { KeepShopComponent } from './components/shopkeep/keep-shop/keep-shop.component';
 import {CartComponent} from "./components/cart/cart/cart.component";
 import {CartProductComponent} from "./components/cart/cart-product/cart-product.component"
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MainShoppingPageComponent,
-        ProductComponent,
-        CategoryCreateComponent,
-        CategoryEditComponent,
-        CategoryComponent,
-        ProductCreateComponent,
-        PriceChangeEditComponent,
-        ProductEditComponent,
-        PriceChangeCreateComponent,
-        PriceChangeRequestComponent,
-        MainPageComponent,
-        LoginComponent,
-        RegisterComponent,
-        AccountInputComponent,
-        CartComponent,
-        CartProductComponent
-    ],
+  declarations: [
+    AppComponent,
+    MainShoppingPageComponent,
+    ProductComponent,
+    CategoryCreateComponent,
+    CategoryEditComponent,
+    CategoryComponent,
+    ProductCreateComponent,
+    PriceChangeEditComponent,
+    ProductEditComponent,
+    PriceChangeCreateComponent,
+    PriceChangeRequestComponent,
+    MainPageComponent,
+    LoginComponent,
+    RegisterComponent,
+    AccountInputComponent,
+    AccountListComponent,
+    AccountListItemComponent,
+    AddAccountComponent,
+    NavComponent,
+    CouponListComponent,
+    CouponListItemComponent,
+    ShopNavComponent,
+    KeepShopComponent,
+    CartComponent,
+    CartProductComponent
+  ],
   imports: [
     BrowserModule,
     NgbModule,

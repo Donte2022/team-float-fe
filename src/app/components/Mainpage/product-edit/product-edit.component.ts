@@ -1,38 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
-import {ICategory} from "../../../interfaces/ICategory";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit,OnDestroy {
 
-  Product: IProduct
-  CurrentCatList : ICategory []
-  OtherCatList : ICategory []
-
+  product: IProduct
+  message : string
+  sub : Subscription
+  confirmMessage: boolean
 
   constructor(private MainPageService: MainPageService) {
-    this.Product = {} as IProduct
-    this.CurrentCatList = []
-    this.OtherCatList = []
+    this.product = {} as IProduct
+    this.confirmMessage = false
+    this.message = ""
+   this.sub = this.MainPageService.$productEditmessage.subscribe(value => {this.message = value})
 
   }
 
   ngOnInit(): void {
-    this.Product = this.MainPageService.getIndProduct()
-    this.OtherCatList = [...this.MainPageService.getFullCategoryList()]
-    console.log(this.Product)
+    this.product = this.MainPageService.getIndProduct()
   }
 
-  // filiter () {
-  //   this.CurrentCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID !== this.Product.ID })})]
-  //   this.OtherCatList = [...this.OtherCatList.filter(value => { return -1 === value.Products.findIndex(value1 => {return value1.ID === this.Product.ID })})]
-  // }
-
+  ngOnDestroy() {
+    this.sub.unsubscribe()
+  }
 
   oncancel () {
     this.MainPageService.setProductEditScreen(false)
@@ -40,7 +37,17 @@ export class ProductEditComponent implements OnInit {
   }
 
   onsubmit (input: IProduct) {
-    this.MainPageService.putproduct(input)
+    if (input.price < input.map){
+      this.confirmMessage = true
+    }
+    else {
+      this.MainPageService.putProduct(input)
+      this.oncancel()
+    }
+  }
+
+  confirm () {
+    this.MainPageService.putProduct(this.product)
     this.oncancel()
   }
 
