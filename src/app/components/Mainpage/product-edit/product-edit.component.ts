@@ -13,13 +13,11 @@ export class ProductEditComponent implements OnInit,OnDestroy {
   product: IProduct
   message : string
   sub : Subscription
-  MAP : number
   confirmMessage: boolean
 
   constructor(private MainPageService: MainPageService) {
     this.product = {} as IProduct
     this.confirmMessage = false
-    this.MAP = 0
     this.message = ""
    this.sub = this.MainPageService.$productEditmessage.subscribe(value => {this.message = value})
 
@@ -27,7 +25,6 @@ export class ProductEditComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.product = this.MainPageService.getIndProduct()
-    this.MAP = this.MainPageService.getIndProduct().map
   }
 
   ngOnDestroy() {
@@ -40,7 +37,7 @@ export class ProductEditComponent implements OnInit,OnDestroy {
   }
 
   onsubmit (input: IProduct) {
-    if (input.price < this.MAP){
+    if (input.price < input.map){
       this.confirmMessage = true
     }
     else {

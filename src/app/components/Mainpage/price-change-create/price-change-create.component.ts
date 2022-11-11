@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
 import {Subscription} from "rxjs";
+import {IPriceChange} from "../../../interfaces/IPriceChange";
 
 @Component({
   selector: 'app-price-change-create',
@@ -10,24 +11,17 @@ import {Subscription} from "rxjs";
 })
 export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
 
-  sale:boolean
-  newPrice:number | undefined
-  startDate : Date
-  endDate : Date
-  couponsleft: number
+
   pro : IProduct
+  pri : IPriceChange
   message : string
   sub : Subscription
   confirmMessage: boolean
 
   constructor(private MainPageService:MainPageService) {
     this.pro = {} as IProduct
+    this.pri = {} as IPriceChange
     this.confirmMessage = false
-    this.sale = false
-    this.newPrice = undefined
-    this.startDate = new Date()
-    this.endDate = new Date()
-    this.couponsleft = 0
     this.message = ""
    this.sub = this.MainPageService.$priceCreatemessage.subscribe(value => {this.message = value})
   }
@@ -45,25 +39,24 @@ export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
   }
 
   oncreate () {
-    if (this.newPrice !== undefined && this.couponsleft !== undefined && this.pro !== undefined) {
-      if (this.pro.map > this.newPrice) {
-        
+      if (this.pro.map > this.pri.newPrice) {
+        this.confirmMessage = true
+      } else {
+        this.confirm()
       }
-    this.MainPageService.postPriceChange(
-      {sale: this.sale, newPrice: this.newPrice,startDate:this.startDate,endDate:this.endDate,couponLeft:this.couponsleft}
-      ,this.pro
-    )
-      this.oncancel()
-  }
   }
 
   confirm(){
-    if (this.newPrice !== undefined && this.couponsleft !== undefined && this.pro !== undefined) {
-      this.MainPageService.postPriceChange(
-        {sale: this.sale, newPrice: this.newPrice,startDate:this.startDate,endDate:this.endDate,couponLeft:this.couponsleft}
-        ,this.pro
-      )
-      this.oncancel()
-    }
+    this.MainPageService.postPriceChange(
+      {
+        sale: this.pri.sale,
+        newPrice: this.pri.newPrice,
+        startDate: this.pri.startDate,
+        endDate: this.pri.endDate,
+        couponLeft: this.pri.couponLeft
+      }
+      , this.pro
+    )
+    this.oncancel()
   }
 }
