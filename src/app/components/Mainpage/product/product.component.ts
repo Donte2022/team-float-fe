@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit,OnDestroy {
   }
 
 
-  onimageerror () {
+  onImageError () {
     this.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
   }
 
@@ -61,7 +61,7 @@ export class ProductComponent implements OnInit,OnDestroy {
     this.MainPageService.setProductScreen(false)
   }}
 
-  ondelete () {
+  onDelete () {
     if (this.Pro !== undefined) {
       this.MainPageService.deleteProduct(this.Pro.id)
   }

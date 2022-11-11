@@ -14,15 +14,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
   showAccountList: boolean = false
   showMyAccount: boolean = false
   showCouponList: boolean = false
+  showCart = false
 
   sub1: Subscription
   sub2: Subscription
   sub3: Subscription
+  sub4: Subscription
 
   constructor(private accountService: AccountService, private mainPageService: MainPageService, private shopkeeperService: ShopkeeperService, private cartService: CartService) {
     this.sub1 = this.accountService.$showAccountList.subscribe(showAccountList => this.showAccountList = showAccountList)
     this.sub2 = this.accountService.$showMyAccount.subscribe(showMyAccount => this.showMyAccount = showMyAccount)
     this.sub3 = this.shopkeeperService.$showCouponList.subscribe(showCouponList => this.showCouponList = showCouponList)
+    this.sub4 = this.cartService.$showCart.subscribe(value=>this.showCart = value)
   }
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
+    this.sub3.unsubscribe()
   }
 
   onShopping () {
