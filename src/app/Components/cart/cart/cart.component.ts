@@ -20,8 +20,7 @@ export class CartComponent implements OnInit {
   shipping: number = 0
   total: number = 0
 
-  @Output() leaveCart = new EventEmitter();
-
+   showCheckout:boolean = false
   constructor(private cartService: CartService, private mainService: MainPageService) {
     this.cartProductList = this.cartService.cartProducts
     this.updateTotals();
@@ -44,9 +43,10 @@ this.cartService.$cartProducts.subscribe(cartProducts=> this.cartProductList = c
     console.log(this.cartProductList)
   }
 
-  continueShopping() {
-    this.leaveCart.emit()
+  onCheckout() {
+    this.showCheckout = true
   }
+
 
 
 }

@@ -28,7 +28,8 @@ import { ShopNavComponent } from './components/shopkeep/shop-nav/shop-nav.compon
 import { KeepShopComponent } from './components/shopkeep/keep-shop/keep-shop.component';
 import { CouponInputComponent } from './components/shopkeep/coupon-input/coupon-input.component';
 import {CartComponent} from "./components/cart/cart/cart.component";
-import {CartProductComponent} from "./components/cart/cart-product/cart-product.component"
+import {CartProductComponent} from "./components/cart/cart-product/cart-product.component";
+import { CheckoutComponent } from './components/checkout/checkout.component'
 
 
 
@@ -59,7 +60,8 @@ import {CartProductComponent} from "./components/cart/cart-product/cart-product.
     KeepShopComponent,
     CouponInputComponent,
     CartComponent,
-    CartProductComponent
+    CartProductComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
