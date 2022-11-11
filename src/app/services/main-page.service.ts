@@ -116,10 +116,10 @@ export class MainPageService {
 // Full List Getters and Setters
 
   getProductById(id:number) {
-    let index: number = this.FullProductList.findIndex(product=>product.id===id)
+    let index: number = this.fullProduct.findIndex(product=>product.id===id)
     console.log(index)
-    console.log( this.FullProductList[index])
-    return this.FullProductList[index]
+    console.log( this.fullProduct[index])
+    return this.fullProduct[index]
   }
 
 

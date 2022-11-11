@@ -3,6 +3,6 @@
   <button (click)="onClickMyAccount()">My Account</button>
   <button *ngIf="userRank === 1" (click)="onClickManageAccounts()">Manage Accounts</button>
   <button *ngIf="userRank < 3" (click)="onClickKeepShop()">Keep Shop</button>
-  <button>Cart</button>
+  <button (click)="onClickCart()">Cart</button>
   <button (click)="onClickLogout()">Logout</button>
 </div>
