@@ -4,7 +4,7 @@ import {ICartProduct} from "../interfaces/ICartProduct";
 import {AccountService} from "./account.service";
 import {IAccount} from "../interfaces/IAccount";
 import {ICart} from "../interfaces/ICart";
-import {first, Observable} from "rxjs";
+import {first, Observable, Subject} from "rxjs";
 import {IProduct} from "../interfaces/IProduct";
 
 @Injectable({
@@ -15,6 +15,7 @@ export class CartService {
 
   account!: IAccount | null;
   cartProducts: ICart[] = []
+  $cartProducts = new Subject<ICart[]>()
 
 
   constructor(private http: HttpService, private accountService: AccountService) {
@@ -30,7 +31,7 @@ export class CartService {
     console.log(this.accountService.$account.getValue())
     this.account = this.accountService.$account.getValue();
     if (this.account !== null) {
-      this.http.onget(`/cart?id=${this.account.id}/${this.account.orderId}`).subscribe(cartProducts => this.cartProducts = cartProducts)
+      this.http.onget(`/cart/${this.account.id}/${this.account.orderId}`).subscribe(cartProducts => this.cartProducts = cartProducts)
     }
 
 
@@ -38,11 +39,10 @@ export class CartService {
 
   addFromProduct(product: IProduct, quantity: number) {
     if (!this.cartProducts.find(item => item.productId === product.id)) {
-      console.log("found something")
       if (this.account !== null) {
         let newCartItem: ICart =
           {
-            accountId: this.account.id,
+            account: this.account,
             orderId: this.account.orderId,
 
             productId: product.id,
@@ -51,14 +51,14 @@ export class CartService {
 
             quantity: quantity,
           }
-        this.cartProducts.push(newCartItem)
-        this.http.onpost("/cart", newCartItem)
+        this.http.onpost("/cart", newCartItem).subscribe(()=>this.onLogIn())
+
       }
     } else {
-      console.log("did not find anything")
      let index = this.cartProducts.findIndex((item) => item.productId === product.id)
       this.cartProducts[index].quantity += quantity
-      this.http.onput(`/cart/${this.cartProducts[index].cartId}`, this.cartProducts[index])
+      console.log("inded:" + this.cartProducts[index].cartId)
+      this.http.onput(`/cart/${this.cartProducts[index].cartId}`, this.cartProducts[index]).subscribe()
     }
   }
 
@@ -66,11 +66,14 @@ export class CartService {
   updateFromCart(cartItem: ICart) {
    let index =  this.cartProducts.findIndex(item => item.cartId === cartItem.cartId)
     this.cartProducts[index].quantity = cartItem.quantity
-    this.http.onput(`/cart/${cartItem.cartId}`,cartItem)
+    this.http.onput(`/cart/${cartItem.cartId}`,cartItem).subscribe()
   }
 
   removeProduct(cartId: number) {
-    this.cartProducts.filter(item => item.cartId!==cartId)
-    this.http.ondelete(`/cart/${cartId}`)
+    this.cartProducts = this.cartProducts.filter(item => item.cartId!==cartId)
+    this.$cartProducts.next(this.cartProducts)
+    this.http.ondelete(`/cart/${cartId}`).subscribe()
+
+
   }
 }

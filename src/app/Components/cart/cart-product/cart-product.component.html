@@ -1,18 +1,19 @@
 <div style="font-size: xxx-large">{{product.displayName}}</div>
 <div><img src="{{imageUrl}}" (error)="onImageError()" id="image"></div>
 <div>Description:{{product.description}}</div>
-<div>Price:{{product.price}}</div>
+<div>Price:{{cartProduct.price}}</div>
 
 <div *ngIf="!editing">
 <p>
   Quantity: {{this.cartProduct.quantity}}
 </p>
   <button (click)="onEdit()">Edit</button>
+  <button (click)="removeProduct(this.cartId)">Remove</button>
 </div>
 
 <div *ngIf="editing">
 <input [(ngModel)]="this.localCartProduct.quantity" type="number"/>
   <button (click)="onCancel()">Cancel</button>
   <button *ngIf="localCartProduct.quantity>0" (click)="onUpdate()"> Update </button>
-  <button *ngIf="localCartProduct.quantity===0" (click)="removeProduct()">Remove</button>
+  <button *ngIf="localCartProduct.quantity===0" (click)="removeProduct(this.cartId)">Remove</button>
 </div>

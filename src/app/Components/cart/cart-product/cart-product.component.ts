@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICartProduct} from "../../../interfaces/ICartProduct";
 import {IProduct} from "../../../interfaces/IProduct";
 import {MainPageService} from "../../../services/main-page.service";
@@ -17,7 +17,8 @@ export class CartProductComponent implements OnInit {
   imageUrl!: string;
   editing: boolean = false
   localCartProduct!:ICart
-
+  @Output() cartChange = new EventEmitter()
+  cartId!: number | undefined;
 
   constructor(private mainService : MainPageService, private cartService : CartService) {
 
@@ -25,6 +26,8 @@ export class CartProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.product =  this.mainService.getProductById(this.cartProduct.productId)
+    this.cartId = this.cartProduct.cartId
+    console.log(this.product.displayName)
     this.imageUrl = this.product.imageUrl
 
   }
@@ -49,11 +52,18 @@ export class CartProductComponent implements OnInit {
     this.editing = false
     console.log(this.cartProduct.quantity)
     this.cartService.updateFromCart(this.cartProduct)
+    this.cartChange.emit()
   }
 
-  removeProduct() {
-    if(this.cartProduct.cartId!==undefined)
+  removeProduct(cartId: number | undefined) {
+    console.log(this.cartId)
+    console.log(this.cartProduct)
+    console.log(this.product)
+
+    if(this.cartProduct.cartId!==undefined){
+      console.log("not undefined")
       this.cartService.removeProduct(this.cartProduct.cartId)
+    this.cartChange.emit()}
   }
 
 

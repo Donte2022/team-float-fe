@@ -12,29 +12,6 @@ import {MainPageService} from "../../../services/main-page.service";
 export class CartComponent implements OnInit {
 
   cartProductList: ICart[];
-    // [
-    //     { cartId:1,
-    //       accountId: 7,
-    //       orderId: 1,
-    //
-    //       productId: 11,
-    //       productName: "red",
-    //       price: 20,
-    //
-    //       quantity: 1
-    //     },
-    //   { cartId:1,
-    //     accountId: 7,
-    //     orderId: 1,
-    //
-    //     productId: 12,
-    //     productName: "red",
-    //     price: 20,
-    //
-    //     quantity: 1
-    //   }
-    //
-    // ]
 
 
   subTotal: number = 0
@@ -48,10 +25,11 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private mainService: MainPageService) {
     this.cartProductList = this.cartService.cartProducts
     this.updateTotals();
-    console.log(this.cartProductList + " cart component")
-  }
+this.cartService.$cartProducts.subscribe(cartProducts=> this.cartProductList = cartProducts)  }
 
   updateTotals() {
+    this.subTotal=0
+    this.cartProductList = this.cartService.cartProducts
     for (let cartProduct of this.cartProductList) {
       let amount = cartProduct.price * cartProduct.quantity
       this.subTotal+=amount
@@ -62,6 +40,8 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cartProductList = this.cartService.cartProducts
+    console.log(this.cartProductList)
   }
 
   continueShopping() {

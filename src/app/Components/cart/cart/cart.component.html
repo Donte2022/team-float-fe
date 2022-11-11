@@ -4,9 +4,9 @@
 </div>
 <app-cart-product
   *ngFor="let cartProduct of cartProductList"
-[cartProduct]="cartProduct">
+[cartProduct]="cartProduct"
+(cartChange)="updateTotals()">
 </app-cart-product>
-
 
 <p>Sub Total: {{this.subTotal}} </p>
 <p>Discount: {{this.discount}}</p>
