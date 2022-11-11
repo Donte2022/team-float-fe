@@ -19,9 +19,11 @@ export class ProductComponent implements OnInit,OnDestroy {
   quantity: number = 1
   displayPrice : number
   sub : Subscription
+  addedMessage: boolean = false
 
 
   constructor(private MainPageService:MainPageService, private cartService: CartService) {
+    this.addedMessage = false
     this.img = this.Pro?.imageUrl
     this.rank = 0
     this.displayPrice = 0
@@ -70,6 +72,7 @@ export class ProductComponent implements OnInit,OnDestroy {
   addToCart() {
     if (this.Pro!==undefined) {
       this.cartService.addFromProduct(this.Pro, this.quantity);
+      this.addedMessage = true
     }
   }
 

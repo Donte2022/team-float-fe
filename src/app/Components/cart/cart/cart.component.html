@@ -1,7 +1,6 @@
+<div *ngIf="!showCheckout">
 <h1>Cart</h1>
-<div>
-<button (click)="continueShopping()">Continue Shopping</button>
-</div>
+
 <app-cart-product
   *ngFor="let cartProduct of cartProductList"
 [cartProduct]="cartProduct"
@@ -14,4 +13,7 @@
 <p>Tax: {{this.tax}} </p>
 <p>Total: {{this.total}}</p>
 
+<button (click)="onCheckout()">Checkout</button>
+</div>
 
+<app-checkout *ngIf="showCheckout" (return)="showCheckout=false"></app-checkout>
