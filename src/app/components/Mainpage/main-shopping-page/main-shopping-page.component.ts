@@ -21,6 +21,7 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
   fullList: ICategory []
   productList: IProduct []
   rank : number = 0
+  showCart: boolean = false
   message : string
   sub : Subscription []
 
@@ -72,6 +73,10 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
     this.MainPageService.setProductCreateScreen(true)
     this.MainPageService.setProductScreen(false)
 
+  }
+
+  onCartClick() {
+    this.showCart = true
   }
 
 }

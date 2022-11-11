@@ -1,6 +1,6 @@
-
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
+import {CartService} from "../../../services/cart.service";
 import {AccountService} from "../../../services/account.service";
 import {Subscription} from "rxjs";
 import {ShopkeeperService} from "../../../services/shopkeeper.service";
@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   sub2: Subscription
   sub3: Subscription
 
-  constructor(private accountService: AccountService, private mainPageService: MainPageService, private shopkeeperService: ShopkeeperService) {
+  constructor(private accountService: AccountService, private mainPageService: MainPageService, private shopkeeperService: ShopkeeperService, private cartService: CartService) {
     this.sub1 = this.accountService.$showAccountList.subscribe(showAccountList => this.showAccountList = showAccountList)
     this.sub2 = this.accountService.$showMyAccount.subscribe(showMyAccount => this.showMyAccount = showMyAccount)
     this.sub3 = this.shopkeeperService.$showCouponList.subscribe(showCouponList => this.showCouponList = showCouponList)

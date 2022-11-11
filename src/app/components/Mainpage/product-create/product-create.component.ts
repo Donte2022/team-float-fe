@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {Subscription} from "rxjs";
 import {IProduct} from "../../../interfaces/IProduct";
+import {ICategory} from "../../../interfaces/ICategory";
 
 @Component({
   selector: 'app-product-create',
@@ -55,7 +56,7 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
         dateAvailable: this.pro.dateAvailable,
         weight: this.pro.weight,
         map: this.pro.map,
-        cost:this.pro.costToMake
+        costToMake:this.pro.costToMake
       })
     this.oncancel()
   }
