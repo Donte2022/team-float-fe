@@ -16,6 +16,8 @@ export class CartService {
   account!: IAccount | null;
   cartProducts: ICart[] = []
   $cartProducts = new Subject<ICart[]>()
+  showCart: boolean = false
+  $showCart = new Subject<boolean>()
 
 
   constructor(private http: HttpService, private accountService: AccountService) {

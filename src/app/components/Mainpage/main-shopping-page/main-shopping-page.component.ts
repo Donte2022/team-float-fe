@@ -58,18 +58,18 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
     }
   }
 
-  oncanel () {
+  onCancel () {
     this.MainPageService.setMainShoppingPageScreen(false)
   }
 
 
-  oncatcreate () {
+  onCatCreate () {
     this.MainPageService.setCategoryCreateScreen(true)
     this.MainPageService.setProductScreen(false)
 
   }
 
-  onproductcreate () {
+  onProductCreate () {
     this.MainPageService.setProductCreateScreen(true)
     this.MainPageService.setProductScreen(false)
 
