@@ -23,6 +23,10 @@ import { AccountListComponent } from './components/admin/account-list/account-li
 import { AccountListItemComponent } from './components/admin/account-list-item/account-list-item.component';
 import { AddAccountComponent } from './components/admin/add-account/add-account.component';
 import { NavComponent } from './components/nav/nav.component';
+import { CouponListComponent } from './components/shopkeep/coupon-list/coupon-list.component';
+import { CouponListItemComponent } from './components/shopkeep/coupon-list-item/coupon-list-item.component';
+import { ShopNavComponent } from './components/shopkeep/shop-nav/shop-nav.component';
+import { KeepShopComponent } from './components/shopkeep/keep-shop/keep-shop.component';
 
 
 @NgModule({
@@ -46,6 +50,10 @@ import { NavComponent } from './components/nav/nav.component';
     AccountListItemComponent,
     AddAccountComponent,
     NavComponent,
+    CouponListComponent,
+    CouponListItemComponent,
+    ShopNavComponent,
+    KeepShopComponent,
   ],
   imports: [
     BrowserModule,

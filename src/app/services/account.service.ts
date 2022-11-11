@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, first, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IAccount} from "../interfaces/IAccount";
+import {ShopkeeperService} from "./shopkeeper.service";
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class AccountService {
     orderId: 1
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private shopkeeperService: ShopkeeperService) { }
   public dummyLogin() {
     this.attemptRegister(this.dummyUser)
   }
@@ -119,6 +120,9 @@ export class AccountService {
           this.userRank = account.rank
           if (account.rank === 1) {
             this.refreshAccountList()
+          }
+          if (account.rank < 3) {
+            this.shopkeeperService.refreshCouponList()
           }
 
         }

@@ -1,0 +1,9 @@
+<div>
+  <div>Code: {{coupon.code}}</div>
+  <div>Good thru: {{coupon.startDate | date}} - {{coupon.endDate | date}}</div>
+  <div>Use Limit: {{coupon.useLimit}}</div>
+  <div *ngIf="coupon.amount">Amount off: ${{coupon.amount}}</div>
+  <div *ngIf="coupon.percentage">Percentage off: {{coupon.percentage}}</div>
+  <button (click)="onClickEdit()">Edit</button>
+  <button (click)="onClickDelete(coupon.id)">Delete</button>
+</div>
