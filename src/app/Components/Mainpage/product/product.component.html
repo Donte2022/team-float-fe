@@ -1,7 +1,7 @@
 <div *ngIf="Pro !== undefined" style="border-style: solid">
   <div style="font-size: xxx-large">{{Pro.displayName}}</div>
   <div *ngFor="let c of Pro.categories">{{c.name}}</div>
-  <div><img src="{{img}}" (error)="onimageerror()" id="image"></div>
+  <div><img src="{{img}}" (error)="onImageError()" id="image"></div>
   <div>description:{{Pro.description}}</div>
   <div>discontinued:{{Pro.discontinued}}</div>
   <div>Date available:{{Pro.dateAvailable}}</div>
@@ -11,11 +11,15 @@
   <div>weight:{{Pro.weight}}</div>
   <div *ngIf="rank>1">MAP price{{Pro.map}}</div>
   <div *ngIf="rank>1">Cost to Make:{{Pro.costToMake}}</div>
+  <div>
+    <input [(ngModel)]="quantity" type="number"/>
+    <button (click)="addToCart()">Add to cart</button>
+  </div>
   <div *ngIf="rank>1">
     <button (click)="onProductEdit()">Edit product</button>
   </div>
   <div *ngIf="rank>1">
-    <button (click)="ondelete()">Delete</button>
+    <button (click)="onDelete()">Delete</button>
   </div>
   <div>
     <button (click)="onPriceChangeCreateScreen()">Price Change Create</button>
