@@ -1,1 +1,14 @@
-<p>shop-nav works!</p>
+<h3>Shopkeeping</h3>
+<div>
+  <button (click)="onClickProductList()">Product List</button>
+  <button (click)="onClickCreateProduct()">Create Product</button>
+  <button (click)="onClickCategories()">Manage Categories</button>
+  <button (click)="onClickCoupons()">Coupons</button>
+</div>
+<div>
+  <app-main-shopping-page *ngIf="showProductList"></app-main-shopping-page>
+  <app-product-create *ngIf="showProductCreate"></app-product-create>
+  <app-category-create *ngIf="showCategories"></app-category-create>
+  <app-coupon-list *ngIf="showCouponList"></app-coupon-list>
+</div>
+

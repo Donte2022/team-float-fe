@@ -13,7 +13,7 @@ import {ShopkeeperService} from "../../../services/shopkeeper.service";
 export class MainPageComponent implements OnInit, OnDestroy {
   showAccountList: boolean = false
   showMyAccount: boolean = false
-  showCouponList: boolean = false
+  showKeepShop: boolean = false
 
   sub1: Subscription
   sub2: Subscription
@@ -22,7 +22,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   constructor(private accountService: AccountService, private mainPageService: MainPageService, private shopkeeperService: ShopkeeperService) {
     this.sub1 = this.accountService.$showAccountList.subscribe(showAccountList => this.showAccountList = showAccountList)
     this.sub2 = this.accountService.$showMyAccount.subscribe(showMyAccount => this.showMyAccount = showMyAccount)
-    this.sub3 = this.shopkeeperService.$showCouponList.subscribe(showCouponList => this.showCouponList = showCouponList)
+    this.sub3 = this.shopkeeperService.$showShopkeepNav.subscribe(showKeepShop => this.showKeepShop = showKeepShop)
   }
 
   ngOnInit(): void {

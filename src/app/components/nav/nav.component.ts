@@ -22,33 +22,25 @@ export class NavComponent implements OnInit {
     this.accountService.$accountIdToEdit.next(null)
     this.accountService.$showMyAccount.next(true)
     this.accountService.$showAccountList.next(false)
-    this.shopkeeperService.$showCouponList.next(false)
+    this.shopkeeperService.$showShopkeepNav.next(false)
   }
 
   onClickManageAccounts() {
     this.accountService.$showAccountList.next(true)
     this.accountService.$showMyAccount.next(false)
-    this.shopkeeperService.$showCouponList.next(false)
+    this.shopkeeperService.$showShopkeepNav.next(false)
   }
 
   onClickLogout() {
     this.accountService.resetAccountState()
-  }
-  onClickCreateProduct () {
-    this.accountService.$showMyAccount.next(false)
-    this.accountService.$showAccountList.next(false)
-    this.mainPageService.setProductCreateScreen(true)
-    this.mainPageService.setProductScreen(false)
-    this.shopkeeperService.$showCouponList.next(false)
-
   }
 
   onClickKeepShop() {
     this.accountService.$showMyAccount.next(false)
     this.accountService.$showAccountList.next(false)
     this.mainPageService.setProductCreateScreen(false)
-    this.mainPageService.setProductScreen(false)
-    this.shopkeeperService.$showCouponList.next(true)
+    this.mainPageService.setProductScreen(true)
+    this.shopkeeperService.$showShopkeepNav.next(true)
   }
 
   onClickShopName() {
@@ -56,7 +48,7 @@ export class NavComponent implements OnInit {
     this.accountService.$showAccountList.next(false)
     this.mainPageService.setProductCreateScreen(false)
     this.mainPageService.setProductScreen(true)
-    this.shopkeeperService.$showCouponList.next(false)
+    this.shopkeeperService.$showShopkeepNav.next(false)
   }
 
 }
