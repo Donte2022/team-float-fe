@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, first, Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import {BehaviorSubject, first, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IAccount} from "../interfaces/IAccount";
 import {ShopkeeperService} from "./shopkeeper.service";
@@ -29,6 +29,7 @@ export class AccountService {
 
   //Admin = 1, Shopkeeper = 2, Customer = 3
   userRank: number = 3
+  $loggedIn = new Subject<boolean>();
 
   dummyUser: any = {
     firstName: "Dummy",
@@ -48,6 +49,7 @@ export class AccountService {
   public login(username: string, password: string): Observable<IAccount> {
     return this.http.get<IAccount>("http://localhost:8080/api/account", {
       params: {username: username, password: password}})
+
   }
 
   public createAccount(newAccount: IAccount): Observable<IAccount> {
@@ -75,8 +77,8 @@ export class AccountService {
       })
   }
 
-  public deleteAccount(accountId: number): Observable<string> {
-    return this.http.delete<string>(`http://localhost:8080/api/account/${accountId}`)
+  public deleteAccount(accountId: number): Observable<String> {
+    return this.http.delete<String>(`http://localhost:8080/api/account/${accountId}`)
 
   }
 
@@ -125,12 +127,14 @@ export class AccountService {
             this.shopkeeperService.refreshCouponList()
           }
 
+          this.$loggedIn.next(true)
         }
         else
           this.$loginErrorMessage.next(this.LOGIN_INVALID_CREDENTIALS_MESSAGE)
       },
       error: () => this.$loginErrorMessage.next(this.LOGIN_HTTP_ERROR_MESSAGE)
     })
+
   }
 
   public attemptRegister(accountToCreate: IAccount) {

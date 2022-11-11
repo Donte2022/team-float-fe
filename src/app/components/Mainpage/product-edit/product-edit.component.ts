@@ -13,9 +13,11 @@ export class ProductEditComponent implements OnInit,OnDestroy {
   product: IProduct
   message : string
   sub : Subscription
+  confirmMessage: boolean
 
   constructor(private MainPageService: MainPageService) {
     this.product = {} as IProduct
+    this.confirmMessage = false
     this.message = ""
    this.sub = this.MainPageService.$productEditmessage.subscribe(value => {this.message = value})
 
@@ -35,7 +37,17 @@ export class ProductEditComponent implements OnInit,OnDestroy {
   }
 
   onsubmit (input: IProduct) {
-    this.MainPageService.putProduct(input)
+    if (input.price < input.map){
+      this.confirmMessage = true
+    }
+    else {
+      this.MainPageService.putProduct(input)
+      this.oncancel()
+    }
+  }
+
+  confirm () {
+    this.MainPageService.putProduct(this.product)
     this.oncancel()
   }
 
