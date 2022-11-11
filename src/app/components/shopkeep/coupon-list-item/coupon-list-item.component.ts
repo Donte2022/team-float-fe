@@ -18,6 +18,7 @@ export class CouponListItemComponent implements OnInit {
   onClickEdit() {
     //Todo handle update
     console.log("Update")
+    this.shopkeeperService.$couponToEditId.next(this.coupon.id)
   }
 
   onClickDelete(couponId: number) {

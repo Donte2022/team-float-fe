@@ -1,6 +1,6 @@
 <div>
-  <app-main-shopping-page *ngIf="!showAccountList && !showMyAccount && !showCouponList"></app-main-shopping-page>
+  <app-main-shopping-page *ngIf="!showAccountList && !showMyAccount && !showKeepShop"></app-main-shopping-page>
   <app-account-input *ngIf="showMyAccount"></app-account-input>
   <app-account-list *ngIf="showAccountList"></app-account-list>
-  <app-coupon-list *ngIf="showCouponList"></app-coupon-list>
+  <app-shop-nav *ngIf="showKeepShop"></app-shop-nav>
 </div>
