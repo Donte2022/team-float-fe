@@ -26,10 +26,10 @@ export class CategoryEditComponent implements OnInit {
   ngOnInit(): void {
     this.category = {...this.MainPageService.getIndCategory()}
     this.otherList = [...this.MainPageService.getFullProductList()]
-    this.fillitarprodut()
+    this.filter()
   }
 
-  fillitarprodut () {
+  filter () {
     for (let pro of this.otherList){
       if (-1 != pro.categories.findIndex(value => {return value.id == this.category.id})){
         this.producttoSubmit.push(pro)

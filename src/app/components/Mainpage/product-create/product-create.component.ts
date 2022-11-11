@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {Subscription} from "rxjs";
+import {IProduct} from "../../../interfaces/IProduct";
 
 @Component({
   selector: 'app-product-create',
@@ -9,31 +10,15 @@ import {Subscription} from "rxjs";
 })
 export class ProductCreateComponent implements OnInit,OnDestroy {
 
-  displayName: string
-  productName: string
-  description: string
-  basePrice: number | undefined
-  imageUrl: string
-  discontinued: boolean
-  avaliableDate: Date
-  weight: number | undefined
-  MAP: number | undefined
-  costtoMake: number | undefined
+  pro : IProduct
   message: string
   sub : Subscription
+  confirmMessage: boolean
 
   constructor(private MainPageService: MainPageService) {
+    this.pro = {} as IProduct
     this.message = ""
-    this.displayName = ""
-    this.productName = ""
-    this.description = ""
-    this.basePrice = undefined
-    this.imageUrl = ""
-    this.discontinued = false
-    this.avaliableDate = new Date()
-    this.weight = undefined
-    this.MAP = undefined
-    this.costtoMake = undefined
+    this.confirmMessage = false
    this.sub = this.MainPageService.$productCreatemessage.subscribe(value => {this.message = value})
 
   }
@@ -50,19 +35,28 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
   }
 
   onpost () {
-    if (this.basePrice && this.weight && this.MAP && this.costtoMake){
+    if (this.pro.price < this.pro.map){
+      this.confirmMessage =true
+    }
+    else {
+      this.confirm()
+    }
+  }
+
+
+  confirm () {
     this.MainPageService.postProduct(
-      {productName: this.productName,
-      displayName: this.displayName,
-      description: this.description,
-      price: this.basePrice,
-      imageUrl: this.imageUrl,
-      discontinued: this.discontinued,
-      dateAvailable: this.avaliableDate,
-      weight: this.weight,
-      map: this.MAP,
-      cost:this.costtoMake}
-    )}
+      {productName: this.pro.productName,
+        displayName: this.pro.displayName,
+        description: this.pro.description,
+        price: this.pro.price,
+        imageUrl: this.pro.imageUrl,
+        discontinued: this.pro.discontinued,
+        dateAvailable: this.pro.dateAvailable,
+        weight: this.pro.weight,
+        map: this.pro.map,
+        cost:this.pro.costToMake
+      })
     this.oncancel()
   }
 }
