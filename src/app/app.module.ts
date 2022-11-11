@@ -26,8 +26,10 @@ import { CouponListComponent } from './components/shopkeep/coupon-list/coupon-li
 import { CouponListItemComponent } from './components/shopkeep/coupon-list-item/coupon-list-item.component';
 import { ShopNavComponent } from './components/shopkeep/shop-nav/shop-nav.component';
 import { KeepShopComponent } from './components/shopkeep/keep-shop/keep-shop.component';
+import { CouponInputComponent } from './components/shopkeep/coupon-input/coupon-input.component';
 import {CartComponent} from "./components/cart/cart/cart.component";
 import {CartProductComponent} from "./components/cart/cart-product/cart-product.component"
+
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import {CartProductComponent} from "./components/cart/cart-product/cart-product.
     CouponListItemComponent,
     ShopNavComponent,
     KeepShopComponent,
+    CouponInputComponent,
     CartComponent,
     CartProductComponent
   ],
