@@ -4,7 +4,7 @@ import {IAccount} from "./IAccount";
 export interface ICart {
 
   cartId?: number
-  account: IAccount;
+  account: IAccount | null;
   orderId: number
 
   productId: number

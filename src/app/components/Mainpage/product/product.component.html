@@ -15,6 +15,7 @@
     <input [(ngModel)]="quantity" type="number"/>
     <button (click)="addToCart()">Add to cart</button>
   </div>
+  <p *ngIf="addedMessage">Added to cart</p>
   <div *ngIf="rank < 3">
     <button (click)="onProductEdit()">Edit product</button>
     <button (click)="onDelete()">Delete</button>

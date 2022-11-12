@@ -13,7 +13,7 @@
 <p>Tax: {{this.tax}} </p>
 <p>Total: {{this.total}}</p>
 
-<button (click)="onCheckout()">Checkout</button>
+<button (click)="onCheckout()">Submit order</button>
 </div>
 
-<app-checkout *ngIf="showCheckout" (return)="showCheckout=false"></app-checkout>
+<app-checkout *ngIf="showCheckout"></app-checkout>
