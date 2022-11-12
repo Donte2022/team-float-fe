@@ -23,6 +23,7 @@ export class AddAccountComponent implements OnInit {
 
   onClickCancel() {
     this.accountService.$showAddAccount.next(false)
+    this.accountService.$showAccountList.next(true)
   }
 
 }

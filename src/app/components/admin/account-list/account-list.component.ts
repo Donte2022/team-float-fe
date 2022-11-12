@@ -11,9 +11,13 @@ import {Subscription} from "rxjs";
 export class AccountListComponent implements OnInit, OnDestroy {
   accountList: IAccount[] = []
   accountToEditId: number | null = null
+  showAccountList: boolean = false
+  showAddAccount: boolean = false
 
   sub1: Subscription
   sub2: Subscription
+  sub3: Subscription
+  sub4: Subscription
 
   constructor(private accountService: AccountService) {
     this.sub1 = accountService.$accountList.subscribe(
@@ -21,6 +25,10 @@ export class AccountListComponent implements OnInit, OnDestroy {
     )
     this.sub2 = accountService.$accountIdToEdit.subscribe(
       accountToEditId => this.accountToEditId = accountToEditId)
+    this.sub3 = accountService.$showAddAccount.subscribe(
+      showAddAccount => this.showAddAccount = showAddAccount
+    )
+    this.sub4 = accountService.$showAccountList.subscribe(showAccountList => this.showAccountList = showAccountList)
   }
 
   ngOnInit(): void {
@@ -29,14 +37,13 @@ export class AccountListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub1.unsubscribe()
     this.sub2.unsubscribe()
-  }
-
-  onClickBack() {
-    this.accountService.$showAccountList.next(false)
+    this.sub3.unsubscribe()
+    this.sub4.unsubscribe()
   }
 
   onClickCreate() {
     this.accountService.$showAddAccount.next(true)
+    this.accountService.$showAccountList.next(false)
   }
 
 }

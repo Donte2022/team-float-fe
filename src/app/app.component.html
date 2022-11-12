@@ -1,14 +1,6 @@
-<div *ngIf="!account">
-  <div *ngIf="errorMsg">{{errorMsg}}</div>
-  <app-login *ngIf="!isRegistering"></app-login>
-  <app-register *ngIf="isRegistering"></app-register>
-</div>
-
-<div *ngIf="account">
-<!--  Todo conditional rendering for productList, cart, myAccount, pastOrders, etc.-->
+<div>
   <app-nav></app-nav>
   <app-main-page></app-main-page>
-  <app-add-account *ngIf="showAddAccount"></app-add-account>
 </div>
 
 

@@ -26,9 +26,12 @@ export class AccountService {
   $showMyAccount = new BehaviorSubject<boolean>(false)
   $showAddAccount = new BehaviorSubject<boolean>(false)
   $showAccountList = new BehaviorSubject<boolean>(false)
+  $showLogin = new BehaviorSubject<boolean>(false)
+  $showManageAccounts = new BehaviorSubject<boolean>(false)
 
   //Admin = 1, Shopkeeper = 2, Customer = 3
-  userRank: number = 3
+  userRank: number = 4
+  $userRank = new BehaviorSubject<number>(4)
   $loggedIn = new Subject<boolean>();
 
   dummyUser: any = {
@@ -121,6 +124,7 @@ export class AccountService {
           this.$loginErrorMessage.next(null)
           this.$isRegistering.next(false)
           this.userRank = account.rank
+          this.$userRank.next(account.rank)
           if (account.rank === 1) {
             this.refreshAccountList()
           }
@@ -129,6 +133,7 @@ export class AccountService {
           }
 
           this.$loggedIn.next(true)
+          this.$showLogin.next(false)
         }
         else
           this.$loginErrorMessage.next(this.LOGIN_INVALID_CREDENTIALS_MESSAGE)
@@ -159,6 +164,7 @@ export class AccountService {
         else {
           this.$accountList.next([...this.$accountList.getValue(), newAccount])
           this.$showAddAccount.next(false)
+          this.$showAccountList.next(true)
           this.$loginErrorMessage.next(null)
         }
       },
@@ -220,6 +226,7 @@ export class AccountService {
     this.$showAccountList.next(false)
     this.$isRegistering.next(false)
     this.$loginErrorMessage.next(null)
-    this.userRank = 3
+    this.userRank = 4
+    this.$userRank.next(4)
   }
 }

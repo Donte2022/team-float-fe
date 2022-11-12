@@ -1,8 +1,11 @@
 <div class="d-flex justify-content-between mb-3 p-3">
   <div (click)="onClickShopName()" role="button">The Candy Shoppe</div>
-  <button (click)="onClickMyAccount()">My Account</button>
+  <button *ngIf="userRank < 4" (click)="onClickMyAccount()">My Account</button>
   <button *ngIf="userRank === 1" (click)="onClickManageAccounts()">Manage Accounts</button>
   <button *ngIf="userRank < 3" (click)="onClickKeepShop()">Keep Shop</button>
   <button (click)="onClickCart()">Cart</button>
-  <button (click)="onClickLogout()">Logout</button>
+  <div>
+    <button *ngIf="userRank === 4" (click)="onClickLogin()">Login</button>
+    <button *ngIf="userRank < 4" (click)="onClickLogout()">Logout</button>
+  </div>
 </div>

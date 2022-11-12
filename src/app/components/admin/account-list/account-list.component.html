@@ -1,7 +1,9 @@
 <h3>Account List</h3>
-<button (click)="onClickBack()"><-</button>
-<button (click)="onClickCreate()">Create Account</button>
-<div *ngFor="let account of accountList">
-  <app-account-list-item  *ngIf="accountToEditId !== account.id" [account]="account"></app-account-list-item>
-  <app-account-input *ngIf="accountToEditId === account.id" [account]="account"></app-account-input>
+<div *ngIf="showAccountList">
+  <button (click)="onClickCreate()">Create Account</button>
+  <div *ngFor="let account of accountList">
+    <app-account-list-item  *ngIf="accountToEditId !== account.id" [account]="account"></app-account-list-item>
+    <app-account-input *ngIf="accountToEditId === account.id" [account]="account"></app-account-input>
+  </div>
 </div>
+<app-add-account *ngIf="showAddAccount"></app-add-account>

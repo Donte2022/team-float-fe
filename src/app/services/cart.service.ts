@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from "./http.service";
-import {ICartProduct} from "../interfaces/ICartProduct";
 import {AccountService} from "./account.service";
 import {IAccount} from "../interfaces/IAccount";
 import {ICart} from "../interfaces/ICart";
-import {first, Observable, Subject} from "rxjs";
+import {first, Subject} from "rxjs";
 import {IProduct} from "../interfaces/IProduct";
 
 @Injectable({
@@ -16,7 +15,6 @@ export class CartService {
   account!: IAccount | null;
   cartProducts: ICart[] = []
   $cartProducts = new Subject<ICart[]>()
-  showCart: boolean = false
   $showCart = new Subject<boolean>()
 
 
@@ -46,7 +44,6 @@ export class CartService {
           {
             account: this.account,
             orderId: this.account.orderId,
-
             productId: product.id,
             productName: product.productName,
             price: product.price,
