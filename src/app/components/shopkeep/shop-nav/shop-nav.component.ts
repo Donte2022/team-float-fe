@@ -1,26 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShopkeeperService} from "../../../services/shopkeeper.service";
 import {MainPageService} from "../../../services/main-page.service";
+import {ICategory} from "../../../interfaces/ICategory";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-shop-nav',
   templateUrl: './shop-nav.component.html',
   styleUrls: ['./shop-nav.component.css']
 })
-export class ShopNavComponent implements OnInit {
+export class ShopNavComponent implements OnInit, OnDestroy {
   showCategories: boolean = false
   showCouponList: boolean = false
   showProductCreate: boolean = false
   showProductList: boolean = true
 
+  subs: Subscription[] = []
+
+  fullList: ICategory [] = []
+
   constructor(private mainPageService: MainPageService, private shopkeeperService: ShopkeeperService) {
-    mainPageService.$mainShoppingpageScreen.subscribe(showProductList => this.showProductList = showProductList)
-    mainPageService.$categoryCreatescreen.subscribe(showCategories => this.showCategories = showCategories)
-    mainPageService.$productCreatescreen.subscribe(showProductCreate => this.showProductCreate = showProductCreate)
-    shopkeeperService.$showCouponList.subscribe(showCouponList => this.showCouponList = showCouponList)
+    this.subs[1] = mainPageService.$mainShoppingpageScreen.subscribe(showProductList => this.showProductList = showProductList)
+    this.subs[2] = mainPageService.$categoryCreatescreen.subscribe(showCategories => this.showCategories = showCategories)
+    this.subs[3] = mainPageService.$productCreatescreen.subscribe(showProductCreate => this.showProductCreate = showProductCreate)
+    this.subs[4] = mainPageService.$fullCategory.subscribe(value => {this.fullList = value})
+    this.subs[5] = shopkeeperService.$showCouponList.subscribe(showCouponList => this.showCouponList = showCouponList)
   }
 
+
   ngOnInit(): void {
+    this.fullList = [...this.mainPageService.getFullCategoryList()]
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach((sub) => sub.unsubscribe())
   }
 
   onClickCategories() {

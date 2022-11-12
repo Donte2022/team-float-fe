@@ -8,7 +8,11 @@
 <div>
   <app-main-shopping-page *ngIf="showProductList"></app-main-shopping-page>
   <app-product-create *ngIf="showProductCreate"></app-product-create>
-  <app-category-create *ngIf="showCategories"></app-category-create>
+  <div *ngIf="showCategories">
+    <app-category-create ></app-category-create>
+    <div>categories</div>
+    <app-category *ngFor="let cat of fullList" [cat]="cat"></app-category>
+  </div>
   <app-coupon-list *ngIf="showCouponList"></app-coupon-list>
 </div>
 
