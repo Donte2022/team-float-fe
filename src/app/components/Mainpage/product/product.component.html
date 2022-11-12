@@ -1,7 +1,7 @@
 <div *ngIf="Pro !== undefined" style="border-style: solid">
   <div style="font-size: xxx-large">{{Pro.displayName}}</div>
   <div *ngFor="let c of Pro.categories">{{c.name}}</div>
-  <div><img src="{{img}}" (error)="onImageError()" id="image"></div>
+  <div><img src="{{img}}" (error)="onImageError()" id="image" alt="{{Pro.displayName}}"></div>
   <div>description:{{Pro.description}}</div>
   <div>discontinued:{{Pro.discontinued}}</div>
   <div>Date available:{{Pro.dateAvailable}}</div>
