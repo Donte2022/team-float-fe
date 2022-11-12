@@ -47,6 +47,14 @@ export class ProductComponent implements OnInit,OnDestroy {
     this.sub2.unsubscribe()
   }
 
+  dateFormat () {
+    if (this.Pro !== undefined){
+     let day = new Date(this.Pro.dateAvailable)
+      console.log(day)
+      return (day.getMonth() + 1) + "/" + day.getDate() + "/" + day.getFullYear()
+    }
+    return
+  }
 
   onImageError () {
     this.img = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"

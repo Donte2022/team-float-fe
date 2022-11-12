@@ -1,9 +1,8 @@
-<div *ngIf="pri !== undefined" style="border-style: solid">
+<div *ngIf="pri !== undefined" style="border-style: solid;background-color: #149ECC">
   <div>Price Change Request</div>
   <div>{{pri.newPrice}}</div>
   <div>{{pri.sale}}</div>
-  <div>{{pri.startDate}}</div>
-  <div>{{pri.endDate}}</div>
+  <div>{{dateFormat(true)}} to {{dateFormat(false)}}</div>
   <div>{{pri.couponLeft}}</div>
 <div><button (click)="onPriceChangeEditScreen()">Price Change Edit</button><button (click)="ondelete()">Delete</button></div>
 </div>
