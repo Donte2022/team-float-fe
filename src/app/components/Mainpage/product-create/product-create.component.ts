@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {Subscription} from "rxjs";
 import {IProduct} from "../../../interfaces/IProduct";
+import {ShopkeeperService} from "../../../services/shopkeeper.service";
 
 @Component({
   selector: 'app-product-create',
@@ -15,7 +16,7 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
   sub : Subscription
   confirmMessage: boolean
 
-  constructor(private MainPageService: MainPageService) {
+  constructor(private MainPageService: MainPageService,private shopkeeperService:ShopkeeperService) {
     this.pro = {} as IProduct
     this.message = ""
     this.confirmMessage = false
@@ -30,8 +31,10 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
   }
 
   oncancel () {
+    this.MainPageService.setCategoryCreateScreen(false)
+    this.MainPageService.setMainShoppingPageScreen(true)
     this.MainPageService.setProductCreateScreen(false)
-    this.MainPageService.setProductScreen(true)
+    this.shopkeeperService.$showCouponList.next(false)
   }
 
   onpost () {
