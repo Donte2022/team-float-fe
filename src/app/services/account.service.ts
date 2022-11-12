@@ -66,14 +66,15 @@ export class AccountService {
   }
 
   public updateAccount(updatedAccount: IAccount): Observable<IAccount> {
-    const { firstName, lastName, email, username, password, rank, id } = updatedAccount
+    const { firstName, lastName, email, username, password, rank, id, orderId } = updatedAccount
       return this.http.put<IAccount>(`http://localhost:8080/api/account/${id}`, {
         firstName: firstName,
         lastName: lastName,
         email: email,
         username: username,
         password: password,
-        rank: rank
+        rank: rank,
+        orderId: orderId
       })
   }
 
@@ -180,7 +181,8 @@ export class AccountService {
     //Todo validation for changing password, lastName, firstName, email, rank
     this.updateAccount(updatedAccount).pipe(first()).subscribe({
       next: () => {
-        this.$account.next(updatedAccount)
+        if (updatedAccount.id === this.$account.getValue()?.id)
+          this.$account.next(updatedAccount)
         this.$showMyAccount.next(false)
         this.$accountIdToEdit.next(null)
       },

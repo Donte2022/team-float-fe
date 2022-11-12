@@ -18,7 +18,6 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
   priceCreate: boolean = false
   priceEdit  : boolean = false
   productScreen: boolean = true
-  fullList: ICategory []
   productList: IProduct []
   rank : number = 0
   showCart: boolean = false
@@ -30,7 +29,6 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
   constructor(private MainPageService: MainPageService) {
     this.message = ""
     this.sub = []
-    this.fullList= []
     this.productList = []
     this.sub.push(this.MainPageService.$categoryEditscreen.subscribe(value => {this.categoryEdit = value}))
     this.sub.push(this.MainPageService.$categoryCreatescreen.subscribe(value => {this.categoryCreate = value}))
@@ -39,7 +37,6 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
     this.sub.push(this.MainPageService.$priceCreatescreen.subscribe(value => {this.priceCreate = value}))
     this.sub.push(this.MainPageService.$priceEditscreen.subscribe(value => {this.priceEdit = value}))
     this.sub.push(this.MainPageService.$productScreen.subscribe(value => {this.productScreen = value}))
-    this.sub.push(this.MainPageService.$fullCategory.subscribe(value => {this.fullList = value}))
     this.sub.push(this.MainPageService.$fullProduct.subscribe(value => {this.productList = [...value]}))
     this.sub.push(this.MainPageService.$mainShoppingpageMessage.subscribe(value => {this.message = value}))
   }
@@ -48,7 +45,6 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
     this.MainPageService.getFullProductListRequest()
     this.MainPageService.getFullCategoryListRequest()
     this.productList = [...this.MainPageService.getFullProductList()]
-    this.fullList = [...this.MainPageService.getFullCategoryList()]
     this.rank = this.MainPageService.getrank()
   }
 
