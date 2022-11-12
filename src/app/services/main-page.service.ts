@@ -14,7 +14,6 @@ import {IsimpleCategory} from "../interfaces/IsimpleCategory";
 })
 export class MainPageService {
 
-  private rank :number = 3
   $displayprice = new Subject<{num:number,proid:number}>()
 
   // Full List
@@ -71,12 +70,7 @@ export class MainPageService {
     this.fullProduct = []
   }
 
-  // Misc Getters and Setters
 
-
-  getrank(): number {
-    return this.rank;
-  }
 
 
 // Ind variables Getters and Setters

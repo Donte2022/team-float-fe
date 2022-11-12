@@ -3,6 +3,7 @@ import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
 import {CartService} from "../../../services/cart.service";
 import {Subscription} from "rxjs";
+import {AccountService} from "../../../services/account.service";
 
 
 @Component({
@@ -20,9 +21,10 @@ export class ProductComponent implements OnInit,OnDestroy {
   displayPrice : number
   sub : Subscription
   addedMessage: boolean = false
+  sub2 : Subscription
 
 
-  constructor(private MainPageService:MainPageService, private cartService: CartService) {
+  constructor(private MainPageService:MainPageService, private cartService: CartService,private accountService:AccountService) {
     this.addedMessage = false
     this.img = this.Pro?.imageUrl
     this.rank = 0
@@ -30,6 +32,7 @@ export class ProductComponent implements OnInit,OnDestroy {
    this.sub = this.MainPageService.$displayprice.subscribe(value => {if (value.proid === this.Pro?.id){
        this.displayPrice = value.num;
     }})
+   this.sub2 = this.accountService.$userRank.subscribe(value => {this.rank = value})
   }
 
   ngOnInit(): void {
@@ -37,11 +40,11 @@ export class ProductComponent implements OnInit,OnDestroy {
       this.img = this.Pro.imageUrl
       this.displayPrice = this.MainPageService.onpricerequest(this.Pro).num
     }
-    this.rank = this.MainPageService.getrank()
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe()
+    this.sub2.unsubscribe()
   }
 
 
@@ -73,6 +76,7 @@ export class ProductComponent implements OnInit,OnDestroy {
     if (this.Pro!==undefined) {
       this.cartService.addFromProduct(this.Pro, this.quantity);
       this.addedMessage = true
+      console.log("adding from Cart")
     }
   }
 

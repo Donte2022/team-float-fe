@@ -47,6 +47,24 @@ export class PriceChangeCreateComponent implements OnInit ,OnDestroy{
   }
 
   confirm(){
+
+
+    if (!this.pri.newPrice){
+      this.message = "Input Field is blank"
+      return
+    }
+    if (!this.pri.endDate){
+      this.message = "Input Field is blank"
+      return
+    }    if (!this.pri.startDate){
+      this.message = "Input Field is blank"
+      return
+    }    if (!this.pri.couponLeft) {
+      this.message = "Input Field is blank"
+      return
+    }
+
+
     this.MainPageService.postPriceChange(
       {
         sale: this.pri.sale,

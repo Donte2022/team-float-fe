@@ -65,6 +65,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckout() {
     this.showCheckout = true
+    this.cartService.onCheckout()
   }
 
   onClickApplyCoupon() {

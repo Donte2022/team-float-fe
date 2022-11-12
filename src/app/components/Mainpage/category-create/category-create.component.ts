@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
+import {Subscription} from "rxjs";
+import {ShopkeeperService} from "../../../services/shopkeeper.service";
 
 @Component({
   selector: 'app-category-create',
@@ -13,12 +15,16 @@ export class CategoryCreateComponent implements OnInit {
   productList: IProduct []
   tempProduct: number | undefined
   name : string
+  message : string
+  sub: Subscription
 
-  constructor(private MainPageService: MainPageService) {
+  constructor(private MainPageService: MainPageService,private shopkeeperService : ShopkeeperService) {
     this.otherProduct = [...this.MainPageService.getFullProductList()]
     this.productList = []
     this.tempProduct = undefined
     this.name = ""
+    this.message = ""
+    this.sub = this.MainPageService.$categoryCreatemessage.subscribe(value => {this.message = value})
   }
 
   ngOnInit(): void {
@@ -59,6 +65,11 @@ export class CategoryCreateComponent implements OnInit {
 
 
   onsubmit () {
+    if (!this.name){
+      this.message = "Input Field is blank"
+      return
+    }
+
     let proidList : number[] = []
     for (let num of this.productList){
       proidList.push(num.id)
