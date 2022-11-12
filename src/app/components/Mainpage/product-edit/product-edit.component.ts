@@ -47,6 +47,42 @@ export class ProductEditComponent implements OnInit,OnDestroy {
   }
 
   confirm () {
+    if (!this.product.displayName){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.productName){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.description){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.price){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.imageUrl){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.dateAvailable){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.weight){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.map){
+      this.message = "Input Field is blank"
+      return;
+    }
+    if (!this.product.costToMake){
+      this.message = "Input Field is blank"
+      return;
+    }
     this.MainPageService.putProduct(this.product)
     this.oncancel()
   }
