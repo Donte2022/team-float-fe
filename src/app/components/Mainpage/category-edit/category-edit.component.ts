@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {ICategory} from "../../../interfaces/ICategory";
 import {IProduct} from "../../../interfaces/IProduct";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-category-edit',
@@ -14,6 +15,8 @@ export class CategoryEditComponent implements OnInit {
   category: ICategory
   producttoSubmit : IProduct []
   tempProduct : number | undefined
+  message : string
+  sub: Subscription
 
 
   constructor(private MainPageService: MainPageService) {
@@ -21,6 +24,9 @@ export class CategoryEditComponent implements OnInit {
     this.otherList = []
     this.producttoSubmit = []
     this.tempProduct = undefined
+    this.message = ""
+    this.sub = this.MainPageService.$categoryEditmessage.subscribe(value => {this.message = value})
+
   }
 
   ngOnInit(): void {
@@ -73,6 +79,11 @@ export class CategoryEditComponent implements OnInit {
 
 
   onsubmit () {
+    if (!this.category.name){
+      this.message = "Input field is Blank"
+      return
+    }
+
     let proidList : number[] = []
     for (let num of this.producttoSubmit){
       proidList.push(num.id)

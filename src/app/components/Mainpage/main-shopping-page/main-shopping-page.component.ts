@@ -45,7 +45,6 @@ export class MainShoppingPageComponent implements OnInit,OnDestroy{
     this.MainPageService.getFullProductListRequest()
     this.MainPageService.getFullCategoryListRequest()
     this.productList = [...this.MainPageService.getFullProductList()]
-    this.rank = this.MainPageService.getrank()
   }
 
   ngOnDestroy() {
