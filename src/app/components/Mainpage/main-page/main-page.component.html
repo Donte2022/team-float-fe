@@ -1,7 +1,13 @@
 <div>
-  <app-main-shopping-page *ngIf="!showAccountList && !showMyAccount && !showKeepShop"></app-main-shopping-page>
+  <div *ngIf="showLogin">
+    <div *ngIf="errorMsg">{{errorMsg}}</div>
+    <app-login *ngIf="!isRegistering"></app-login>
+    <app-register *ngIf="isRegistering"></app-register>
+  </div>
+
+  <app-main-shopping-page *ngIf="!showManageAccounts && !showMyAccount && !showKeepShop && !showLogin && !showCart"></app-main-shopping-page>
   <app-account-input *ngIf="showMyAccount"></app-account-input>
-  <app-account-list *ngIf="showAccountList"></app-account-list>
+  <app-account-list *ngIf="showManageAccounts"></app-account-list>
   <app-shop-nav *ngIf="showKeepShop"></app-shop-nav>
   <app-cart *ngIf="showCart"></app-cart>
 </div>

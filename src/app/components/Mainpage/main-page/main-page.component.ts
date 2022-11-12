@@ -11,22 +11,24 @@ import {ShopkeeperService} from "../../../services/shopkeeper.service";
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit, OnDestroy {
-  showAccountList: boolean = false
+  errorMsg: string | null = null
+  isRegistering: boolean = false
+  showLogin: boolean = false
+  showManageAccounts: boolean = false
   showMyAccount: boolean = false
-  showCouponList: boolean = false
   showKeepShop: boolean = false
   showCart = false
 
-  sub1: Subscription
-  sub2: Subscription
-  sub3: Subscription
-  sub4: Subscription
+  subs: Subscription[] = []
 
   constructor(private accountService: AccountService, private mainPageService: MainPageService, private shopkeeperService: ShopkeeperService, private cartService: CartService) {
-    this.sub1 = this.accountService.$showAccountList.subscribe(showAccountList => this.showAccountList = showAccountList)
-    this.sub2 = this.accountService.$showMyAccount.subscribe(showMyAccount => this.showMyAccount = showMyAccount)
-    this.sub3 = this.shopkeeperService.$showShopkeepNav.subscribe(showKeepShop => this.showKeepShop = showKeepShop)
-    this.sub4 = this.cartService.$showCart.subscribe(value=>this.showCart = value)
+    this.subs[1] = accountService.$showManageAccounts.subscribe(showManageAccounts => this.showManageAccounts = showManageAccounts)
+    this.subs[2] = accountService.$showMyAccount.subscribe(showMyAccount => this.showMyAccount = showMyAccount)
+    this.subs[3] = shopkeeperService.$showShopkeepNav.subscribe(showKeepShop => this.showKeepShop = showKeepShop)
+    this.subs[4] = cartService.$showCart.subscribe(value=>this.showCart = value)
+    this.subs[5] = accountService.$showLogin.subscribe(showLogin => this.showLogin = showLogin)
+    this.subs[6] = accountService.$isRegistering.subscribe(isRegistering => this.isRegistering = isRegistering)
+    this.subs[7] = accountService.$loginErrorMessage.subscribe(errorMsg => this.errorMsg = errorMsg)
   }
 
   ngOnInit(): void {
@@ -34,14 +36,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub1.unsubscribe()
-    this.sub2.unsubscribe()
-    this.sub3.unsubscribe()
-    this.sub4.unsubscribe()
+    this.subs.forEach((sub) => sub.unsubscribe())
   }
-
-  onShopping () {
-    this.mainPageService.setMainShoppingPageScreen(true)
-  }
-
 }

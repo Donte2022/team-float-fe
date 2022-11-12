@@ -15,15 +15,11 @@
     <input [(ngModel)]="quantity" type="number"/>
     <button (click)="addToCart()">Add to cart</button>
   </div>
-  <div *ngIf="rank>1">
+  <div *ngIf="rank < 3">
     <button (click)="onProductEdit()">Edit product</button>
-  </div>
-  <div *ngIf="rank>1">
     <button (click)="onDelete()">Delete</button>
-  </div>
-  <div>
     <button (click)="onPriceChangeCreateScreen()">Price Change Create</button>
+    <div>List of Price Change Request:</div>
+    <app-price-change-request *ngFor="let pri of Pro.priceChange" [pri]="pri" [pro]="Pro"></app-price-change-request>
   </div>
-  <div>List of Price Change Request:</div>
-  <app-price-change-request *ngFor="let pri of Pro.priceChange" [pri]="pri" [pro]="Pro"></app-price-change-request>
 </div>
