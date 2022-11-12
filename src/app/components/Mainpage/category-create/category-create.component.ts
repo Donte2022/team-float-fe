@@ -26,7 +26,8 @@ export class CategoryCreateComponent implements OnInit {
 
   oncancel () {
     this.MainPageService.setCategoryCreateScreen(false)
-    this.MainPageService.setProductScreen(true)
+    // this.MainPageService.setProductScreen(true)
+    this.MainPageService.setMainShoppingPageScreen(true)
   }
 
   onproductselect (input:any) {
@@ -65,6 +66,6 @@ export class CategoryCreateComponent implements OnInit {
     this.MainPageService.postCategory({
       name: this.name,proidList: proidList}
     )
-    this.oncancel()
+    // this.oncancel()
   }
 }

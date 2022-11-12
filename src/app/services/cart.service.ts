@@ -10,8 +10,6 @@ import {IProduct} from "../interfaces/IProduct";
   providedIn: 'root'
 })
 export class CartService {
-
-
   account!: IAccount | null;
   cartProducts: ICart[] = []
   $cartProducts = new Subject<ICart[]>()
@@ -72,7 +70,5 @@ export class CartService {
     this.cartProducts = this.cartProducts.filter(item => item.cartId!==cartId)
     this.$cartProducts.next(this.cartProducts)
     this.http.delete(`/cart/${cartId}`).subscribe()
-
-
   }
 }

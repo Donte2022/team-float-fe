@@ -30,8 +30,8 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
   }
 
   oncancel () {
+    this.MainPageService.setMainShoppingPageScreen(true)
     this.MainPageService.setProductCreateScreen(false)
-    this.MainPageService.setProductScreen(true)
   }
 
   onpost () {

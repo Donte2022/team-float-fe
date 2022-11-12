@@ -50,6 +50,7 @@ export class NavComponent implements OnInit {
 
   onClickLogout() {
     this.accountService.resetAccountState()
+    this.onClickShopName()
   }
 
   onClickKeepShop() {
