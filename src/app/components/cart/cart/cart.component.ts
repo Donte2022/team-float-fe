@@ -40,11 +40,11 @@ this.cartService.$cartProducts.subscribe(cartProducts=> this.cartProductList = c
 
   ngOnInit(): void {
     this.cartProductList = this.cartService.cartProducts
-    console.log(this.cartProductList)
   }
 
   onCheckout() {
     this.showCheckout = true
+    this.cartService.onCheckout()
   }
 
 
