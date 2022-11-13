@@ -16,6 +16,14 @@
 <p>Total: {{this.total}}</p>
     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 
+<div>
+  <h6>Enter Coupon Code</h6>
+  <input [(ngModel)]="couponCode">
+  <button (click)="onClickApplyCoupon()">Apply</button>
+  <div *ngIf="validCoupon">Coupon Applied</div>
+  <div *ngIf="couponErrorMessage" class="alert alert-danger">{{couponErrorMessage}}</div>
+</div>
+
 <button (click)="onCheckout()">Submit order</button>
 </div>
 </div>

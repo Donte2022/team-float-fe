@@ -14,9 +14,16 @@ export class ShopkeeperService {
   private readonly COUPON_CODE_NOT_UNIQUE_MESSAGE = "Coupon code already in use"
   private readonly COUPON_HTTP_ERROR_MESSAGE = "Http error"
 
-  $couponErrorMessage = new BehaviorSubject<string | null>(null)
+  private readonly REDEEM_INVALID_COUPON_CODE = "Invalid coupon code"
+  private readonly REDEEM_INVALID_COUPON_EXPIRED = "Coupon has expired"
+  private readonly REDEEM_INVALID_COUPON_TOO_EARLY = "Cannot redeem coupon until later date"
+  private readonly REDEEM_INVALID_COUPON_USE_LIMIT = "Coupon use limit reached"
+
+  $couponCreateErrorMessage = new BehaviorSubject<string | null>(null)
+  $couponRedeemErrorMessage = new BehaviorSubject<string | null>(null)
   $couponToEditId = new BehaviorSubject<number | null>(null)
   $couponList = new BehaviorSubject<ICoupon[]>([])
+  $validCoupon = new BehaviorSubject<ICoupon | null>(null)
   $showCouponInput = new BehaviorSubject<boolean>(false)
   $showCouponList = new BehaviorSubject<boolean>(false)
   $showShopkeepNav = new BehaviorSubject<boolean>(false)
@@ -57,6 +64,10 @@ export class ShopkeeperService {
     })
   }
 
+  public redeemCoupon(couponCode: string): Observable<ICoupon> {
+    return this.http.put<ICoupon>("http://localhost:8080/api/coupon/redeem", {code: couponCode})
+  }
+
   public attemptDelete(couponId: number) {
     this.deleteCoupon(couponId).pipe(first()).subscribe({
       next: () => {
@@ -77,13 +88,13 @@ export class ShopkeeperService {
           this.$couponList.next([...this.$couponList.getValue(), newCoupon])
           this.$showCouponInput.next(false)
           this.$isCreatingCoupon.next(false)
-          this.$couponErrorMessage.next(null)
+          this.$couponCreateErrorMessage.next(null)
       },
       error: (err) => {
         if (err.status === 409)
-          this.$couponErrorMessage.next(this.COUPON_CODE_NOT_UNIQUE_MESSAGE)
+          this.$couponCreateErrorMessage.next(this.COUPON_CODE_NOT_UNIQUE_MESSAGE)
         else
-          this.$couponErrorMessage.next(this.COUPON_HTTP_ERROR_MESSAGE)
+          this.$couponCreateErrorMessage.next(this.COUPON_HTTP_ERROR_MESSAGE)
       }
     })
   }
@@ -95,10 +106,37 @@ export class ShopkeeperService {
         couponList.splice(couponList.indexOf(updatedCoupon), 1, updatedCoupon)
         this.$couponList.next(couponList)
         this.$couponToEditId.next(null)
-        this.$couponErrorMessage.next(null)
+        this.$couponCreateErrorMessage.next(null)
+      },
+      error: () => {
+        this.$couponCreateErrorMessage.next(this.COUPON_HTTP_ERROR_MESSAGE)
+      }
+    })
+  }
+
+  public attemptRedeemCoupon(couponCode: string) {
+    this.redeemCoupon(couponCode).pipe(first()).subscribe({
+      next: (couponToRedeem) => {
+        this.$validCoupon.next(couponToRedeem)
       },
       error: (err) => {
-        this.$couponErrorMessage.next(this.COUPON_HTTP_ERROR_MESSAGE)
+        if (err.status === 404) {
+          this.$couponRedeemErrorMessage.next(this.REDEEM_INVALID_COUPON_CODE)
+          return
+        }
+        if (err.status === 510) {
+          this.$couponRedeemErrorMessage.next(this.REDEEM_INVALID_COUPON_EXPIRED)
+          return
+        }
+        if (err.status === 425) {
+          this.$couponRedeemErrorMessage.next(this.REDEEM_INVALID_COUPON_TOO_EARLY)
+          return
+        }
+        if (err.status === 429) {
+          this.$couponRedeemErrorMessage.next(this.REDEEM_INVALID_COUPON_USE_LIMIT)
+          return
+        }
+        this.$couponRedeemErrorMessage.next(this.COUPON_HTTP_ERROR_MESSAGE)
       }
     })
   }
@@ -116,7 +154,7 @@ export class ShopkeeperService {
   }
 
   public createOrUpdate(coupon: ICoupon) {
-    if (this.validateCoupon(coupon)) {
+    if (this.validateCreateCoupon(coupon)) {
       if (coupon.id === 0)
         this.attemptCreateCoupon(coupon)
       else
@@ -125,21 +163,21 @@ export class ShopkeeperService {
   }
 
 
-  public validateCoupon(coupon: ICoupon) {
+  public validateCreateCoupon(coupon: ICoupon) {
     if (coupon.code.length < 1) {
-      this.$couponErrorMessage.next(this.COUPON_INVALID_CODE_MESSAGE)
+      this.$couponCreateErrorMessage.next(this.COUPON_INVALID_CODE_MESSAGE)
       return false
     }
     if (coupon.useLimit < 1) {
-      this.$couponErrorMessage.next(this.COUPON_INVALID_USE_LIMIT_MESSAGE)
+      this.$couponCreateErrorMessage.next(this.COUPON_INVALID_USE_LIMIT_MESSAGE)
       return false
     }
     if (coupon.percentage < 0 || coupon.percentage > 100) {
-      this.$couponErrorMessage.next(this.COUPON_INVALID_PERCENTAGE)
+      this.$couponCreateErrorMessage.next(this.COUPON_INVALID_PERCENTAGE)
       return false
     }
     if (coupon.amount < 0) {
-      this.$couponErrorMessage.next(this.COUPON_INVALID_AMOUNT_MESSAGE)
+      this.$couponCreateErrorMessage.next(this.COUPON_INVALID_AMOUNT_MESSAGE)
       return false
     }
     //Todo validation for endDate and startDate

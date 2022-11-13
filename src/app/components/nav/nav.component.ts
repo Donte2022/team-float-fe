@@ -50,6 +50,7 @@ export class NavComponent implements OnInit {
 
   onClickLogout() {
     this.accountService.resetAccountState()
+    this.onClickShopName()
   }
 
   onClickKeepShop() {
@@ -78,7 +79,7 @@ export class NavComponent implements OnInit {
     this.accountService.$showManageAccounts.next(false)
     this.mainPageService.setProductCreateScreen(false)
     this.mainPageService.setProductScreen(false)
-    this.shopkeeperService.$showCouponList.next(false)
+    this.shopkeeperService.$showShopkeepNav.next(false)
     this.cartService.$showCart.next(true)
     this.accountService.$showLogin.next(false)
 

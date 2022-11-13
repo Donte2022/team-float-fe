@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {ICategory} from "../../../interfaces/ICategory";
 import {IProduct} from "../../../interfaces/IProduct";
@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./category-edit.component.css']
 })
 export class CategoryEditComponent implements OnInit {
+  @Input() cat!: ICategory
 
   otherList: IProduct []
   category: ICategory
@@ -48,6 +49,7 @@ export class CategoryEditComponent implements OnInit {
   oncancel () {
     this.MainPageService.setCategoryEditScreen(false)
     this.MainPageService.setProductScreen(true)
+    this.MainPageService.$categoryToEditId.next(null)
   }
 
   onproductselect (input:any) {

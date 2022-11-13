@@ -10,13 +10,10 @@ import {IProduct} from "../interfaces/IProduct";
   providedIn: 'root'
 })
 export class CartService {
-
-
   account!: IAccount | null;
   cartProducts: ICart[] = []
   $cartProducts = new Subject<ICart[]>()
   $showCart = new Subject<boolean>()
-
 
   constructor(private http: HttpService, private accountService: AccountService) {
     this.accountService.$loggedIn.subscribe((value) => {
@@ -30,8 +27,6 @@ export class CartService {
     if (this.account !== null) {
       this.http.get(`/cart/${this.account.id}/${this.account.orderId}`).subscribe(cartProducts => this.cartProducts = cartProducts)
     }
-
-
   }
 
   addFromProduct(product: IProduct, quantity: number) {
@@ -51,7 +46,6 @@ export class CartService {
             productId: product.id,
             productName: product.productName,
             price: product.price,
-
             quantity: quantity,
           }
         this.http.post("/cart", newCartItem).subscribe(() => this.onLogIn())
@@ -107,13 +101,11 @@ export class CartService {
         let index = this.cartProducts.findIndex((item) => item.productId === product.id)
         this.cartProducts[index].quantity += quantity
         console.log(this.cartProducts)
-
       }
     }
   }
   dummyAccountFromCart(cartItem: ICart) {
     let index = this.cartProducts.findIndex(item => item.cartId === cartItem.cartId)
     this.cartProducts[index].quantity = cartItem.quantity
-
   }
 }
