@@ -32,6 +32,9 @@ export class MainPageService {
   private indPrice : IPriceChange
   $indPrice = new Subject<IPriceChange>()
 
+  $categoryToEditId = new BehaviorSubject<number | null>(null)
+  $isCreatingCategory = new BehaviorSubject<boolean>(false)
+
   // Message Subjects
 
   $mainShoppingpageMessage = new BehaviorSubject<string>("")
@@ -84,7 +87,6 @@ export class MainPageService {
   setIndCategory(value: ICategory) {
     this.indCategory = {...value};
     this.$indCategory.next(this.indCategory)
-
   }
 
   getIndProduct(): IProduct {

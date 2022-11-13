@@ -27,14 +27,14 @@ export class CartProductComponent implements OnInit {
   ngOnInit(): void {
     this.product =  this.mainService.getProductById(this.cartProduct.productId)
     this.cartId = this.cartProduct.cartId
-    console.log(this.product.displayName)
     this.imageUrl = this.product.imageUrl
 
   }
 
   onImageError () {
     console.error( this.product?.imageUrl + " Invaild Image URL")
-    this.product.imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
+    this.imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
+
   }
 
   onEdit() {
@@ -45,23 +45,19 @@ export class CartProductComponent implements OnInit {
   onCancel() {
     this.localCartProduct = this.cartProduct
     this.editing = false
-    console.log(this.cartProduct.quantity)
   }
   onUpdate() {
     this.cartProduct = this.localCartProduct
+    if (this.cartProduct.account!==null) {
     this.editing = false
-    console.log(this.cartProduct.quantity)
-    this.cartService.updateFromCart(this.cartProduct)
+    this.cartService.updateFromCart(this.cartProduct)} else {
+      this.cartService.dummyAccountFromCart(this.cartProduct)
+    }
     this.cartChange.emit()
   }
 
   removeProduct(cartId: number | undefined) {
-    console.log(this.cartId)
-    console.log(this.cartProduct)
-    console.log(this.product)
-
     if(this.cartProduct.cartId!==undefined){
-      console.log("not undefined")
       this.cartService.removeProduct(this.cartProduct.cartId)
     this.cartChange.emit()}
   }

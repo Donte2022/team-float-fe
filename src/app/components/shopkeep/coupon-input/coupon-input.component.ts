@@ -26,7 +26,7 @@ export class CouponInputComponent implements OnInit {
   createOrUpdateText: string = this.CREATE_TEXT
 
   constructor(private shopkeeperService: ShopkeeperService) {
-    shopkeeperService.$couponErrorMessage.subscribe(errMsg => this.errMsg = errMsg)
+    shopkeeperService.$couponCreateErrorMessage.subscribe(errMsg => this.errMsg = errMsg)
   }
 
   ngOnInit(): void {

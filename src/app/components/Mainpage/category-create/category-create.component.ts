@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {MainPageService} from "../../../services/main-page.service";
 import {IProduct} from "../../../interfaces/IProduct";
 import {Subscription} from "rxjs";
-import {ShopkeeperService} from "../../../services/shopkeeper.service";
 
 @Component({
   selector: 'app-category-create',
@@ -18,7 +17,7 @@ export class CategoryCreateComponent implements OnInit {
   message : string
   sub: Subscription
 
-  constructor(private MainPageService: MainPageService,private shopkeeperService : ShopkeeperService) {
+  constructor(private MainPageService: MainPageService) {
     this.otherProduct = [...this.MainPageService.getFullProductList()]
     this.productList = []
     this.tempProduct = undefined
@@ -31,10 +30,10 @@ export class CategoryCreateComponent implements OnInit {
   }
 
   oncancel () {
-    this.MainPageService.setCategoryCreateScreen(false)
-    this.MainPageService.setMainShoppingPageScreen(true)
-    this.MainPageService.setProductCreateScreen(false)
-    this.shopkeeperService.$showCouponList.next(false)
+    // this.MainPageService.setCategoryCreateScreen(false)
+    // this.MainPageService.setProductScreen(true)
+    // this.MainPageService.setMainShoppingPageScreen(true)
+    this.MainPageService.$isCreatingCategory.next(false)
   }
 
   onproductselect (input:any) {
@@ -78,6 +77,7 @@ export class CategoryCreateComponent implements OnInit {
     this.MainPageService.postCategory({
       name: this.name,proidList: proidList}
     )
-    this.oncancel()
+    this.MainPageService.$isCreatingCategory.next(false)
+    // this.oncancel()
   }
 }

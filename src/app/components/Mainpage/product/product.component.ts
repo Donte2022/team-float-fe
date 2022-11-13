@@ -83,6 +83,7 @@ export class ProductComponent implements OnInit,OnDestroy {
     if (this.Pro!==undefined) {
       this.cartService.addFromProduct(this.Pro, this.quantity);
       this.addedMessage = true
+      console.log("adding from Cart")
     }
   }
 
