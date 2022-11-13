@@ -1,31 +1,31 @@
 <div *ngIf="Pro !== undefined">
-<div  style="border-style: solid;width: 30rem;height: 50rem " class="product card mb-3 m-3 overflow-scroll">
-  <div class="m-3 fw-bold fs-3 text-center">
-  <div style="font-size: xxx-large" class="badge bg-danger mb-3">{{Pro.displayName}}</div>
-    <div><img src="{{img}}" (error)="onImageError()" id="image" alt="{{Pro.displayName}}" class="card-img-top"></div>
+  <div class="card product mb-5 overflow-scroll" style="width: 35rem;height: 50rem">
+    <img src="{{img}}" (error)="onImageError()" id="image" alt="{{Pro.displayName}}" class="card-img-top" >
+    <div class="m-3 fw-bold fs-3 text-center">
+      <div style="font-size: xxx-large" class="badge bg-danger mb-3">{{Pro.displayName}}</div>
     <div class="card-body">
       <div *ngIf="Pro.categories.length != 0">Categories</div>
-  <div *ngFor="let c of Pro.categories">{{c.name}}</div>
-  <div>description: {{Pro.description}}</div>
-  <div>discontinued: {{Pro.discontinued}}</div>
-  <div>Date available: {{dateFormat()}}</div>
-  <div *ngIf="rank < 3"> Base Price:{{Pro.price}}</div>
-  <div>Price: {{displayPrice}}</div>
-  <div>weight:{{Pro.weight}}</div>
-  <div *ngIf="rank<3">MAP price{{Pro.map}}</div>
-  <div *ngIf="rank<3">Cost to Make:{{Pro.costToMake}}</div>
-  <div>
-    <input [(ngModel)]="quantity" type="number"/>
-    <button (click)="addToCart()">Add to cart</button>
-  </div>
+      <div *ngFor="let c of Pro.categories">{{c.name}}</div>
+      <div>description: {{Pro.description}}</div>
+      <div>discontinued: {{Pro.discontinued}}</div>
+      <div>Date available: {{dateFormat()}}</div>
+      <div *ngIf="rank < 3"> Base Price:{{Pro.price}}</div>
+      <div>Price: {{displayPrice}}</div>
+      <div>weight:{{Pro.weight}}</div>
+      <div *ngIf="rank<3">MAP price{{Pro.map}}</div>
+      <div *ngIf="rank<3">Cost to Make:{{Pro.costToMake}}</div>
+      <div>
+        <input [(ngModel)]="quantity" type="number"/>
+        <button (click)="addToCart()">Add to cart</button>
+      </div>
     </div>
-  <div *ngIf="rank < 3">
-    <button (click)="onProductEdit()">Edit product</button>
-    <button (click)="onDelete()">Delete</button>
-    <button (click)="onPriceChangeCreateScreen()">Price Change Create</button>
-    <div>List of Price Change Request:</div>
-    <app-price-change-request *ngFor="let pri of Pro.priceChange" [pri]="pri" [pro]="Pro"></app-price-change-request>
+    <div *ngIf="rank < 3">
+      <button (click)="onProductEdit()">Edit product</button>
+      <button (click)="onDelete()">Delete</button>
+      <button (click)="onPriceChangeCreateScreen()">Price Change Create</button>
+      <div>List of Price Change Request:</div>
+      <app-price-change-request *ngFor="let pri of Pro.priceChange" [pri]="pri" [pro]="Pro"></app-price-change-request>
+    </div>
   </div>
-</div>
-</div>
+  </div>
 </div>
