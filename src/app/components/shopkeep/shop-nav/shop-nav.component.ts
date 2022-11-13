@@ -10,6 +10,8 @@ import {Subscription} from "rxjs";
   styleUrls: ['./shop-nav.component.css']
 })
 export class ShopNavComponent implements OnInit, OnDestroy {
+  categoryToEditId: number | null = null
+  isCreatingCategory: boolean = false
   showCategories: boolean = false
   showCouponList: boolean = false
   showProductCreate: boolean = false
@@ -25,6 +27,8 @@ export class ShopNavComponent implements OnInit, OnDestroy {
     this.subs[3] = mainPageService.$productCreatescreen.subscribe(showProductCreate => this.showProductCreate = showProductCreate)
     this.subs[4] = mainPageService.$fullCategory.subscribe(value => {this.fullList = value})
     this.subs[5] = shopkeeperService.$showCouponList.subscribe(showCouponList => this.showCouponList = showCouponList)
+    this.subs[6] = mainPageService.$categoryToEditId.subscribe(categoryToEditId => this.categoryToEditId = categoryToEditId)
+    this.subs[7] = mainPageService.$isCreatingCategory.subscribe(isCreatingCategory => this.isCreatingCategory = isCreatingCategory)
   }
 
 
@@ -63,6 +67,10 @@ export class ShopNavComponent implements OnInit, OnDestroy {
     this.mainPageService.setMainShoppingPageScreen(false)
     this.mainPageService.setProductCreateScreen(false)
     this.shopkeeperService.$showCouponList.next(true)
+  }
+
+  onClickCreateCategory() {
+    this.mainPageService.$isCreatingCategory.next(true)
   }
 
 }

@@ -21,6 +21,7 @@ export class CategoryComponent implements OnInit {
       this.MainPageService.setProductScreen(false)
       this.MainPageService.setCategoryEditScreen(true)
       this.MainPageService.setIndCategory({...this.cat})
+      this.MainPageService.$categoryToEditId.next(this.cat.id)
     }
   }
   ondelete() {
