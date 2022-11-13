@@ -19,8 +19,9 @@
         <button (click)="addToCart()">Add to cart</button>
       </div>
     </div>
-    <div *ngIf="rank < 3">
       <p *ngIf="addedMessage">Added to cart</p>
+
+      <div *ngIf="rank < 3">
       <button (click)="onProductEdit()">Edit product</button>
       <button (click)="onDelete()">Delete</button>
       <button (click)="onPriceChangeCreateScreen()">Price Change Create</button>
