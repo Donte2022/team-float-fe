@@ -1,9 +1,28 @@
-<h3>Update Account</h3>
-<input [(ngModel)]="account.firstName" name="firstName" placeholder="first name">
-<input [(ngModel)]="account.lastName" name="lastName" placeholder="last name">
-<input [(ngModel)]="account.email" name="email" placeholder="email">
-<input [(ngModel)]="account.username" name="username" placeholder="username">
-<input [(ngModel)]="account.password" name="password" placeholder="new password" type="password">
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<h3>Update AccountBB</h3>
+</div>
+<div class="d-grid gap-2 col-6 mx-auto">
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">First Name</span>
+<input [(ngModel)]="account.firstName" name="firstName" class="form-control">
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon2">Last Name</span>
+<input [(ngModel)]="account.lastName" name="lastName" class="form-control">
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon3">Email</span>
+<input [(ngModel)]="account.email" name="email" class="form-control">
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon4">Username</span>
+<input [(ngModel)]="account.username" name="username" class="form-control">
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon5">Password</span>
+<input [(ngModel)]="account.password" name="password" type="password" class="form-control">
+</div>
+
 <div *ngIf="userIsAdmin && !isAdminsAccount">
   <div class="mx-2">
     <input [ngModel]="account.rank.toString()"
@@ -19,6 +38,9 @@
     <label for="customer" class="ms-1">Customer</label>
   </div>
 </div>
-<button (click)="onSave()" class="btn btn-info" type="submit">Save</button>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+  <button (click)="onSave()" class="btn btn-info" type="submit">Save</button>
 <button *ngIf="!isAdminsAccount" (click)="onDelete()" class="btn btn-danger" type="button">Delete</button>
 <button (click)="onCancel()" class="btn btn-warning" type="button">Cancel</button>
+</div>
+</div>

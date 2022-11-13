@@ -1,8 +1,28 @@
-<form #login="ngForm">
-  <input ngModel name="username" placeholder="username">
-  <input ngModel name="password" placeholder="password" type="password">
-  <button (click)="onClickLogin(login.value)" class="btn btn-primary">Login</button>
-</form>
-<button (click)="onClickToReg()" class="btn btn-info">Need to register?</button>
 
-<button (click)="dummyLogin()" class="btn">Dummy Login</button>
+<div class="position-absolute top-50 start-50 translate-middle">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<!--<div class="d-grid gap-2 col-6 mx-auto">-->
+<form #login="ngForm">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Username</span>
+    <input ngModel name="username" class="form-control" aria-label="Username">
+  </div>
+  <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon2">Password</span>
+  <input ngModel name="password" class="form-control" aria-label="Password" type="password">
+</div>
+</form>
+</div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <button (click)="onClickLogin(login.value)" class="btn btn-primary">Login</button>
+    <button (click)="onClickToReg()" class="btn btn-info" type="button">Need to Register?</button>
+
+</div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center m-3">
+    <button (click)="dummyLogin()" class="btn btn-secondary" type="button"><b>Dummy Login</b></button>
+</div>
+</div>
+
+
+
+

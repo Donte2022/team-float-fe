@@ -1,23 +1,54 @@
-<div *ngIf="errMsg" class="alert-danger alert">{{errMsg}}</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
 <h5>{{createOrUpdateText}} Coupon</h5>
-<input [(ngModel)]="coupon.code" placeholder="Coupon code">
-<input [ngModel]="coupon.startDate | date:'yyyy-MM-dd'" (ngModelChange)="coupon.startDate = $event" type="date" name="startDate"/>
-<input [ngModel]="coupon.endDate | date:'yyyy-MM-dd'" (ngModelChange)="coupon.endDate = $event" type="date" name="endDate"/>
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<div *ngIf="errMsg" class="alert-danger alert">{{errMsg}}</div>
+
+</div>
+<div class="d-grid gap-2 col-6 mx-auto">
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Coupon Code</span>
+<input [(ngModel)]="coupon.code" class="form-control">
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon2">Start Date</span>
+<input [ngModel]="coupon.startDate | date:'yyyy-MM-dd'" (ngModelChange)="coupon.startDate = $event" type="date" name="startDate" class="form-control"/>
+</div>
+<div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon3">End Date</span>
+<input [ngModel]="coupon.endDate | date:'yyyy-MM-dd'" (ngModelChange)="coupon.endDate = $event" type="date" name="endDate" class="form-control"/>
+<div>
 <div>
 
   <div class="mx-2">
     <input [(ngModel)]="couponType" id="amount" name="couponType" type="radio" value="amount">
     <label for="amount" class="ms-1">Amount</label>
   </div>
+
   <div class="mx-2">
     <input [(ngModel)]="couponType" type="radio" id="percentage" name="couponType" value="percentage">
     <label for="percentage" class="ms-1">Percentage</label>
   </div>
 </div>
-<input *ngIf="couponType === 'amount'" [(ngModel)]="coupon.amount" placeholder="amount" type="number">
-<input *ngIf="couponType === 'percentage'" [(ngModel)]="coupon.percentage" placeholder="percentage" type="number">
-<input [(ngModel)]="coupon.useLimit" type="number">
-
+</div>
+</div>
+  <div class="input-group mb-3" *ngIf="couponType === 'amount'">
+    <span class="input-group-text" id="basic-addon4">Amount</span>
+<input [(ngModel)]="coupon.amount" placeholder="amount" type="number" class="form-control">
+  </div>
+  <div class="input-group mb-3" *ngIf="couponType === 'percentage'">
+    <span class="input-group-text" id="basic-addon5">Percentage</span>
+<input [(ngModel)]="coupon.percentage" placeholder="percentage" type="number" class="form-control">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon6">Number</span>
+<input [(ngModel)]="coupon.useLimit" type="number" class="form-control">
+  </div>
+</div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 <button (click)="onClickSubmit()">{{createOrUpdateText}}</button>
 <button (click)="onClickCancel()">Cancel</button>
-
+</div>
+</div>

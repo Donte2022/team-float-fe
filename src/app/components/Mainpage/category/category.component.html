@@ -1,5 +1,10 @@
+<div class="m-3">
 <div *ngIf="cat !== undefined" style="border-style: dashed">
-  category: {{cat.name}}
-  <div><button (click)="oncatedit()">Edit category</button></div>
+
+  <b>Category:</b> {{cat.name}}
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+  <div><button (click)="oncatedit()">Edit</button></div>
   <div><button (click)="ondelete()">Delete</button></div>
+</div>
+</div>
 </div>

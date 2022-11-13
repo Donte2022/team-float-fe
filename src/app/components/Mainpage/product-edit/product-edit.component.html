@@ -1,14 +1,19 @@
-<div>Edit a product</div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Edit a product</h3></div>
+<div class="d-grid gap-2 col-6 mx-auto">
 <div>{{message}}</div>
-<div>Display name:<input  [(ngModel)]="product.displayName"></div>
-<div>product name:<input [(ngModel)]="product.productName"></div>
-<div>description:<textarea [(ngModel)]="product.description"></textarea></div>
-<div>Base Price:<input type="number" min="0"  [(ngModel)]="product.price"></div>
-<div>Image:<input  [(ngModel)]="product.imageUrl"></div>
-<div>discontinued:<input type="checkbox" [checked]="product.discontinued" [(ngModel)]="product.discontinued"></div>
-<div>Avaliable On Date:<input type="date"  [(ngModel)]="product.dateAvailable"></div>
-<div>weight: <input type="number" min="0"  [(ngModel)]="product.weight"></div>
-<div>MAP:<input type="numbe" min="0"  [(ngModel)]="product.map"></div>
-<div>Cost to Make:<input type="number" min="0" [(ngModel)]="product.costToMake"></div>
-<div *ngIf="confirmMessage">Are you sure you want to set your price below the MAP price?<button (click)="confirm()">Confirm</button></div>
+    <div><b>Display name:</b><input  [(ngModel)]="product.displayName"></div>
+    <div><b>Product name:</b><input [(ngModel)]="product.productName"></div>
+    <div><b>Description:</b><textarea [(ngModel)]="product.description"></textarea></div>
+    <div><b>Base Price:</b><input type="number" min="0"  [(ngModel)]="product.price"></div>
+    <div><b>Image:</b><input  [(ngModel)]="product.imageUrl"></div>
+    <div><b>Discontinued:</b><input type="checkbox" [checked]="product.discontinued" [(ngModel)]="product.discontinued"></div>
+    <div><b>Available On Date:</b><input type="date"  [(ngModel)]="product.dateAvailable"></div>
+    <div><b>Weight:</b><input type="number" min="0"  [(ngModel)]="product.weight"></div>
+    <div><b>MAP:</b><input type="number" min="0"  [(ngModel)]="product.map"></div>
+    <div><b>Cost to Make:</b><input type="number" min="0" [(ngModel)]="product.costToMake"></div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <div *ngIf="confirmMessage">Are you sure you want to set your price below the MAP price?<button (click)="confirm()">Confirm</button></div>
 <div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onsubmit(product)">Submit</button></div>
+</div>
+</div>

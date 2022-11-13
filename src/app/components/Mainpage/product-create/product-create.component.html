@@ -1,14 +1,58 @@
-<div>Create a new product</div>
-<div>{{message}}</div>
-<div>Display name:<input [(ngModel)]="pro.displayName"></div>
-<div>product name:<input [(ngModel)]="pro.productName"></div>
-<div>description:<textarea [(ngModel)]="pro.description"></textarea></div>
-<div>Base Price:<input type="number" min="0" [(ngModel)]="pro.price"></div>
-<div>Image Url:<input [(ngModel)]="pro.imageUrl"></div>
-<div>discontinued:<input type="checkbox" [(ngModel)]="pro.discontinued"></div>
-<div>Avaliable On Date:<input type="date" [(ngModel)]="pro.dateAvailable"></div>
-<div>weight: <input type="number" min="0" [(ngModel)]="pro.weight"></div>
-<div>MAP:<input type="number" min="0" [(ngModel)]="pro.map"></div>
-<div>Cost to Make:<input type="number" min="0" [(ngModel)]="pro.costToMake"></div>
-<div *ngIf="confirmMessage">Are you sure you want to set the sale price below the MAP?<button (click)="confirm()">Confirm</button></div>
-<div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onpost()">Submit</button></div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Create a new product</h3></div>
+
+<div class="m-3"></div>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center text-danger">
+{{message}}</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Display Name:</span>
+<input [(ngModel)]="pro.displayName" class="form-control">
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon2">Product Name:</span>
+<input [(ngModel)]="pro.productName" class="form-control">
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon3">Description:</span>
+<textarea [(ngModel)]="pro.description" class="form-control"></textarea>
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon4">Base Price:</span>
+<input type="number" min="0" [(ngModel)]="pro.price" class="form-control">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon5">Image Url:</span>
+<input [(ngModel)]="pro.imageUrl" class="form-control">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon6">Discontinued:</span>
+<input type="checkbox" [(ngModel)]="pro.discontinued" >
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon7">Available On Date:</span>
+<input type="date" [(ngModel)]="pro.dateAvailable" class="form-control">
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon8">Weight:</span>
+<input type="number" min="0" [(ngModel)]="pro.weight" class="form-control">
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon9">MAP:</span>
+<input type="number" min="0" [(ngModel)]="pro.map" class="form-control">
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon10">Cost To Make:</span>
+<input type="number" min="0" [(ngModel)]="pro.costToMake" class="form-control">
+</div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <div *ngIf="confirmMessage">Are you sure you want to set the sale price below the MAP?<button (click)="confirm()">Confirm</button></div>
+<div *ngIf="confirmMessage === false">
+    <button (click)="onpost()">Submit</button>
+    <button (click)="oncancel()">Cancel</button>
+</div>
+    </div>
+</div>

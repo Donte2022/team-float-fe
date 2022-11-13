@@ -1,9 +1,14 @@
-<h3>Account List</h3>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Account List</h3></div>
+
 <div *ngIf="showAccountList">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center m-3">
   <button (click)="onClickCreate()">Create Account</button>
+  </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-start m-4">
   <div *ngFor="let account of accountList">
     <app-account-list-item  *ngIf="accountToEditId !== account.id" [account]="account"></app-account-list-item>
     <app-account-input *ngIf="accountToEditId === account.id" [account]="account"></app-account-input>
   </div>
+</div>
 </div>
 <app-add-account *ngIf="showAddAccount"></app-add-account>
