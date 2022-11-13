@@ -1,11 +1,11 @@
 <div style="font-size: xxx-large">{{product.displayName}}</div>
 <div><img src="{{imageUrl}}" (error)="onImageError()" id="image"></div>
-<div>Description:{{product.description}}</div>
-<div>Price:{{cartProduct.price}}</div>
+<div><b>Description:</b>{{product.description}}</div>
+<div><b>Price:</b>{{cartProduct.price}}</div>
 
 <div *ngIf="!editing">
 <p>
-  Quantity: {{this.cartProduct.quantity}}
+  <b>Quantity:</b> {{this.cartProduct.quantity}}
 </p>
   <button (click)="onEdit()">Edit</button>
   <button (click)="removeProduct(this.cartId)">Remove</button>
@@ -13,7 +13,10 @@
 
 <div *ngIf="editing">
 <input [(ngModel)]="this.localCartProduct.quantity" type="number"/>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+
   <button (click)="onCancel()">Cancel</button>
   <button *ngIf="localCartProduct.quantity>0" (click)="onUpdate()"> Update </button>
   <button *ngIf="localCartProduct.quantity===0" (click)="removeProduct(this.cartId)">Remove</button>
+</div>
 </div>

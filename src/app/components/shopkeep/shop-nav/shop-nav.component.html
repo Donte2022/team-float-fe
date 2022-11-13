@@ -1,5 +1,6 @@
-<h3>Shopkeeping</h3>
-<div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Shopkeeping</h3></div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center m-3">
+
   <button (click)="onClickProductList()">Product List</button>
   <button (click)="onClickCreateProduct()">Create Product</button>
   <button (click)="onClickCategories()">Manage Categories</button>
@@ -10,7 +11,7 @@
   <app-product-create *ngIf="showProductCreate"></app-product-create>
   <div *ngIf="showCategories">
     <app-category-create ></app-category-create>
-    <div>categories</div>
+    <div><b>Categories</b></div>
     <app-category *ngFor="let cat of fullList" [cat]="cat"></app-category>
   </div>
   <app-coupon-list *ngIf="showCouponList"></app-coupon-list>

@@ -1,10 +1,10 @@
-<div>Edit a Price Change Request</div>
-<div>MAP price is {{pro.map}}</div>
+<div><h5>Edit a Price Change Request</h5></div>
+<div><b>MAP price is</b> {{pro.map}}</div>
 <div>{{message}}</div>
-<div>sale<input type="checkbox" [checked]="priceChange.sale" [(ngModel)]="priceChange.sale"></div>
-<div>New Price:<input type="number" min="0" [(ngModel)]="priceChange.newPrice"></div>
-<div>Start Date:<input type="date" [(ngModel)]="priceChange.startDate"></div>
-<div>End Date:<input type="date" [(ngModel)]="priceChange.endDate"></div>
-<div>Coupons<input type="number" min="0" [(ngModel)]="priceChange.couponLeft"></div>
-<div *ngIf="confirmMessage">Are you sure you want to set the sale price below the MAP?<button (click)="confirm()">Confirm</button></div>
+<div><b>Sale</b><input type="checkbox" [checked]="priceChange.sale" [(ngModel)]="priceChange.sale"></div>
+<div><b>New Price:</b><input type="number" min="0" [(ngModel)]="priceChange.newPrice"></div>
+<div><b>Start Date:</b><input type="date" [(ngModel)]="priceChange.startDate"></div>
+<div><b>End Date:</b><input type="date" [(ngModel)]="priceChange.endDate"></div>
+<div><b>Coupons</b><input type="number" min="0" [(ngModel)]="priceChange.couponLeft"></div>
+<div *ngIf="confirmMessage"><b>Are you sure you want to set the sale price below the MAP?</b><button (click)="confirm()">Confirm</button></div>
 <div *ngIf="confirmMessage === false"><button (click)="oncancel()">Cancel</button><button (click)="onedit()">Submit</button></div>

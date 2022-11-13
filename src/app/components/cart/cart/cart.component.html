@@ -1,6 +1,8 @@
 <div *ngIf="!showCheckout">
-<h1>Cart</h1>
-
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<h3>Cart</h3>
+    </div>
+<div class="d-grid gap-2 col-6 mx-auto">
 <app-cart-product
   *ngFor="let cartProduct of cartProductList"
 [cartProduct]="cartProduct"
@@ -12,8 +14,10 @@
 <p>Shipping: {{this.shipping}} </p>
 <p>Tax: {{this.tax}} </p>
 <p>Total: {{this.total}}</p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 
 <button (click)="onCheckout()">Submit order</button>
 </div>
-
+</div>
+</div>
 <app-checkout *ngIf="showCheckout"></app-checkout>

@@ -1,26 +1,53 @@
-<h3>Create Account</h3>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+  <h3>Create Account</h3></div>
+
+<div class="d-grid gap-2 col-6 mx-auto">
 <form #create="ngForm">
   <div *ngIf="errMsg" class="alert alert-danger">{{errMsg}}</div>
-  <input ngModel name="firstName" placeholder="first name">
-  <input ngModel name="lastName" placeholder="last name">
-  <input ngModel name="email" placeholder="email">
-  <input ngModel name="username" placeholder="username">
-  <input ngModel name="password" placeholder="password" type="password">
-  <div>
-    <div class="mx-2">
+  <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">First Name</span>
+  <input ngModel name="firstName" class="form-control">
+</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon2">Last Name</span>
+  <input ngModel name="lastName"  class="form-control">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon3">Email</span>
+  <input ngModel name="email" class="form-control">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon4">Username</span>
+  <input ngModel name="username" class="form-control">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon5">Password</span>
+  <input ngModel name="password" type="password" class="form-control">
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+
+  <div class="mx-2">
       <input ngModel type="radio" id="admin" name="rank" value="1">
       <label for="admin" class="ms-1">Admin</label>
     </div>
+
     <div class="mx-2">
       <input ngModel type="radio" id="shopkeeper" name="rank" value="2">
       <label for="shopkeeper" class="ms-1">Shopkeeper</label>
     </div>
+
     <div class="mx-2">
       <input ngModel type="radio" id="customer" name="rank" value="3">
       <label for="customer" class="ms-1">Customer</label>
     </div>
   </div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
   <button (click)="onClickCreate(create.value)" class="btn btn-primary">Create</button>
   <button (click)="onClickCancel()" class="btn btn-info">Cancel</button>
+  </div>
 </form>
-
+</div>

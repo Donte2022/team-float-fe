@@ -1,15 +1,16 @@
-<div>Edit category</div>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Edit category</h3></div>
 <div>{{message}}</div>
-<div>name:<input [(ngModel)]="category.name"></div>
-<div> Add product:
+<div><b>Name:</b><input [(ngModel)]="category.name"></div>
+<div><b> Add product:</b>
   <select name="Aviable Products" (change)="onproductselect($event)">
-    <option [value]="undefined">Please pick a product</option>
+    <option [value]="undefined"><b>Please pick a product</b></option>
     <option *ngFor="let p of otherList" [value]="p.id">
       {{p.displayName}}
     </option>
   </select>
   <button (click)="onadd()">Add</button>
 </div>
-<div *ngIf="producttoSubmit.length != 0"> Remove product:</div>
+<div *ngIf="producttoSubmit.length != 0"><b>Remove product:</b></div>
 <div *ngFor="let r of producttoSubmit">{{r.displayName}}<button (click)="ondelete(r)">X</button></div>
 <button (click)="oncancel()">Cancel</button><button (click)="onsubmit()">Submit</button>
