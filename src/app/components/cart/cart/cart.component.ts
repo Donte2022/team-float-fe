@@ -32,11 +32,13 @@ export class CartComponent implements OnInit, OnDestroy {
     this.updateTotals();
     this.sub1 = this.cartService.$cartProducts.subscribe(cartProducts=> this.cartProductList = cartProducts)
     this.sub2 = this.shopkeeperService.$couponRedeemErrorMessage.subscribe(redeemErrMsg => this.couponErrorMessage = redeemErrMsg)
-    this.sub3 = this.shopkeeperService.$validCoupon.subscribe(validCoupon => this.validCoupon = validCoupon)
+    this.sub3 = this.shopkeeperService.$validCoupon.subscribe(validCoupon => {
+      this.validCoupon = validCoupon
+      this.validateCoupon()
+    })
   }
 
   updateTotals() {
-    console.log("updating totals")
     this.subTotal=0
     this.cartProductList = this.cartService.cartProducts
     for (let cartProduct of this.cartProductList) {
@@ -48,13 +50,12 @@ export class CartComponent implements OnInit, OnDestroy {
       this.shipping = 0;
     else
       this.shipping = 9.99;
-    this.total = this.subTotal + this.tax + this.shipping
+    this.total = this.subTotal + this.tax + this.shipping - this.discount
   }
 
   ngOnInit(): void {
     this.cartProductList = this.cartService.cartProducts
     console.log(this.cartProductList)
-    this.validateCoupon()
   }
 
   ngOnDestroy() {
@@ -73,25 +74,26 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   validateCoupon() {
+    this.total += this.discount
+    this.discount = 0
     if (this.validCoupon) {
-      console.log("validating")
       const amount = this.validCoupon.amount
       const percentage = this.validCoupon.percentage
       if (amount && this.subTotal > amount) {
         this.discount = amount
-        this.subTotal -= amount
+        this.total -= amount
       }
-      if (amount && this.total < amount) {
+      if (amount && this.subTotal < amount) {
         this.discount = this.subTotal
-        this.subTotal = 0
+        this.total -= this.discount
       }
       if (percentage === 100) {
         this.discount = this.subTotal
-        this.subTotal = 0
+        this.total -= this.subTotal
       }
       if (percentage < 100 && percentage > 0) {
         this.discount = this.subTotal * (percentage/100)
-        this.subTotal -= this.discount
+        this.total -= this.discount
       }
     }
   }
