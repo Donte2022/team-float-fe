@@ -120,8 +120,6 @@ export class ShopkeeperService {
         this.$validCoupon.next(couponToRedeem)
       },
       error: (err) => {
-        console.error(err.status)
-        console.error(err.message)
         if (err.status === 404) {
           this.$couponRedeemErrorMessage.next(this.REDEEM_INVALID_COUPON_CODE)
           return
