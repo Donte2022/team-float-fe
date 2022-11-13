@@ -33,7 +33,8 @@ export class CartProductComponent implements OnInit {
 
   onImageError () {
     console.error( this.product?.imageUrl + " Invaild Image URL")
-    this.product.imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
+    this.imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png"
+
   }
 
   onEdit() {
