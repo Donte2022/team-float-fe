@@ -50,7 +50,6 @@ export class ProductComponent implements OnInit,OnDestroy {
   dateFormat () {
     if (this.Pro !== undefined){
      let day = new Date(this.Pro.dateAvailable)
-      console.log(day)
       return (day.getMonth() + 1) + "/" + day.getDate() + "/" + day.getFullYear()
     }
     return
