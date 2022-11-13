@@ -95,7 +95,7 @@ export class ProductCreateComponent implements OnInit,OnDestroy {
         dateAvailable: this.pro.dateAvailable,
         weight: this.pro.weight,
         map: this.pro.map,
-        costToMake:this.pro.costToMake
+        cost:this.pro.costToMake
       })
     this.MainPageService.$mainShoppingpageScreen.next(true)
     this.oncancel()

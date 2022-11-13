@@ -1,7 +1,7 @@
 <div *ngIf="productScreen">
-  <div style="font-size: xxx-large">Shopping Page</div>
+  <div style="font-size: xxx-large" class="m-3">Products</div>
   <div>{{message}}</div>
-  <div>Products:</div>
+  <div class="d-flex flex-wrap justify-content-start m-3" style="overflow: scroll;gap: 2%;" >
   <app-product *ngFor="let pro of productList" [Pro]="pro" ></app-product>
 </div>
 <!--<app-category-create *ngIf="categoryCreate && rank>1"></app-category-create>-->

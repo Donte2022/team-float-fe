@@ -18,6 +18,21 @@ export class PriceChangeRequestComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  dateFormat (input:boolean) {
+    if (this.pri !== undefined){
+      let day = new Date()
+      if (input) {
+        day = new Date(this.pri.startDate)
+        return (day.getMonth() + 1) + "/" + day.getDate() + "/" + day.getFullYear()
+      }
+      else {
+         day = new Date(this.pri.endDate)
+        return (day.getMonth() + 1) + "/" + day.getDate() + "/" + day.getFullYear()
+      }
+    }
+    return
+  }
+
   onPriceChangeEditScreen () {
     if (this.pri !== undefined && this.pro !== undefined) {
       this.MainPageService.setIndPriceChange(this.pri)
