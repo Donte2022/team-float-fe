@@ -6,7 +6,7 @@ export interface IsimpleProduct {
   dateAvailable : Date
   weight: number
   discontinued : boolean
-  costToMake : number
+  cost : number
   imageUrl : string
   description : string
 }
