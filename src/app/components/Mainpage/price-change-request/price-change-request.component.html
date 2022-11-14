@@ -1,9 +1,12 @@
-
-<div *ngIf="pri !== undefined" style="border-style: solid;background-color: #149ECC">
-  <div>Price Change Request</div>
-  <div>{{pri.newPrice}}</div>
-  <div>{{pri.sale}}</div>
-  <div>{{dateFormat(true)}} to {{dateFormat(false)}}</div>
-  <div>{{pri.couponLeft}}</div>
-<div><button (click)="onPriceChangeEditScreen()">Price Change Edit</button><button (click)="ondelete()">Delete</button></div>
+<div class="price-change-request">
+  <div *ngIf="pri !== undefined" class="p-2 mb-2">
+    <div>New Price: {{pri.newPrice}}</div>
+    <div>On Sale: {{pri.sale}}</div>
+    <div>Good Through: {{dateFormat(true)}} to {{dateFormat(false)}}</div>
+  </div>
+  <div class="d-flex justify-content-around">
+    <button (click)="onPriceChangeEditScreen()" class="btn price-change-btn my-2">Price Change Edit</button>
+    <button (click)="ondelete()" class="btn delete-btn my-2">Delete</button>
+  </div>
 </div>
+

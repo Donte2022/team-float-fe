@@ -1,10 +1,6 @@
 <div *ngIf="productScreen">
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Shopping Page</h3></div>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center"><h3>Shopping Page</h3></div>
   <div>{{message}}</div>
-  <div class="m-3">
-    <b>Products:</b></div>
-
   <app-product *ngFor="let pro of productList" [Pro]="pro" ></app-product>
 </div>
 <!--<app-category-create *ngIf="categoryCreate && rank>1"></app-category-create>-->
