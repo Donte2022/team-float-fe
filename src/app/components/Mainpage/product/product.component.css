@@ -1,4 +1,12 @@
 #image {
-  height: 20rem;
-  width: 35rem;
+  max-width: 30%;
+}
+
+.add-btn {
+  background-color: #06d6a0;
+}
+
+.shopkeep-btn {
+  background-color: #118ab2;
+  color: #EEE;
 }
